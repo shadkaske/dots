@@ -10,3 +10,6 @@
 [submodule "/home/shad/.local/share/oh-my-zsh"]
 	path = /home/shad/.local/share/oh-my-zsh
 	url = https://github.com/ohmyzsh/ohmyzsh.git
+[submodule "/home/shad/.config/base16-shell"]
+	path = /home/shad/.config/base16-shell
+	url = https://github.com/chriskempson/base16-shell.git

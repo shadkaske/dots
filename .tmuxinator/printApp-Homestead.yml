@@ -1,0 +1,14 @@
+# ~/.tmuxinator/Dotfiles.yml
+
+name: printApp
+root: ~/code
+
+windows:
+  - Editor: nvim
+  - Utils:
+      layout: main-horizontal
+      panes:
+        - #empty
+        - npm run watch
+  - File Manager: ranger
+  - Remote: ssh apptest

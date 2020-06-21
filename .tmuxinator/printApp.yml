@@ -1,0 +1,14 @@
+# ~/.tmuxinator/Dotfiles.yml
+
+name: printApp
+root: ~/Code/Laravel/printapp
+
+windows:
+  - Editor: nvim
+  - Utils:
+      layout: main-horizontal
+      panes:
+        - valet start
+        - npm run watch
+  - File Manager: ranger
+  - Remote: ssh apptest

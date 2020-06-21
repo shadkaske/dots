@@ -13,3 +13,7 @@
 [submodule "/home/shad/.config/base16-shell"]
 	path = /home/shad/.config/base16-shell
 	url = https://github.com/chriskempson/base16-shell.git
+[submodule "/home/shad/.emacs.d"]
+	path = /home/shad/.emacs.d
+	url = https://github.com/syl20bnr/spacemacs
+	branch = develop

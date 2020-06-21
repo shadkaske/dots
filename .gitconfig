@@ -1,0 +1,17 @@
+[user]
+    name = Shad Kaske
+    email = shadkaske@gmail.com
+[core]
+    editor = code --wait
+[merge]
+    tool = nvim
+[diff]
+    tool = nvim
+[difftool "nvim"]
+    cmd = nvim -d
+[mergetool "nvim"]
+    cmd = nvim -d $LOCAL $MERGED $REMOTE -c $MERGED
+[mergetool]
+    keepBackup = false
+[alias]
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative

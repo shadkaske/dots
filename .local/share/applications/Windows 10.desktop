@@ -1,0 +1,8 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Name=Windows 10
+Comment=Starts the VirtualBox machine Windows 10
+Type=Application
+Exec=/usr/lib/virtualbox/VirtualBoxVM --comment "Windows 10" --startvm "{c1e64776-e0ca-4268-8f0a-c1851f2d0500}"
+Icon=virtualbox-vbox.png

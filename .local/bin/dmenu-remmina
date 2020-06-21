@@ -1,0 +1,27 @@
+#!/bin/bash
+
+names=$(ag --no-group '^name' $HOME/.local/share/remmina | cut -d "=" -f2)
+windo=$(echo $'\nMain Window\nPreferences\nNew Connection')
+
+selected=$(echo "$names $windo" | dmenu -i -p "Remmina Connections:")
+
+if [[ ! -z $selected ]]; then
+    case $selected in
+        "Main Window")
+            remmina
+            ;;
+
+        "Preferences")
+            remmina -p 0
+            ;;
+
+        "New Connection")
+            remmina --new
+            ;;
+
+        *)
+            remminafile=$(ag -l $selected $HOME/.local/share/remmina)
+            remmina --connect=$remminafile
+            ;;
+    esac
+fi

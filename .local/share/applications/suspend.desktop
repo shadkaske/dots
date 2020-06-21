@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Suspend
+Exec=systemctl suspend
+Terminal=false
+Type=Application
+Encoding=UTF-8
+Icon=system-suspend-hibernate
+Categories=System;TerminalEmulator;
+Keywords=shell;prompt;command;commandline;cmd;suspend;sleep

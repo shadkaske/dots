@@ -1,0 +1,12 @@
+[submodule "/home/shad/.local/share/zsh-customs/themes/powerlevel10k"]
+	path = /home/shad/.local/share/zsh-customs/themes/powerlevel10k
+	url = https://gitee.com/romkatv/powerlevel10k.git
+[submodule ".local/share/zsh-customs/plugins/zsh-syntax-highlighting"]
+	path = .local/share/zsh-customs/plugins/zsh-syntax-highlighting
+	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
+[submodule "/home/shad/.local/share/zsh-customs/plugins/zsh-autosuggestions"]
+	path = /home/shad/.local/share/zsh-customs/plugins/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions
+[submodule "/home/shad/.local/share/oh-my-zsh"]
+	path = /home/shad/.local/share/oh-my-zsh
+	url = https://github.com/ohmyzsh/ohmyzsh.git

@@ -1,6 +1,7 @@
 [submodule ".local/share/zsh-customs/themes/powerlevel10k"]
 	path = .local/share/zsh-customs/themes/powerlevel10k
 	url = https://gitee.com/romkatv/powerlevel10k.git
+    shallow = true
 [submodule ".local/share/zsh-customs/plugins/zsh-syntax-highlighting"]
 	path = .local/share/zsh-customs/plugins/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting.git

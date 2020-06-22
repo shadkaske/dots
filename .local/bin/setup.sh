@@ -10,8 +10,8 @@ sudo apt install -y neovim tmux tmuxinator zsh build-essential xclip git-flow \
     curl python3-pip python2 ruby-dev tmuxinator silversearcher-ag \
     exuberant-ctags nodejs npm breeze-cursor-theme unzip kitty \
     curl dconf-editor software-properties-common apt-transport-https wget \
-    # nautilus-dropbox emacs evolution evolution-ews openjdk-11-jdk virtualbox \
-    # virtualbox-dkms virtualbox-ext-pack virtualbox-guest-additions-iso \
+    nautilus-dropbox emacs evolution evolution-ews openjdk-11-jdk virtualbox \
+    virtualbox-dkms virtualbox-ext-pack virtualbox-guest-additions-iso \
     remmina remmina-plugin-rdp wine winetricks gnome-tweaks
 
 curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py

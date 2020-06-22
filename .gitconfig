@@ -4,9 +4,9 @@
 [core]
     editor = code --wait
 [merge]
-    tool = nvim
+    tool = vscode
 [diff]
-    tool = nvim
+    tool = vscode
 [difftool "nvim"]
     cmd = nvim -d
 [mergetool "nvim"]
@@ -15,3 +15,7 @@
     keepBackup = false
 [alias]
     lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+[mergetool "vscode"]
+    cmd = code --wait $MERGED
+[difftool "vscode"]
+    cmd = code --wait --diff $LOCAL $REMOTE

@@ -3,15 +3,12 @@
 # Grab git submodules
 git --work-tree=$HOME --git-dir=$HOME/.dots submodule update --init
 
-# Add Repos
-sudo add-apt-repository ppa:serge-rider/dbeaver-ce -y
-
 # System update
 sudo apt update && sudo apt dist-upgrade -y
 
 sudo apt install -y neovim tmux tmuxinator zsh build-essential xclip git-flow \
     curl python3-pip python2 ruby-dev tmuxinator silversearcher-ag \
-    exuberant-ctags nodejs npm breeze-cursor-theme unzip kitty dbeaver-ce \
+    exuberant-ctags nodejs npm breeze-cursor-theme unzip kitty \
     curl dconf-editor software-properties-common apt-transport-https wget \
     # nautilus-dropbox emacs evolution evolution-ews openjdk-11-jdk virtualbox \
     # virtualbox-dkms virtualbox-ext-pack virtualbox-guest-additions-iso \
@@ -47,5 +44,7 @@ flatpak install flathub com.microsoft.Teams -y
 flatpak install flathub org.eclipse.Java -y
 
 flatpak install flathub com.spotify.Client -y
+
+flatpak install flathub io.dbeaver.DBeaverCommunity -y
 
 fc-cache -fv

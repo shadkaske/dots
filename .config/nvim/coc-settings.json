@@ -1,0 +1,37 @@
+{
+  "suggest.noselect": false,
+  "python.jediEnabled": true,
+  "python.formatting.provider": "autopep8",
+  "python.formatting.autopep8Args": [
+    "--max-line-length 100"
+  ],
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": false,
+  "python.linting.flake8Enabled": true,
+  "python.linting.flake8Args": [
+    "--max-line-length=100",
+    "--ignore=W605"
+  ],
+  "python.autoComplete.addBrackets": true,
+  "coc.preferences.formatOnSaveFiletypes": [
+    "python"
+  ],
+  "xml.java.home": "/usr/lib/jvm/openjdk-11",
+  "snippets.ultisnips.enable": true,
+  "snippets.ultisnips.directories": [
+    "UltiSnips",
+    "~/.config/nvim/plugged/vim-snippets/snippets"
+  ],
+  "snippets.userSnippetsDirectory": "~/.config/nvim/custom-snippets",
+  "intelephense.licenceKey": "00JMKSX69F0RDXE",
+  "eslint.run": "onSave",
+  "eslint.autoFixOnSave": true,
+  "eslint.options": {
+    "configFile": "./.eslintrc.json"
+  },
+  "html.filetypes": [
+    "html",
+    "blade"
+  ],
+  "html.format.enable": true
+}

@@ -7,10 +7,6 @@
     tool = vscode
 [diff]
     tool = vscode
-[difftool "nvim"]
-    cmd = nvim -d
-[mergetool "nvim"]
-    cmd = nvim -d $LOCAL $MERGED $REMOTE -c $MERGED
 [mergetool]
     keepBackup = false
 [alias]
@@ -19,3 +15,7 @@
     cmd = code --wait $MERGED
 [difftool "vscode"]
     cmd = code --wait --diff $LOCAL $REMOTE
+[difftool "nvim"]
+    cmd = nvim -d
+[mergetool "nvim"]
+    cmd = nvim -d $LOCAL $MERGED $REMOTE -c $MERGED

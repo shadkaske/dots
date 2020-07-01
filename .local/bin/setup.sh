@@ -26,15 +26,12 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \
 # Clone base16 repos for gnome terminal and shell
 git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell
 
-# Spacemacs
-git clone --single-branch --branch develop https://github.com/syl20bnr/spacemacs ~/.emacs.d
-
 # System update
 sudo apt update && sudo apt dist-upgrade -y
 
 sudo apt install -y neovim tmux tmuxinator zsh build-essential xclip git-flow \
     silversearcher-ag breeze-cursor-theme unzip kitty curl \
-    software-properties-common apt-transport-https wget nautilus-dropbox emacs \
+    software-properties-common apt-transport-https wget nautilus-dropbox \
     evolution evolution-ews openjdk-11-jdk virtualbox virtualbox-dkms \
     virtualbox-ext-pack virtualbox-guest-additions-iso remmina \
     remmina-plugin-rdp wine winetricks gnome-tweaks

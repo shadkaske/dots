@@ -33,7 +33,7 @@ sudo apt install -y neovim tmux tmuxinator zsh build-essential xclip git-flow \
     silversearcher-ag breeze-cursor-theme unzip kitty curl wget \
     software-properties-common apt-transport-https nautilus-dropbox \
     evolution evolution-ews openjdk-11-jdk remmina \
-    remmina-plugin-rdp wine winetricks gnome-tweaks
+    remmina-plugin-rdp wine winetricks gnome-tweaks ca-certificates gnupg-agent
 
 # curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py
 
@@ -48,6 +48,29 @@ sudo apt install -y neovim tmux tmuxinator zsh build-essential xclip git-flow \
 # python3 -m pip install neovim
 
 # python2 -m pip install neovim
+
+#Docker and Docker-compose
+curl -L \
+    "https://github.com/docker/compose/releases/download/latest/docker-compose-$(uname -s)-$(uname -m)" \
+    -o docker-compose
+
+sudo mv docker-compose /usr/local/bin/docker-compose
+
+sudo chmod +x /usr/local/bin/docker-compose
+
+sudo apt remove docker docker-engine docker.io containerd runc -y
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+
+sudo apt update
+
+sudo apt install docker-ce docker-ce-cli containerd.io
+
 
 #VSCode
 wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -

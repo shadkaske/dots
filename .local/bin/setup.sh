@@ -30,25 +30,24 @@ git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shel
 sudo apt update && sudo apt dist-upgrade -y
 
 sudo apt install -y neovim tmux tmuxinator zsh build-essential xclip git-flow \
-    silversearcher-ag breeze-cursor-theme unzip kitty curl \
-    software-properties-common apt-transport-https wget nautilus-dropbox \
-    evolution evolution-ews openjdk-11-jdk virtualbox virtualbox-dkms \
-    virtualbox-ext-pack virtualbox-guest-additions-iso remmina \
+    silversearcher-ag breeze-cursor-theme unzip kitty curl wget \
+    software-properties-common apt-transport-https nautilus-dropbox \
+    evolution evolution-ews openjdk-11-jdk remmina \
     remmina-plugin-rdp wine winetricks gnome-tweaks
 
-#curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py
+# curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py
 
-#sudo python2 get-pip.py
+# sudo python2 get-pip.py
 
-#rm -rf get-pip.py
+# rm -rf get-pip.py
 
-#sudo gem install neovim
+# sudo gem install neovim
 
-#sudo npm -g install neovim
+# sudo npm -g install neovim
 
-#python3 -m pip install neovim
+# python3 -m pip install neovim
 
-#python2 -m pip install neovim
+# python2 -m pip install neovim
 
 #VSCode
 wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -

@@ -87,8 +87,6 @@ flatpak install flathub com.microsoft.Teams -y
 
 flatpak install flathub org.eclipse.Java -y
 
-flatpak install flathub com.spotify.Client -y
-
 flatpak install flathub io.dbeaver.DBeaverCommunity -y
 
 fc-cache -fv

@@ -14,7 +14,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
 Plug 'chriskempson/base16-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -22,7 +21,7 @@ Plug 'edkolev/tmuxline.vim'
 Plug 'machakann/vim-highlightedyank'
 Plug 'chrisbra/Colorizer'
 Plug 'voldikss/vim-floaterm'
-" Plug 'vim-scripts/ReplaceWithRegister'
+Plug 'vim-scripts/ReplaceWithRegister'
 " Git
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
@@ -31,7 +30,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Snippets
 Plug 'honza/vim-snippets'
 " language
-" Plug 'ludovicchabant/vim-gutentags'
 Plug 'shadkaske/vim-blade', { 'for': ['php', 'blade'] }
 Plug 'Valloric/MatchTagAlways', {'for': ['php', 'html', 'blade']}
 Plug 'StanAngeloff/php.vim', { 'for': ['php', 'html'] }

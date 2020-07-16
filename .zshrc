@@ -40,6 +40,8 @@ plugins=(
     vagrant
     common-aliases
     vi-mode
+    docker
+    docker-compose
 )
 
 # User configuration
@@ -156,3 +158,4 @@ function kkssh() {
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 alias dots='git --git-dir=$HOME/.dots --work-tree=$HOME'
+alias tn='tmux new-session -A -s Terms'

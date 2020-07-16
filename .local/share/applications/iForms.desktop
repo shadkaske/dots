@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=iForms Designer
 Comment=iForms Design App
-Exec=/home/shad/.local/bin/iforms.sh
+Exec=/home/shad/.local/bin/iforms
 Icon=/home/shad/.local/share/icons/hicolor/48x48/apps/iforms.png
 Terminal=false
 Type=Application

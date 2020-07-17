@@ -32,8 +32,9 @@ sudo apt update && sudo apt dist-upgrade -y
 sudo apt install -y neovim tmux tmuxinator zsh build-essential xclip git-flow \
     silversearcher-ag breeze-cursor-theme unzip kitty curl wget \
     software-properties-common apt-transport-https nautilus-dropbox \
-    evolution evolution-ews openjdk-11-jdk remmina \
-    remmina-plugin-rdp wine winetricks gnome-tweaks ca-certificates gnupg-agent
+    evolution evolution-ews openjdk-11-jdk remmina remmina-plugin-rdp wine \
+    winetricks gnome-tweaks ca-certificates gnupg-agent autokey-gtk \
+    gnome-boxes nmap
 
 # curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py
 

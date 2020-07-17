@@ -82,6 +82,14 @@ alias tinker="php artisan tinker"
 alias phu="vendor/bin/phpunit"
 alias phuf="vendor/bin/phpunit --filter "
 alias tt='tmux new-session -A -s Terms'
+alias tp='tmuxinator start printApp-Homestead'
+alias hss='ssh homestead'
+alias hsu='homestead up'
+alias hsc='homestead up && ssh homestead'
+alias hsh='homestead halt'
+alias hst='homestead status'
+alias hsr='homestead reload && ssh homestead'
+alias hsp='homestead suspend'
 alias nivm='nvim'
 alias eixt='exit'
 alias cl="cal -B 1 -A 1"
@@ -136,6 +144,10 @@ bindkey '^[[B' down-line-or-search
 bindkey '^ ' autosuggest-accept
 
 # Custom functions
+
+function homestead() {
+    ( cd ~/.config/homestead && vagrant $* )
+}
 
 function kkssh() {
     ( kitty +kitten ssh $1 && ssh $1 )

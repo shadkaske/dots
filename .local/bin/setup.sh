@@ -46,7 +46,8 @@ sudo apt install -y neovim tmux tmuxinator zsh build-essential xclip git-flow \
     gnome-boxes nmap nodejs mysql-server php7.2-bcmath php7.2-bz2 php7.2-cli \
     php7.2-common php7.2-curl php7.2-fpm php7.2-gd php7.2-imap php7.2-intl \
     php7.2-json php7.2-ldap php7.2-mbstring php7.2-mysql php7.2-odbc \
-    php7.2-opcache php7.2-readline php7.2-xml python3 python2 ruby-full
+    php7.2-opcache php7.2-readline php7.2-xml python3 python2 ruby-full \
+    python3-pip
 
 # install yarn, just skip the recomended packages
 sudo apt install --no-install-recommends yarn
@@ -59,7 +60,7 @@ rm -f composer-setup.php
 
 # install valet
 composer global require cpriego/valet-linux
-valet install
+$HOME/.config/composer/vendor/bin/valet install
 
 curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py
 
@@ -71,9 +72,11 @@ sudo gem install neovim
 
 sudo npm -g install neovim
 
-python3 -m pip install neovim
+python3 -m pip install neovim neovim-remote
 
 python2 -m pip install neovim
+
+nvim -u $HOME/.config/nvim/plugins.vim +PlugInstall +qall
 
 #VSCode
 wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
@@ -110,3 +113,9 @@ cd $HOME
 rm -rf $HOME/Downloads/JetBrainsMono
 
 fc-cache -fv
+
+/bin/zsh
+
+$HOME/.config/base16-shell/scripts/base16-material-darker.sh
+
+chsh -s /bin/zsh $USER

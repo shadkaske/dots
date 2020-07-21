@@ -47,7 +47,7 @@ sudo apt install -y neovim tmux tmuxinator zsh build-essential xclip git-flow \
     php7.2-common php7.2-curl php7.2-fpm php7.2-gd php7.2-imap php7.2-intl \
     php7.2-json php7.2-ldap php7.2-mbstring php7.2-mysql php7.2-odbc \
     php7.2-opcache php7.2-readline php7.2-xml python3 python2 ruby-full \
-    python3-pip samba
+    python3-pip samba libnss3-tools jq xsel
 
 # install yarn, just skip the recomended packages
 sudo apt install --no-install-recommends yarn

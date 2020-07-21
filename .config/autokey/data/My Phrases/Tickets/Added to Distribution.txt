@@ -1,0 +1,6 @@
+User has been added to the distribution list. Updates will sync to the global address book within the hour.
+
+#add 15m
+#category Exchange
+#set Site=Main
+#close      

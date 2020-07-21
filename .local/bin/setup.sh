@@ -19,6 +19,10 @@ fi
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
     $HOME/.local/share/zsh-customs/plugins/zsh-syntax-highlighting
 
+# Install ZSH Autosuggestions
+git clone https://github.com/zsh-users/zsh-autosuggestions \
+    $HOME/.local/share/zsh-customs/plugins/zsh-autosuggestions
+
 # Install powerlevel10k
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \
     $HOME/.local/share/zsh-customs/themes/powerlevel10k
@@ -29,12 +33,25 @@ git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shel
 # System update
 sudo apt update && sudo apt dist-upgrade -y
 
+# Add nodejs PPA
+curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+
+# Add Yarn PPA
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | \
+    sudo tee /etc/apt/sources.list.d/yarn.list
+
+sudo apt update
+
 sudo apt install -y neovim tmux tmuxinator zsh build-essential xclip git-flow \
     silversearcher-ag breeze-cursor-theme unzip kitty curl wget \
     software-properties-common apt-transport-https nautilus-dropbox \
     evolution evolution-ews openjdk-11-jdk remmina remmina-plugin-rdp wine \
     winetricks gnome-tweaks ca-certificates gnupg-agent autokey-gtk \
-    gnome-boxes nmap
+    gnome-boxes nmap nodejs
+
+# install yarn, just skip the recomended packages
+sudo apt install --no-install-recommends yarn
 
 # curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py
 
@@ -49,29 +66,6 @@ sudo apt install -y neovim tmux tmuxinator zsh build-essential xclip git-flow \
 # python3 -m pip install neovim
 
 # python2 -m pip install neovim
-
-#Docker and Docker-compose
-curl -L \
-    "https://github.com/docker/compose/releases/download/latest/docker-compose-$(uname -s)-$(uname -m)" \
-    -o docker-compose
-
-sudo mv docker-compose /usr/local/bin/docker-compose
-
-sudo chmod +x /usr/local/bin/docker-compose
-
-sudo apt remove docker docker-engine docker.io containerd runc -y
-
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-
-sudo add-apt-repository \
-   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-   $(lsb_release -cs) \
-   stable"
-
-sudo apt update
-
-sudo apt install docker-ce docker-ce-cli containerd.io
-
 
 #VSCode
 wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -

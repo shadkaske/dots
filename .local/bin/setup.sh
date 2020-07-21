@@ -41,6 +41,9 @@ curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | \
     sudo tee /etc/apt/sources.list.d/yarn.list
 
+# Add PHP PPA
+sudo apt-add-repository ppa:ondrej/php
+
 sudo apt update
 
 sudo apt install -y neovim tmux tmuxinator zsh build-essential xclip git-flow \
@@ -48,24 +51,37 @@ sudo apt install -y neovim tmux tmuxinator zsh build-essential xclip git-flow \
     software-properties-common apt-transport-https nautilus-dropbox \
     evolution evolution-ews openjdk-11-jdk remmina remmina-plugin-rdp wine \
     winetricks gnome-tweaks ca-certificates gnupg-agent autokey-gtk \
-    gnome-boxes nmap nodejs
+    gnome-boxes nmap nodejs mysql-server php7.2-bcmath php7.2-bz2 php7.2-cli \
+    php7.2-common php7.2-curl php7.2-fpm php7.2-gd php7.2-imap php7.2-intl \
+    php7.2-json php7.2-ldap php7.2-mbstring php7.2-mysql php7.2-odbc \
+    php7.2-opcache php7.2-readline php7.2-xml python3 python2 ruby-full
 
 # install yarn, just skip the recomended packages
 sudo apt install --no-install-recommends yarn
 
-# curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py
+# Install Composer
+curl -sS https://getcomposer.org/installer -o composer-setup.php
+sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 
-# sudo python2 get-pip.py
+rm -f composer-setup.php
 
-# rm -rf get-pip.py
+# install valet
+composer global require cpriego/valet-linux
+valet install
 
-# sudo gem install neovim
+curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py
 
-# sudo npm -g install neovim
+sudo python2 get-pip.py
 
-# python3 -m pip install neovim
+rm -rf get-pip.py
 
-# python2 -m pip install neovim
+sudo gem install neovim
+
+sudo npm -g install neovim
+
+python3 -m pip install neovim
+
+python2 -m pip install neovim
 
 #VSCode
 wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
@@ -83,5 +99,22 @@ flatpak install flathub com.microsoft.Teams -y
 flatpak install flathub org.eclipse.Java -y
 
 flatpak install flathub io.dbeaver.DBeaverCommunity -y
+
+# Install JetBrains Mono Nerd Font
+cd $HOME/Downloads
+
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/JetBrainsMono.zip
+
+unzip unzip JetBrainsMono.zip -d ./JetBrainsMono
+
+cd ./JetBrainsMono
+
+rm JetBrains\ Mono\ *Windows\ Compatible* -f
+
+mv *.ttf $HOME/.local/share/fonts
+
+cd $HOME
+
+rm -rf $HOME/Downloads/JetBrainsMono
 
 fc-cache -fv

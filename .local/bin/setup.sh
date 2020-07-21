@@ -119,6 +119,7 @@ rm -rf $HOME/Downloads/JetBrainsMono
 
 fc-cache -fv
 
-sudo usermod -a -G libvirt $USER
+# Set default terminal emulatoer
+sudo update-alternatives --set x-terminal-emulator /usr/bin/kitty
 
 chsh -s /bin/zsh $USER

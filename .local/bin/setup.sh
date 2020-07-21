@@ -1,31 +1,20 @@
 #!/bin/bash
 
 # create direcotries if needed
-if [[ ! -d "$HOME/.local/share" ]]; then
-    mkdir -p $HOME/.local/share
-fi
-
-if [[ ! -d "$HOME/.local/share/zsh-customs" ]]; then
-    mkdir -p $HOME/.local/share/zsh-customs
-fi
-
-# Clone oh-my-zsh
-if [[ ! -d "$HOME/.local/share/oh-my-zsh" ]]; then
-    git clone https://github.com/robbyrussell/oh-my-zsh.git \
-    $HOME/.local/share/oh-my-zsh
-fi
+git clone https://github.com/robbyrussell/oh-my-zsh.git \
+    $HOME/.oh-my-zsh
 
 # Install zsh syntax highlighting
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
-    $HOME/.local/share/zsh-customs/plugins/zsh-syntax-highlighting
+    $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 
 # Install ZSH Autosuggestions
 git clone https://github.com/zsh-users/zsh-autosuggestions \
-    $HOME/.local/share/zsh-customs/plugins/zsh-autosuggestions
+    $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 
 # Install powerlevel10k
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \
-    $HOME/.local/share/zsh-customs/themes/powerlevel10k
+    $HOME/.oh-my-zsh/custom/themes/powerlevel10k
 
 # Clone base16 repos for gnome terminal and shell
 git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell
@@ -42,7 +31,7 @@ echo "deb https://dl.yarnpkg.com/debian/ stable main" | \
     sudo tee /etc/apt/sources.list.d/yarn.list
 
 # Add PHP PPA
-sudo apt-add-repository ppa:ondrej/php
+sudo apt-add-repository --yes ppa:ondrej/php
 
 sudo apt update
 

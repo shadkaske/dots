@@ -153,9 +153,13 @@ function kkssh() {
     ( kitty +kitten ssh $1 && ssh $1 )
 }
 
+function dots {
+   /usr/bin/git --git-dir=$HOME/.dots/ --work-tree=$HOME $@
+}
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-alias dots='git --git-dir=$HOME/.dots --work-tree=$HOME'
+# alias dots='git --git-dir=$HOME/.dots --work-tree=$HOME'
 alias tn='tmux new-session -A -s Terms'

@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Get and keep sudo alive
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
 # create direcotries if needed
 git clone https://github.com/robbyrussell/oh-my-zsh.git \
     $HOME/.oh-my-zsh

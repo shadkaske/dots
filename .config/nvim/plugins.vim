@@ -58,7 +58,6 @@ let g:coc_global_extensions = [
       \ 'coc-json',
       \ 'coc-tag',
       \ 'coc-pairs',
-      \ 'coc-xml',
       \ 'coc-html',
       \ 'coc-css',
       \ 'coc-dictionary',

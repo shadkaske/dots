@@ -96,6 +96,16 @@ wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo dpkg -i google-chrome-stable_current_amd64.deb
 rm -f google-chrome-stable_current_amd64.deb
 
+# Install Todoist App
+wget https://github.com/KryDos/todoist-linux/releases/download/1.23.0/Todoist_1.23.0_amd64.deb
+sudo dpkg -i Todoist_1.23.0_amd64.deb
+rm -f Todoist_1.23.0_amd64.deb
+
+# Install AngryIPScanner
+wget https://github.com/angryip/ipscan/releases/download/3.7.2/ipscan_3.7.2_amd64.deb
+sudo dpkg -i ipscan_3.7.2_amd64.deb
+rm -f ipscan_3.7.2_amd64.deb
+
 flatpak install flathub com.microsoft.Teams -y
 
 flatpak install flathub org.eclipse.Java -y

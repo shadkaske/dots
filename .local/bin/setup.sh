@@ -101,11 +101,13 @@ rm -f google-chrome-stable_current_amd64.deb
 wget https://github.com/KryDos/todoist-linux/releases/download/1.23.0/Todoist_1.23.0_amd64.deb
 sudo dpkg -i Todoist_1.23.0_amd64.deb
 rm -f Todoist_1.23.0_amd64.deb
+sudo apt install --fix-broken --yes
 
 # Install AngryIPScanner
 wget https://github.com/angryip/ipscan/releases/download/3.7.2/ipscan_3.7.2_amd64.deb
 sudo dpkg -i ipscan_3.7.2_amd64.deb
 rm -f ipscan_3.7.2_amd64.deb
+sudo apt install --fix-broken --yes
 
 flatpak install flathub com.microsoft.Teams -y
 

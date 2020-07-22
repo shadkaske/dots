@@ -127,4 +127,7 @@ sudo update-alternatives --set x-terminal-emulator /usr/bin/kitty
 # Set kvantum environment variable
 echo "export QT_STYLE_OVERRIDE=kvantum" >> ~/.profile
 
+# Import dconf settings
+dconf load / < $HOME/.local/share/dconf-user-settings.conf
+
 chsh -s /bin/zsh $USER

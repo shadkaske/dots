@@ -134,6 +134,9 @@ fc-cache -fv
 # Set default terminal emulatoer
 sudo update-alternatives --set x-terminal-emulator /usr/bin/kitty
 
+# Add vboxusers group
+sudo usermod -aG vboxusers $USER
+
 # Set kvantum environment variable
 echo "export QT_STYLE_OVERRIDE=kvantum" >> ~/.profile
 

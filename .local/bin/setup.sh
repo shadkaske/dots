@@ -49,7 +49,8 @@ sudo apt install ACCEPT_EULA=Y -y neovim tmux tmuxinator zsh build-essential \
     php7.2-opcache php7.2-readline php7.2-xml python3 python2 ruby-full \
     python3-pip libnss3-tools jq xsel nginx papirus-icon-theme \
     virtualbox virtualbox-dkms virtualbox-ext-pack \
-    virtualbox-guest-additions-iso qt5-style-kvantum qt5-style-kvantum-themes
+    virtualbox-guest-additions-iso qt5-style-kvantum qt5-style-kvantum-themes \
+    gconf2 gconf-service libappindicator1
 
 # Remove Apps we don't want
 sudo apt remove --yes --purge geary

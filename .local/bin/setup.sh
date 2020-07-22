@@ -49,7 +49,7 @@ sudo apt install -y neovim tmux tmuxinator zsh build-essential xclip git-flow \
     php7.2-opcache php7.2-readline php7.2-xml python3 python2 ruby-full \
     python3-pip libnss3-tools jq xsel nginx papirus-icon-theme \
     virtualbox virtualbox-dkms virtualbox-ext-pack \
-    virtualbox-guest-additions-iso
+    virtualbox-guest-additions-iso qt5-style-kvantum qt5-style-kvantum-themes
 
 # Remove Apps we don't want
 sudo apt remove --yes --purge geary
@@ -123,5 +123,8 @@ fc-cache -fv
 
 # Set default terminal emulatoer
 sudo update-alternatives --set x-terminal-emulator /usr/bin/kitty
+
+# Set kvantum environment variable
+echo "export QT_STYLE_OVERRIDE=kvantum" >> ~/.profile
 
 chsh -s /bin/zsh $USER

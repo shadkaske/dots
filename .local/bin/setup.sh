@@ -42,12 +42,14 @@ sudo apt install -y neovim tmux tmuxinator zsh build-essential xclip git-flow \
     silversearcher-ag breeze-cursor-theme unzip kitty curl wget \
     software-properties-common apt-transport-https nautilus-dropbox \
     evolution evolution-ews openjdk-11-jdk remmina remmina-plugin-rdp  \
-    gnome-tweaks ca-certificates gnupg-agent autokey-gtk gnome-boxes nmap \
+    gnome-tweaks ca-certificates gnupg-agent autokey-gtk nmap \
     nodejs mysql-server php7.2-bcmath php7.2-bz2 php7.2-cli \
     php7.2-common php7.2-curl php7.2-fpm php7.2-gd php7.2-imap php7.2-intl \
     php7.2-json php7.2-ldap php7.2-mbstring php7.2-mysql php7.2-odbc \
     php7.2-opcache php7.2-readline php7.2-xml python3 python2 ruby-full \
-    python3-pip samba libnss3-tools jq xsel nginx papirus-icon-theme
+    python3-pip libnss3-tools jq xsel nginx papirus-icon-theme \
+    virtualbox virtualbox-dkms virtualbox-ext-pack \
+    virtualbox-guest-additions-iso
 
 # Remove Apps we don't want
 sudo apt remove --yes --purge geary

@@ -38,7 +38,7 @@ sudo apt-add-repository --yes ppa:ondrej/php
 
 sudo apt update
 
-sudo apt install ACCEPT_EULA=Y -y neovim tmux tmuxinator zsh build-essential \
+sudo apt install -y neovim tmux tmuxinator zsh build-essential \
     xclip git-flow silversearcher-ag breeze-cursor-theme unzip kitty curl wget \
     software-properties-common apt-transport-https nautilus-dropbox \
     evolution evolution-ews openjdk-11-jdk remmina remmina-plugin-rdp  \

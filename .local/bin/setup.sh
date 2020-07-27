@@ -50,7 +50,9 @@ sudo apt install -y neovim tmux tmuxinator zsh build-essential \
     python3-pip libnss3-tools jq xsel nginx papirus-icon-theme \
     virtualbox virtualbox-dkms virtualbox-ext-pack \
     virtualbox-guest-additions-iso qt5-style-kvantum qt5-style-kvantum-themes \
-    gconf2 gconf-service libappindicator1
+    gconf2 gconf-service libappindicator1 network-manager-l2tp-gnome \
+    network-manager-strongswan libstrongswan-standard-plugins \
+    libstrongswan-extra-plugins
 
 # Remove Apps we don't want
 sudo apt remove --yes --purge geary

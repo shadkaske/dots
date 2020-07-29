@@ -56,13 +56,14 @@ sudo apt install --yes neovim tmux tmuxinator zsh build-essential \
     php7.2-json php7.2-ldap php7.2-mbstring php7.2-mysql php7.2-odbc \
     php7.2-opcache php7.2-readline php7.2-xml python3 python2 ruby-full \
     python3-pip libnss3-tools jq xsel nginx papirus-icon-theme \
-    virtualbox virtualbox-dkms virtualbox-ext-pack \
-    virtualbox-guest-additions-iso qt5-style-kvantum qt5-style-kvantum-themes \
+    qt5-style-kvantum qt5-style-kvantum-themes \
     gconf2 gconf-service libappindicator1 network-manager-l2tp-gnome \
     network-manager-strongswan libstrongswan-standard-plugins \
     libstrongswan-extra-plugins onedrive wine winetricks timeshift \
-    backintime-qt4 dnsmasq inotify-tools code google-chrome-stable libavcodec-extra58 \
-    xournal htop nautilus-admin
+    backintime-qt4 dnsmasq inotify-tools code google-chrome-stable \
+    libavcodec-extra58 xournal htop nautilus-admin qemu-kvm libvirt-clients \
+    libvirt-daemon-system bridge-utils virt-manager libvirt-daemon ovmf \
+    gnome-boxes spice-vdagent virt-viewer qemu
 
 # Remove Apps we don't want
 sudo apt remove --yes --purge geary
@@ -139,7 +140,13 @@ fc-cache -fv
 sudo update-alternatives --set x-terminal-emulator /usr/bin/kitty
 
 # Add vboxusers group
-sudo usermod -aG vboxusers $USER
+sudo adduser $USER libvirt
+sudo adduser $USER libvirt-qemu
+
+# Copy samba config and enable
+sudo cp $HOME/.config/samba.conf /etc/samba/smb.conf
+sudo systemctl enable smbd
+sudo systemctl start smbd
 
 # Set kvantum environment variable
 echo "export QT_STYLE_OVERRIDE=kvantum" >> ~/.profile

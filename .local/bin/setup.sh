@@ -42,11 +42,11 @@ wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-ke
 sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
 
 # Add PHP PPA
-sudo apt-add-repository --yes ppa:ondrej/php
+sudo apt-add-repository --yes --no-update ppa:ondrej/php
 
 sudo apt update
 
-sudo apt install -y neovim tmux tmuxinator zsh build-essential \
+sudo apt install --yes neovim tmux tmuxinator zsh build-essential \
     xclip git-flow silversearcher-ag breeze-cursor-theme unzip kitty curl wget \
     software-properties-common apt-transport-https nautilus-dropbox \
     evolution evolution-ews default-jre default-jdk remmina remmina-plugin-rdp  \
@@ -62,14 +62,12 @@ sudo apt install -y neovim tmux tmuxinator zsh build-essential \
     network-manager-strongswan libstrongswan-standard-plugins \
     libstrongswan-extra-plugins onedrive wine winetricks timeshift \
     backintime-qt4 dnsmasq inotify-tools code google-chrome-stable libavcodec-extra58 \
-    xournal htop
+    xournal htop nautilus-admin
 
 # Remove Apps we don't want
 sudo apt remove --yes --purge geary
 
 sudo apt autoremove --yes
-
-sudo apt autoclean
 
 # install yarn, just skip the recomended packages
 sudo apt install --no-install-recommends yarn

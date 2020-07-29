@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Get and keep sudo alive
-while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+# add local/bin to path
+export PATH=$HOME/.local/bin:$PATH
 
 # create direcotries if needed
 git clone https://github.com/robbyrussell/oh-my-zsh.git \
@@ -33,6 +33,14 @@ curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | \
     sudo tee /etc/apt/sources.list.d/yarn.list
 
+# add vscode ppa
+wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+
+# add chrome ppa
+wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+
 # Add PHP PPA
 sudo apt-add-repository --yes ppa:ondrej/php
 
@@ -41,7 +49,7 @@ sudo apt update
 sudo apt install -y neovim tmux tmuxinator zsh build-essential \
     xclip git-flow silversearcher-ag breeze-cursor-theme unzip kitty curl wget \
     software-properties-common apt-transport-https nautilus-dropbox \
-    evolution evolution-ews openjdk-11-jdk remmina remmina-plugin-rdp  \
+    evolution evolution-ews default-jre default-jdk remmina remmina-plugin-rdp  \
     gnome-tweaks ca-certificates gnupg-agent autokey-gtk nmap \
     nodejs mysql-server php7.2-bcmath php7.2-bz2 php7.2-cli \
     php7.2-common php7.2-curl php7.2-fpm php7.2-gd php7.2-imap php7.2-intl \
@@ -53,12 +61,15 @@ sudo apt install -y neovim tmux tmuxinator zsh build-essential \
     gconf2 gconf-service libappindicator1 network-manager-l2tp-gnome \
     network-manager-strongswan libstrongswan-standard-plugins \
     libstrongswan-extra-plugins onedrive wine winetricks timeshift \
-    backintime-qt4
+    backintime-qt4 dnsmasq inotify-tools code google-chrome-stable libavcodec-extra58 \
+    xournal htop
 
 # Remove Apps we don't want
 sudo apt remove --yes --purge geary
 
 sudo apt autoremove --yes
+
+sudo apt autoclean
 
 # install yarn, just skip the recomended packages
 sudo apt install --no-install-recommends yarn
@@ -87,18 +98,7 @@ python3 -m pip install neovim neovim-remote
 
 python2 -m pip install neovim
 
-nvim -u $HOME/.config/nvim/plugins.vim +PlugInstall +qall
-
-#VSCode
-wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
-sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
-sudo apt update
-sudo apt install code
-
-# google chrome
-wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-sudo dpkg -i google-chrome-stable_current_amd64.deb
-rm -f google-chrome-stable_current_amd64.deb
+nvim -u $HOME/.config/nvim/plugins.vim +PlugInstall +CocInstall +qall
 
 # Install Todoist App
 wget https://github.com/KryDos/todoist-linux/releases/download/1.23.0/Todoist_1.23.0_amd64.deb

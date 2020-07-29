@@ -52,7 +52,8 @@ sudo apt install -y neovim tmux tmuxinator zsh build-essential \
     virtualbox-guest-additions-iso qt5-style-kvantum qt5-style-kvantum-themes \
     gconf2 gconf-service libappindicator1 network-manager-l2tp-gnome \
     network-manager-strongswan libstrongswan-standard-plugins \
-    libstrongswan-extra-plugins onedrive wine winetricks
+    libstrongswan-extra-plugins onedrive wine winetricks timeshift \
+    backintime-qt4
 
 # Remove Apps we don't want
 sudo apt remove --yes --purge geary

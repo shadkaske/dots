@@ -1,0 +1,9 @@
+#!/bin/bash
+if [[ -z $(virsh list | ag -i windows10 | cut -c1-4) ]]; then
+    virsh start Windows10
+fi
+
+ID=$((virsh list | ag -i windows10 | cut -c1-4) | xargs)
+virt-viewer --connect qemu:///system $ID &
+
+# vi: ft=sh

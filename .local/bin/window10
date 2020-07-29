@@ -1,5 +1,0 @@
-#!/bin/bash
-
-gnome-boxes --open-uuid e0f46600-3c64-4415-8f1e-491ede7de036
-
-# vim: ft=sh

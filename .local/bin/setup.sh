@@ -63,7 +63,7 @@ sudo apt install --yes neovim tmux tmuxinator zsh build-essential \
     backintime-qt4 dnsmasq inotify-tools code google-chrome-stable \
     libavcodec-extra58 xournal htop nautilus-admin qemu-kvm libvirt-clients \
     libvirt-daemon-system bridge-utils virt-manager libvirt-daemon ovmf \
-    gnome-boxes spice-vdagent virt-viewer qemu
+    spice-vdagent virt-viewer qemu
 
 # Remove Apps we don't want
 sudo apt remove --yes --purge geary
@@ -142,11 +142,15 @@ sudo update-alternatives --set x-terminal-emulator /usr/bin/kitty
 # Add vboxusers group
 sudo adduser $USER libvirt
 sudo adduser $USER libvirt-qemu
+sudo adduser $USER kvm
 
 # Copy samba config and enable
-sudo cp $HOME/.config/samba.conf /etc/samba/smb.conf
+sudo cp $HOME/.config/system/smb.conf /etc/samba/smb.conf
 sudo systemctl enable smbd
 sudo systemctl start smbd
+
+# enable libvirt daemon
+sudo systemctl enable libvirtd
 
 # Set kvantum environment variable
 echo "export QT_STYLE_OVERRIDE=kvantum" >> ~/.profile

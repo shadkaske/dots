@@ -63,7 +63,7 @@ sudo apt install --yes neovim tmux tmuxinator zsh build-essential \
     backintime-qt4 dnsmasq inotify-tools code google-chrome-stable \
     libavcodec-extra58 xournal htop nautilus-admin qemu-kvm libvirt-clients \
     libvirt-daemon-system bridge-utils virt-manager libvirt-daemon ovmf \
-    spice-vdagent virt-viewer qemu
+    spice-vdagent virt-viewer qemu mlocate
 
 # Remove Apps we don't want
 sudo apt remove --yes --purge geary

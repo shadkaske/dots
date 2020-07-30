@@ -139,10 +139,15 @@ fc-cache -fv
 # Set default terminal emulatoer
 sudo update-alternatives --set x-terminal-emulator /usr/bin/kitty
 
-# Add vboxusers group
+# Add libvirt group
 sudo adduser $USER libvirt
 sudo adduser $USER libvirt-qemu
 sudo adduser $USER kvm
+
+# change compression to no for vm dir
+mkdir -p $HOME/.local/share/libvirt
+sudo chattr +C ~/.local/share/libvirt
+sudo chattr +C /var/run/libvirt
 
 # Copy samba config and enable
 sudo cp $HOME/.config/system/smb.conf /etc/samba/smb.conf

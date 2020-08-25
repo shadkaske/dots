@@ -8,7 +8,7 @@ fi
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
-# ZSH_THEME="af-magic"
+# ZSH_THEME="avit"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Base16 Shell

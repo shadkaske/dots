@@ -1,5 +1,0 @@
-#assign Nathaniel Jay Lee <leenatha@Showplacewood.com>
-#set Site=Main
-#category ShowplacePro
-#created_by Nathaniel Jay Lee <leenatha@Showplacewood.com> 
-#add 15m

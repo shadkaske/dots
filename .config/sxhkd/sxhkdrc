@@ -1,0 +1,45 @@
+# Reload functions
+super + Escape
+	slock
+
+super + shift + alt + k
+    killall -SIGUSR1 sxhkd
+
+super + alt + d
+    dmenu-display-config
+
+super + alt + p
+    j4-dmenu-desktop --dmenu="dmenu"
+
+super + alt + v
+	dmenu-greenclip
+
+super + alt + r
+	dmenu-remmina
+
+super + alt + n
+    dmenu-networkmanager
+
+super + alt + s
+    dmenu-audio-select
+
+super + alt + l
+    dmenu-lastpass copy
+
+super + ctrl + b
+    qutebrowser
+
+super + ctrl + e
+    evolution
+
+super + ctrl + f
+    kitty -e ranger
+
+XF86AudioRaiseVolume
+	pactl set-sink-volume 1 +3% && pactl set-sink-volume 2 +3%
+
+XF86AudioLowerVolume
+	pactl set-sink-volume 1 -3% && pactl set-sink-volume 2 -3%
+
+XF86AudioMute
+	pactl set-sink-mute 1 toggle && pactl set-sink-mute 2 toggle

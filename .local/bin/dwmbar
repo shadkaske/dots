@@ -1,0 +1,53 @@
+#!/bin/bash
+
+weather() {
+    OUTFILE=$HOME/Code/source/dwmbar/weather.txt
+
+    UPDATEINTERVAL=3600
+
+    CURTIME=$(date +%s)
+    FILETIME=$(stat $OUTFILE -c %Y)
+    TIMEDIFF=$(expr $CURTIME - $FILETIME)
+
+    if [[ $TIMEDIFF -gt $UPDATEINTERVAL || -z $OUTFILE ]]; then
+
+        url='wttr.in/fsd?format=%C+%t\n'
+
+        icon="  "
+
+        data=$(curl --silent "$url")
+
+        echo " $icon $data " > $OUTFILE
+    fi
+
+    printf "%s" "$(<$OUTFILE)"
+}
+
+pulse() {
+    VOL=$(pamixer --get-volume-human | tr -d '%')
+
+    printf "%s" "$SEP1"
+
+    if [ "$VOL" = "muted" ] || [ "$VOL" -eq 0 ]; then
+        printf " 0%%"
+    elif [ "$VOL" -gt 0 ] && [ "$VOL" -le 33 ]; then
+        printf " %s%%" "$VOL"
+    elif [ "$VOL" -gt 33 ] && [ "$VOL" -le 66 ]; then
+        printf "  %s%%" "$VOL"
+    else
+        printf "  %s%%" "$VOL"
+    fi
+}
+
+while true; do
+
+    WTTR=$(weather)
+    DATE=$(date +"%a, %b %d %R")
+    VOL=$(pulse)
+
+    xsetroot -name " $VOL | $WTTR | $DATE "
+
+    sleep 1
+done
+
+# vi: ft=sh

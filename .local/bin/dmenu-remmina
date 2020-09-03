@@ -21,7 +21,7 @@ if [[ ! -z $selected ]]; then
 
         *)
             remminafile=$(ag -l $selected $HOME/.local/share/remmina)
-            remmina --connect=$remminafile
+            remmina --connect="$remminafile"
             ;;
     esac
 fi

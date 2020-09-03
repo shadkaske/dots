@@ -47,6 +47,8 @@ Plug 'mboughaba/i3config.vim'
 Plug 'janko/vim-test'
 Plug 'vim-python/python-syntax', { 'for': 'python'}
 Plug 'chr4/nginx.vim'
+Plug 'baskerville/vim-sxhkdrc'
+" Plug 'kovetskiy/sxhkd-vim'
 " Plug 'cosminadrianpopescu/vim-sql-workbench'
 
 call plug#end()

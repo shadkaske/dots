@@ -1,0 +1,8 @@
+#!/bin/bash
+
+NUM_DISPLAYS=$(xrandr | ag " connected " | wc -l)
+
+case $NUM_DISPLAYS in
+    "3")
+        sh $HOME/.screenlayout/deskscreen.sh ;;
+esac

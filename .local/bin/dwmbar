@@ -17,7 +17,7 @@ weather() {
 
         data=$(curl --silent "$url")
 
-        echo " $icon $data " > $OUTFILE
+        echo "$icon $data" > $OUTFILE
     fi
 
     printf "%s" "$(<$OUTFILE)"
@@ -39,15 +39,19 @@ pulse() {
     fi
 }
 
-while true; do
+wifi() {
+    printf "  %s" "$(iw dev wlp7s0 link | grep SSID | cut -d  " " -f 2-)"
+}
 
-    WTTR=$(weather)
-    DATE=$(date +"%a, %b %d %R")
-    VOL=$(pulse)
+REQESTED_SEGMENT=$1
 
-    xsetroot -name " $VOL | $WTTR | $DATE "
-
-    sleep 1
-done
+case $REQESTED_SEGMENT in
+    pulse)
+        pulse
+        ;;
+    weather)
+        weather
+        ;;
+esac
 
 # vi: ft=sh

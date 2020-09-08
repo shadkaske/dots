@@ -3,7 +3,7 @@
 names=$(ag --no-group '^name' $HOME/.local/share/remmina | cut -d "=" -f2)
 windo=$(echo $'\nMain Window\nPreferences\nNew Connection')
 
-selected=$(echo "$names $windo" | dmenu -i -p "Remmina Connections:")
+selected=$(echo "$names $windo" | dmenu -p "Remmina Connections:")
 
 if [[ ! -z $selected ]]; then
     case $selected in

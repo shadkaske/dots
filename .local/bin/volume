@@ -1,0 +1,17 @@
+#!/bin/bash
+
+case $1 in
+    up)
+	    amixer -D pulse set Master on > /dev/null
+        amixer -D pulse set Master 5%+ > /dev/null
+        ;;
+    down)
+	    amixer -D pulse set Master on > /dev/null
+        amixer -D pulse set Master 5%- > /dev/null
+        ;;
+    mute)
+        amixer -D pulse set Master 1+ toggle > /dev/null
+        ;;
+esac
+
+# vi: ft=sh

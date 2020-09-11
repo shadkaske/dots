@@ -1,39 +1,48 @@
 # Reload functions
-super + Escape
-	slock
+# super + Escape
+# 	slock
 
 super + shift + alt + k
     killall -SIGUSR1 sxhkd
 
-super + alt + d
+super + Escape
+    slock
+
+super + shift + d
     dmenu-display-config
 
-super + alt + p
+super + shift + p
     j4-dmenu-desktop --dmenu="dmenu"
 
-super + alt + v
+super + shift + v
 	dmenu-greenclip
 
-super + alt + r
+super + shift + o
+	dmenu-qutebrowser
+
+super + shift + r
 	dmenu-remmina
 
-super + alt + n
+super + shift + t
     dmenu-networkmanager
 
-super + alt + s
+super + shift + s
     dmenu-audio-select
 
-super + alt + l
+super + shift + l
     dmenu-lastpass copy
 
-super + ctrl + b
-    qutebrowser
+super + ctrl + c
+    google-chrome
+
+super + ctrl + x
+    firefox
 
 super + ctrl + e
     evolution
 
 super + ctrl + f
-    kitty -e ranger
+    kitty --class="rangerfm" -e ranger
 
 XF86AudioRaiseVolume
 	volume up
@@ -43,3 +52,21 @@ XF86AudioLowerVolume
 
 XF86AudioMute
     volume mute
+
+super + F1
+    volume mute
+
+super + F2
+    volume down
+
+super + F3
+    volume up
+
+super + F4
+    playerctl play-pause
+
+super + F5
+    playerctl previous
+
+super + F6
+    playerctl next

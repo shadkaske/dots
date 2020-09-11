@@ -1,0 +1,5 @@
+#!/bin/bash
+
+kitty --class="Neovim" -e nvim
+
+# vi: ft=sh

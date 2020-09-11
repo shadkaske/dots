@@ -1,8 +1,10 @@
 #!/bin/bash
-if [[ -z $(virsh list | ag -i windows10) ]]; then
-    virsh start Windows10
-fi
+# if [[ -z $(virsh list | ag -i windows10) ]]; then
+#     virsh start Windows10
+# fi
 
-virt-manager --connect=qemu:///system --show-domain-console Windows10
+# virt-manager --connect=qemu:///system --show-domain-console Windows10
+
+vboxmanage startvm "Windows10 Fresh" --type gui
 
 # vi: ft=sh

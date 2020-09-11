@@ -1,15 +1,20 @@
 #!/bin/bash
 
 weather() {
-    OUTFILE=$HOME/Code/source/dwmbar/weather.txt
+    OUTFILE=$HOME/.cache/weather.txt
 
     UPDATEINTERVAL=3600
 
     CURTIME=$(date +%s)
-    FILETIME=$(stat $OUTFILE -c %Y)
-    TIMEDIFF=$(expr $CURTIME - $FILETIME)
 
-    if [[ $TIMEDIFF -gt $UPDATEINTERVAL || -z $OUTFILE ]]; then
+    if [[ ! -z $OUTFILE ]]; then
+        TIMEDIFF=9999
+    else
+        FILETIME=$(stat $OUTFILE -c %Y)
+        TIMEDIFF=$(expr $CURTIME - $FILETIME)
+    fi
+
+    if [[ $TIMEDIFF -gt $UPDATEINTERVAL ]]; then
 
         url='wttr.in/fsd?format=%C+%t\n'
 

@@ -9,12 +9,12 @@ vmxml="$HOME/.config/system/libvirt"
 
 case $reason in
     1) # backup start
-        mkdir -p $vmxml
-        for vm in $(virsh list --all --name)
-        do
-            virsh dumpxml $vm > "$vmxml/$vm.xml"
-        done
+        #mkdir -p $vmxml
+        #for vm in $(virsh list --all --name)
+        #do
+        #   virsh dumpxml $vm > "$vmxml/$vm.xml"
+        #done
 
         #copy samba config if newer
-        cp -u /etc/samba/smb.conf $HOME/.config/system/smb.conf
+        #cp -u /etc/samba/smb.conf $HOME/.config/system/smb.conf
 esac

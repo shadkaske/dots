@@ -9,6 +9,10 @@
       "title": "scratchpad"
     },
     {
+      "class": "org.remmina.Remmina",
+      "title": "Remmina Remote Desktop Client"
+    },
+    {
       "class": "Gnome-calculator",
       "title": "Calculator"
     },

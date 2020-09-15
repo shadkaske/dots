@@ -23,7 +23,8 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \
 git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell
 
 # Base16 Gnome Terminal
-git clone https://github.com/aaron-williamson/base16-gnome-terminal.git ~/.config/base16-gnome-terminal
+git clone https://github.com/aaron-williamson/base16-gnome-terminal.git \
+    ~/.config/base16-gnome-terminal
 
 
 # Install FZF
@@ -47,32 +48,28 @@ sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/v
 
 # add chrome ppa
 wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> \
+    /etc/apt/sources.list.d/google-chrome.list'
 
 # Add PHP PPA
 sudo apt-add-repository --yes --no-update ppa:ondrej/php
 
 sudo apt update
 
-sudo apt install --yes neovim tmux tmuxinator zsh build-essential \
-    xclip git-flow silversearcher-ag breeze-cursor-theme unzip kitty curl wget \
-    software-properties-common apt-transport-https nautilus-dropbox \
-    evolution evolution-ews default-jre default-jdk remmina remmina-plugin-rdp  \
-    gnome-tweaks ca-certificates gnupg-agent autokey-gtk nmap \
-    nodejs python3 python2 ruby-full python3-pip libnss3-tools jq xsel
-    papirus-icon-theme qt5-style-kvantum qt5-style-kvantum-themes gconf2 \
-    gconf-service libappindicator1 network-manager-l2tp-gnome \
-    network-manager-strongswan libstrongswan-standard-plugins \
-    libstrongswan-extra-plugins onedrive wine winetricks timeshift \
-    backintime-qt4 inotify-tools code google-chrome-stable \
-    libavcodec-extra58 xournal htop nautilus-admin mlocate feh arandr \
-    compton unclutter sxhkd qutebrowser ranger libx11-dev libxft-dev \
-    libxinerama-dev libharfbuzz-dev lastpass-cli dunst php7.2-xdebug \
-    php7.2-bcmath php7.2-bz2 php7.2-cli php7.2-common php7.2-curl php7.2-fpm \
-    php7.2-gd php7.2-imap php7.2-intl php7.2-json php7.2-ldap php7.2-mbstring \
-    php7.2-mysql php7.2-odbc php7.2-opcache php7.2-readline php7.2-sqlite3 \
-    php7.2-xml mysql-server virt-manager qemu libvirt-daemon ovmf virt-viewer \
-    libvirt-clients
+sudo apt install --yes neovim tmux tmuxinator zsh build-essential xclip git-flow \
+    silversearcher-ag breeze-cursor-theme unzip kitty curl wget software-properties-common \
+    apt-transport-https nautilus-dropbox evolution evolution-ews default-jre default-jdk remmina \
+    remmina-plugin-rdp gnome-tweaks ca-certificates gnupg-agent autokey-gtk nmap nodejs python3 \
+    python2 ruby-full python3-pip libnss3-tools jq xsel papirus-icon-theme qt5-style-kvantum \
+    qt5-style-kvantum-themes gconf2 gconf-service libappindicator1 network-manager-l2tp-gnome \
+    network-manager-strongswan libstrongswan-standard-plugins libstrongswan-extra-plugins onedrive \
+    wine winetricks timeshift backintime-qt4 inotify-tools code google-chrome-stable \
+    libavcodec-extra58 xournal htop nautilus-admin mlocate feh arandr compton unclutter sxhkd \
+    qutebrowser ranger libx11-dev libxft-dev libxinerama-dev libharfbuzz-dev lastpass-cli dunst \
+    php7.2-xdebug php7.2-bcmath php7.2-bz2 php7.2-cli php7.2-common php7.2-curl php7.2-fpm \
+    php7.2-gd php7.2-imap php7.2-intl php7.2-json php7.2-ldap php7.2-mbstring php7.2-mysql \
+    php7.2-odbc php7.2-opcache php7.2-readline php7.2-sqlite3 php7.2-xml mysql-server virt-manager \
+    qemu libvirt-daemon ovmf virt-viewer libvirt-clients samba
 
 # Remove Apps we don't want
 sudo apt remove --yes --purge geary
@@ -130,21 +127,21 @@ flatpak install flathub org.eclipse.Java -y
 flatpak install flathub io.dbeaver.DBeaverCommunity -y
 
 # Install JetBrains Mono Nerd Font
-cd $HOME/Downloads
+# cd $HOME/Downloads
 
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/JetBrainsMono.zip
+# wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/JetBrainsMono.zip
 
-unzip unzip JetBrainsMono.zip -d ./JetBrainsMono
+# unzip unzip JetBrainsMono.zip -d ./JetBrainsMono
 
-cd ./JetBrainsMono
+# cd ./JetBrainsMono
 
-rm JetBrains\ Mono\ *Windows\ Compatible* -f
+# rm JetBrains\ Mono\ *Windows\ Compatible* -f
 
-mv *.ttf $HOME/.local/share/fonts
+# mv *.ttf $HOME/.local/share/fonts
 
-cd $HOME
+# cd $HOME
 
-rm -rf $HOME/Downloads/JetBrainsMono
+# rm -rf $HOME/Downloads/JetBrainsMono
 
 fc-cache -fv
 

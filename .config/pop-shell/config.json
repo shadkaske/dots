@@ -1,0 +1,25 @@
+{
+  "float": [
+    {
+      "class": "pop-shell-example",
+      "title": "pop-shell-example"
+    },
+    {
+      "class": "st-256color",
+      "title": "scratchpad"
+    },
+    {
+      "class": "Gnome-calculator",
+      "title": "Calculator"
+    },
+    {
+      "class": "Virt-manager",
+      "title": "Virtual Machine Manager"
+    },
+    {
+        "class": "VirtualBox Manager",
+        "title": "Oracle VM VirtualBox Manager"
+    }
+  ],
+  "log_on_focus": false
+}

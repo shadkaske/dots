@@ -1,0 +1,11 @@
+#!/bin/bash
+
+spid=$(wmctrl -l -p | ag scratchpad | awk '{print $3}')
+
+if [ -z "$spid" ]; then
+    st -T scratchpad -e tmux new-session -A -s Scratchpad
+else
+    kill $spid
+fi
+
+# vi: ft=sh

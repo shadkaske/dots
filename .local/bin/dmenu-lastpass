@@ -104,7 +104,7 @@ fi
 # Main
 ######
 
-# List all entries in LastPass vault into dmenu formatted as follows
+# List all entries in LastPass vault into dmenu -i formatted as follows
 # Folder/subfolder/Name of Site [username at site] [id: id for lookup]
 IFS=$'\n' entries=($(lpass ls --long |
   cut -d ' ' -f 3- |
@@ -119,10 +119,10 @@ if ! lpass status; then
   exit 1
 fi
 
-# Get selection from user via dmenu
+# Get selection from user via dmenu -i
 selid=$(
   printf '%s\n' "${entries[@]}" |
-  dmenu -p 'LastPass: ' -l 7 |
+  dmenu -i -p 'LastPass: ' -l 7 |
   sed 's/^.*\[id: \([0-9]\{1,\}\)\].*$/\1/'
   )
 if [ -z "${selid}" ]; then

@@ -69,7 +69,7 @@ sudo apt install --yes neovim tmux tmuxinator zsh build-essential xclip git-flow
     php7.2-xdebug php7.2-bcmath php7.2-bz2 php7.2-cli php7.2-common php7.2-curl php7.2-fpm \
     php7.2-gd php7.2-imap php7.2-intl php7.2-json php7.2-ldap php7.2-mbstring php7.2-mysql \
     php7.2-odbc php7.2-opcache php7.2-readline php7.2-sqlite3 php7.2-xml mysql-server virt-manager \
-    qemu libvirt-daemon ovmf virt-viewer libvirt-clients samba
+    qemu libvirt-daemon ovmf virt-viewer libvirt-clients samba snapd
 
 # Remove Apps we don't want
 sudo apt remove --yes --purge geary
@@ -109,10 +109,12 @@ python3 -m pip install neovim neovim-remote
 nvim -u $HOME/.config/nvim/plugins.vim +PlugInstall +CocInstall +qall
 
 # Install Todoist App
-wget https://github.com/KryDos/todoist-linux/releases/download/1.23.0/Todoist_1.23.0_amd64.deb
-sudo dpkg -i Todoist_1.23.0_amd64.deb
-rm -f Todoist_1.23.0_amd64.deb
-sudo apt install --fix-broken --yes
+# wget https://github.com/KryDos/todoist-linux/releases/download/1.23.0/Todoist_1.23.0_amd64.deb
+# sudo dpkg -i Todoist_1.23.0_amd64.deb
+# rm -f Todoist_1.23.0_amd64.deb
+# sudo apt install --fix-broken --yes
+sudo snap install todoist
+
 
 # Install AngryIPScanner
 wget https://github.com/angryip/ipscan/releases/download/3.7.2/ipscan_3.7.2_amd64.deb

@@ -1,4 +1,10 @@
 #!/bin/bash
+
+# Check the default network start if not running
+if [[ -z $(virsh net-list | ag default) ]]; then
+    virsh net-start default
+fi
+
 if [[ -z $(virsh list | ag -i windows10) ]]; then
     virsh start Windows10
 fi

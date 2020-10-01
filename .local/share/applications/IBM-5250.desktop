@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=IBM 5250 Session
 Comment=IBM 5250 Session
-Exec=/home/shad/.local/bin/frontier-5250-DTA
+Exec=/opt/ibm/iAccessClientSolutions/Start_Programs/Linux_x86-64/acslaunch_linux-64 /plugin=5250 /system=frontier /nosave /sso /wide
 Icon=/opt/ibm/iAccessClientSolutions/Icons/logo128.png
 Terminal=false
 Type=Application

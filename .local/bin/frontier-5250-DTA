@@ -1,5 +1,0 @@
-#!/bin/bash
-
-WINEPREFIX=~/Wine/iForms /usr/bin/wine /opt/ibm/iAccessClientSolutions/Start_Programs/Windows_x86-64/acslaunch_win-64.exe /plugin=5250 /system=frontier /nosave /sso /wide
-
-# vim: ft=sh

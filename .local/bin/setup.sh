@@ -54,11 +54,16 @@ sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> \
 # Add PHP PPA
 sudo apt-add-repository --yes --no-update ppa:ondrej/php
 
+# Add AdoptJDK PPA
+wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | sudo apt-key add -
+
+sudo add-apt-repository --yes https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/
+
 sudo apt update
 
 sudo apt install --yes neovim tmux tmuxinator zsh build-essential xclip git-flow \
     silversearcher-ag breeze-cursor-theme unzip kitty curl wget software-properties-common \
-    apt-transport-https nautilus-dropbox evolution evolution-ews default-jre default-jdk remmina \
+    apt-transport-https nautilus-dropbox evolution evolution-ews remmina \
     remmina-plugin-rdp gnome-tweaks ca-certificates gnupg-agent autokey-gtk nmap nodejs python3 \
     python2 ruby-full python3-pip libnss3-tools jq xsel papirus-icon-theme qt5-style-kvantum \
     qt5-style-kvantum-themes gconf2 gconf-service libappindicator1 network-manager-l2tp-gnome \
@@ -81,6 +86,9 @@ sudo apt autoremove --yes
 
 # install yarn, just skip the recomended packages
 sudo apt install --no-install-recommends yarn
+
+# Install adoptopenjdk
+sudo apt install --yes adoptopenjdk-11-hotspot
 
 # Install Composer
 # curl -sS https://getcomposer.org/installer -o composer-setup.php

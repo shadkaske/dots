@@ -1,11 +1,14 @@
 configuration {
   /* theme: "Pop-Dark"; */
-  theme: "Base16-Material-Darker";
-  /* theme: "material"; */
+  theme: "Base16-Helios";
+  /* theme: "dmenu"; */
+	combi-modi: "window,drun,run,ssh";
+  /* show-icons: false; */
   show-icons: true;
   font: "JetBrainsMono Nerd Font 16";
   terminal: "kitty";
 	drun-show-actions: false;
+	matching: "fuzzy";
 	/* fake-transparency: true; */
 }
 

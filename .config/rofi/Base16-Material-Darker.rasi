@@ -19,7 +19,8 @@
     selected-active-foreground:  @foreground;
     alternate-normal-foreground: @foreground;
     alternate-active-background: @blue;
-    bordercolor:                 @foreground;
+    bordercolor:                 @blue;
+    /* bordercolor:                 @foreground; */
     normal-background:           @background;
     selected-normal-background:  @blue;
     separatorcolor:              @orange;
@@ -30,15 +31,17 @@
     alternate-active-foreground: @foreground;
     selected-active-background:  @blue;
     active-background:           @orange;
-    background-color: transparent;
+    /* background-color: transparent; */
 }
 #window {
     transparency: "real";
-    border:     4;
+    border:     2;
     padding:    5;
     text-color: @foreground;
     /* text-color: @bordercolor; */
-    background-color: rgb(33, 33, 33, 0.8);
+    /* background-color: rgb(33, 33, 33, 0.8); */
+    background-color: @background;
+    border-color: @bordercolor;
 }
 #mainbox {
     border:  0;
@@ -122,4 +125,4 @@
     text-color: @normal-foreground;
 }
 
-/* vi: set ft=css
+/* vim:ft=css

@@ -4,9 +4,9 @@
 [core]
     editor = nvim
 [merge]
-    tool = vscode
+    tool = nvim
 [diff]
-    tool = vscode
+    tool = nvim
 [mergetool]
     keepBackup = false
 [alias]

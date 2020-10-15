@@ -33,5 +33,7 @@
     "html",
     "blade"
   ],
-  "html.format.enable": true
+  "html.format.enable": true,
+  "explorer.icon.enableVimDevicons": true,
+  "explorer.file.autoReveal": false
 }

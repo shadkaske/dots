@@ -1,12 +1,11 @@
-" Plugins ------------------------------------------------------------------{{{
-
 call plug#begin('~/.config/nvim/plugged')
 
 " UI / Navigation
-Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] } |
-      \ Plug 'Xuyuanp/nerdtree-git-plugin' | Plug 'ryanoasis/vim-devicons'
-      \  | Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+" Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] } |
+"       \ Plug 'Xuyuanp/nerdtree-git-plugin' | Plug 'ryanoasis/vim-devicons'
+"       \  | Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ntpeters/vim-better-whitespace'
+Plug 'ryanoasis/vim-devicons'
 Plug 'easymotion/vim-easymotion'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'moll/vim-bbye'
@@ -15,9 +14,11 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'chriskempson/base16-vim'
+" Plug 'chriskempson/base16-vim'
+Plug 'kaicataldo/material.vim', { 'branch': 'main' }
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" Plug 'vim-airline/vim-airline-themes'
+" Plug 'itchyny/lightline.vim'
 Plug 'edkolev/tmuxline.vim'
 Plug 'machakann/vim-highlightedyank'
 Plug 'chrisbra/Colorizer'
@@ -49,8 +50,7 @@ Plug 'vim-python/python-syntax', { 'for': 'python'}
 Plug 'chr4/nginx.vim'
 Plug 'baskerville/vim-sxhkdrc'
 Plug 'pprovost/vim-ps1'
-" Plug 'kovetskiy/sxhkd-vim'
-" Plug 'cosminadrianpopescu/vim-sql-workbench'
+Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
 
 call plug#end()
 
@@ -68,7 +68,7 @@ let g:coc_global_extensions = [
       \ 'coc-yaml',
       \ 'coc-python',
       \ 'coc-phpls',
-      \ 'coc-ultisnips'
+      \ 'coc-ultisnips',
+      \ 'coc-explorer'
       \ ]
 
-"}}}

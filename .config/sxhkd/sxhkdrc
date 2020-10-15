@@ -12,7 +12,7 @@ super + shift + d
     dmenu-display-config
 
 super + shift + p
-    j4-dmenu-desktop --dmenu="dmenu"
+    rofi -show drun
 
 super + shift + v
 	dmenu-greenclip
@@ -43,6 +43,9 @@ super + ctrl + e
 
 super + ctrl + f
     kitty --class="rangerfm" -e ranger
+
+super + ctrl + v
+    virt-manager
 
 XF86AudioRaiseVolume
 	volume up

@@ -5,4 +5,6 @@ NUM_DISPLAYS=$(xrandr | ag " connected " | wc -l)
 case $NUM_DISPLAYS in
     "3")
         sh $HOME/.screenlayout/deskscreen.sh ;;
+    "2")
+        sh $HOME/.local/bin/xrandr-workstation-dual-display.sh ;;
 esac

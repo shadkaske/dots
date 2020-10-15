@@ -61,20 +61,20 @@ sudo add-apt-repository --yes https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/
 
 sudo apt update
 
-sudo apt install --yes neovim tmux tmuxinator zsh build-essential xclip git-flow \
-    silversearcher-ag breeze-cursor-theme unzip kitty curl wget software-properties-common \
-    apt-transport-https nautilus-dropbox evolution evolution-ews remmina \
-    remmina-plugin-rdp gnome-tweaks ca-certificates gnupg-agent autokey-gtk nmap nodejs python3 \
-    python2 ruby-full python3-pip libnss3-tools jq xsel papirus-icon-theme qt5-style-kvantum \
-    qt5-style-kvantum-themes gconf2 gconf-service libappindicator1 network-manager-l2tp-gnome \
-    network-manager-strongswan libstrongswan-standard-plugins libstrongswan-extra-plugins onedrive \
-    wine winetricks timeshift backintime-qt4 inotify-tools code google-chrome-stable \
-    libavcodec-extra58 xournal htop nautilus-admin mlocate feh arandr compton unclutter sxhkd \
-    qutebrowser ranger libx11-dev libxft-dev libxinerama-dev libharfbuzz-dev lastpass-cli dunst \
-    php7.2-xdebug php7.2-bcmath php7.2-bz2 php7.2-cli php7.2-common php7.2-curl php7.2-fpm \
-    php7.2-gd php7.2-imap php7.2-intl php7.2-json php7.2-ldap php7.2-mbstring php7.2-mysql \
-    php7.2-odbc php7.2-opcache php7.2-readline php7.2-sqlite3 php7.2-xml mysql-server virt-manager \
-    qemu libvirt-daemon ovmf virt-viewer libvirt-clients samba snapd rofi
+# sudo apt install --yes neovim tmux tmuxinator zsh build-essential xclip git-flow \
+#     silversearcher-ag breeze-cursor-theme unzip kitty curl wget software-properties-common \
+#     apt-transport-https nautilus-dropbox evolution evolution-ews remmina \
+#     remmina-plugin-rdp gnome-tweaks ca-certificates gnupg-agent autokey-gtk nmap nodejs python3 \
+#     python2 ruby-full python3-pip libnss3-tools jq xsel papirus-icon-theme qt5-style-kvantum \
+#     qt5-style-kvantum-themes gconf2 gconf-service libappindicator1 network-manager-l2tp-gnome \
+#     network-manager-strongswan libstrongswan-standard-plugins libstrongswan-extra-plugins onedrive \
+#     wine winetricks timeshift backintime-qt4 inotify-tools code google-chrome-stable \
+#     libavcodec-extra58 xournal htop nautilus-admin mlocate feh arandr compton unclutter sxhkd \
+#     qutebrowser ranger libx11-dev libxft-dev libxinerama-dev libharfbuzz-dev lastpass-cli dunst \
+#     php7.2-xdebug php7.2-bcmath php7.2-bz2 php7.2-cli php7.2-common php7.2-curl php7.2-fpm \
+#     php7.2-gd php7.2-imap php7.2-intl php7.2-json php7.2-ldap php7.2-mbstring php7.2-mysql \
+#     php7.2-odbc php7.2-opcache php7.2-readline php7.2-sqlite3 php7.2-xml mysql-server virt-manager \
+#     qemu libvirt-daemon ovmf virt-viewer libvirt-clients samba snapd rofi
 
 # Remove Apps we don't want
 sudo apt remove --yes --purge geary
@@ -92,15 +92,9 @@ sudo apt install --yes adoptopenjdk-11-hotspot
 
 # Install Composer
 # curl -sS https://getcomposer.org/installer -o composer-setup.php
-sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+# sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 
-rm -f composer-setup.php
-
-# # install valet
-composer global require cpriego/valet-linux
-$HOME/.config/composer/vendor/bin/valet install
-
-curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py
+# rm -f composer-setup.php
 
 sudo python2 get-pip.py
 

@@ -1,9 +1,18 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block, everything else may go below.
+# confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block, everything else may go below.
+# typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+
+# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# fi
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -44,7 +53,7 @@ plugins=(
 # User configuration
 
 # Set ENV Variable for Artisan plugin
-ARTISAN_OPEN_ON_MAKE=nvim
+export ARTISAN_OPEN_ON_MAKE=nvim
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -80,16 +89,11 @@ alias phu="vendor/bin/phpunit"
 alias phuf="vendor/bin/phpunit --filter "
 alias tt='tmux new-session -A -s Terms'
 alias tp='tmuxinator start printApp-Homestead'
-alias hss='homestead ssh'
-alias hsu='homestead up'
-alias hsc='homestead up && ssh homestead'
-alias hsh='homestead halt'
-alias hst='homestead status'
-alias hsr='homestead reload && ssh homestead'
-alias hsp='homestead suspend'
 alias nivm='nvim'
 alias eixt='exit'
 alias cl="cal -B 1 -A 1"
+alias xoff='sudo phpdismod -s cli xdebug'
+alias xon='sudo phpenmod -s cli xdebug'
 
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/.local/bin/pip:$PATH
@@ -99,6 +103,9 @@ export PATH=vendor/bin:$PATH
 
 # Term Setting
 export TERM="xterm-256color"
+
+# AskPass Helper
+export SUDO_ASKPASS='/usr/bin/ssh-askpass'
 
 # NVM
 export NVM_DIR=~/.nvm
@@ -160,3 +167,9 @@ function dots {
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # alias dots='git --git-dir=$HOME/.dots --work-tree=$HOME'
 alias tn='tmux new-session -A -s Terms'
+
+# Fix for systemd unit file completion
+_systemctl_unit_state() {
+  typeset -gA _sys_unit_state
+  _sys_unit_state=( $(__systemctl list-unit-files "$PREFIX*" | awk '{print $1, $2}') ) }
+export PATH=~/.npm-global/bin:$PATH

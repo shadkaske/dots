@@ -1,7 +1,3 @@
-
-" \__ \ ) _ (  /(__)\  )(_) )\__ \   )  (  \  /  _)(_  )    (
-" (___/(_) (_)(__)(__)(____/ (___/  (_)\_)  \/  (____)(_/\/\_)
-"
 "   Author: Shad Kaske
 "   Repo: https://github.com/shadkaske/dotfiles
 "
@@ -14,10 +10,11 @@ if (has('termguicolors'))
 endif
 
 " Theme
-if filereadable(expand('~/.vimrc_background'))
-  let base16colorspace=256
-  source ~/.vimrc_background
-endif
+" if filereadable(expand('~/.vimrc_background'))
+"   let base16colorspace=256
+"   source ~/.vimrc_background
+" endif
+colorscheme material
 
 set colorcolumn=100
 
@@ -27,29 +24,31 @@ if !exists('g:airline_symbols')
 endif
 let g:airline#extensions#tabline#enabled=1
 let g:airline_powerline_fonts=1
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
+" let g:airline_left_sep = ''
+" let g:airline_left_alt_sep = ''
+" let g:airline_right_sep = ''
+" let g:airline_right_alt_sep = ''
 
 " Tmux Line
-let g:tmuxline_separators = {
-      \ 'left' : '',
-      \ 'left_alt': ')',
-      \ 'right' : '',
-      \ 'right_alt' : '(',
-      \ 'space' : ' '}
+" let g:tmuxline_separators = {
+"       \ 'left' : '',
+"       \ 'left_alt': ')',
+"       \ 'right' : '',
+"       \ 'right_alt' : '(',
+"       \ 'space' : ' '}
 
 " let g:tmuxline_powerline_separators = 0
-let g:tmuxline_status_justify = 'left'
+" let g:tmuxline_status_justify = 'left'
 
-let g:tmuxline_preset = {
-  \'a'    : '#S',
-  \'win'  : ['#I', '#W'],
-  \'cwin' : ['#I', '#W'],
-  \'y'    : '#(whoami)',
-  \'z'    : '@ #h'
-  \ }
+  let g:tmuxline_preset = {
+        \'a'    : '#S',
+        \'b'    : '#W',
+        \'win'  : ['#I', '#W'],
+        \'cwin' : ['#I', '#W'],
+        \'x'    : '%a',
+        \'y'    : '%R',
+        \'z'    : '#H'}
+
 
 " }}}
 
@@ -114,6 +113,7 @@ set title
 set scrolloff=3
 set shell=$SHELL
 set laststatus=2
+set timeoutlen=500
 
 " Split Settings
 set splitbelow
@@ -190,40 +190,6 @@ set listchars=tab:‣\ ,trail:·,precedes:«,extends:»,eol:¬
 
 " Plugin Settings ----------------------------------------------------------{{{
 
-" NERDTree
-" Use Minimal UI
-let NERDTreeMinimalUI = 1
-
-" Show Direcotry Arrows
-let NERDTreeDirArrows = 1
-
-" Set Default Window Size
-let NERDTreeWinSize = 50
-
-let g:NERDTreeQuitOnOpen=0
-
-" Show Hidden Files
-let NERDTreeShowHidden=1
-
-" Hide certain files and directories from NERDTree
-let g:NERDTreeIgnore = ['^\.DS_Store$', '^tags$', '\.git$[[dir]]',
-      \ '\.idea$[[dir]]', '\.sass-cache$']
-
-" Turn off nerdtree status line
-let g:NERDTreeStatusline = ''
-
-" Coc Snippets
-" inoremap <silent><expr> <TAB>
-"       \ pumvisible() ? coc#_select_confirm() :
-"       \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-"       \ <SID>check_back_space() ? "\<TAB>" :
-"       \ coc#refresh()
-
-" let g:coc_snippet_next = '<tab>'
-
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
-
 " VimTest
 let test#strategy = 'dispatch'
 
@@ -236,30 +202,25 @@ let g:gitgutter_sign_modified_removed = '<'
 
 " let g:sneak#label = 1
 
-" Gutentags Settings
-" let g:gutentags_exclude = ['*.css', '*.html', '*.js', '*.json', '*.xml',
-"                             \ '*.phar', '*.ini', '*.rst', '*.md',
-"                             \ '*vendor/*/test*', '*vendor/*/Test*',
-"                             \ '*vendor/*/fixture*', '*vendor/*/Fixture*',
-"                             \ '*var/cache*', '*var/log*']
-
 " Emmet Settings
-" let g:user_emmet_settings = {
-"             \  'php' : {
-"             \    'extends' : 'html',
-"             \    'filters' : 'c',
-"             \  },
-"             \  'blade' : {
-"             \    'extends' : 'html',
-"             \    'filters' : 'c',
-"             \  },
-"             \  'html' : {
-"             \    'comment_type': 'none',
-"             \  },
-"             \ }
+let g:user_emmet_settings = {
+            \  'php' : {
+            \    'extends' : 'html',
+            \    'filters' : 'c',
+            \  },
+            \  'blade' : {
+            \    'extends' : 'html',
+            \    'filters' : 'c',
+            \  },
+            \  'html' : {
+            \    'comment_type': 'none',
+            \  },
+            \ }
 
 " Float Term setting
 let g:floaterm_autoclose = 2
+let g:floatterm_wintype = 'normal'
+let g:floatterm_position = 'bottom'
 
 " VDebug
 hi default DbgBreakptLine term=reverse ctermfg=Black ctermbg=Cyan guifg=#4A4A4A guibg=#89DDFF
@@ -314,6 +275,14 @@ endfunction
 "
 " Use `:Format` to format current buffer
 command! -nargs=0 Format :call CocAction('format')
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Explorer Settings
+let g:coc_explorer_global_presets = {
+    \ 'explorer.icon.enableVimDevicons': 'true'
+  \ }
 
 "}}}
 
@@ -429,8 +398,8 @@ inoremap <C-space> <C-x><C-f>
 nnoremap <silent> <leader>S :StripWhitespace<CR>
 
 " NERDTree
-nmap <silent> <leader>e :NERDTreeToggle<cr>
-nmap <silent> <leader>y :NERDTreeFind<cr>
+nmap <silent> <leader>e :CocCommand explorer --toggle<cr>
+" nmap <silent> <leader>y :NERDTreeFind<cr>
 
 " // in visual mode will start a search with the current selection
 vnoremap // y/<C-R>"<CR>"

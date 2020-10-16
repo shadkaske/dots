@@ -13,7 +13,8 @@ let g:coc_global_extensions = [
       \ 'coc-python',
       \ 'coc-phpls',
       \ 'coc-ultisnips',
-      \ 'coc-explorer'
+      \ 'coc-explorer',
+      \ 'coc-vimlsp'
       \ ]
 
 

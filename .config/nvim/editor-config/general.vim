@@ -62,7 +62,7 @@ set ignorecase
 set smartcase
 set hlsearch
 set incsearch
-set nolazyredraw
+set lazyredraw
 
 " Turn off Dinging Noises
 set noerrorbells

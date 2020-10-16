@@ -2,14 +2,15 @@ call plug#begin('~/.config/nvim/plugged')
 
     " UI / Navigation
     Plug 'ntpeters/vim-better-whitespace'
-    Plug 'ryanoasis/vim-devicons'
-    Plug 'easymotion/vim-easymotion'
-    " Plug 'justinmk/vim-sneak'
+    " Plug 'ryanoasis/vim-devicons'
+    " Plug 'easymotion/vim-easymotion'
+    Plug 'justinmk/vim-sneak'
     Plug 'christoomey/vim-tmux-navigator'
     Plug 'moll/vim-bbye'
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-dispatch'
+    Plug 'ChristianChiarulli/far.vim'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
     " Plug 'chriskempson/base16-vim'

@@ -37,7 +37,6 @@ let g:which_key_map['='] = [ '<C-W>='                             , 'balance win
 let g:which_key_map['d'] = [ ':Bdelete'                           , 'delete buffer']
 let g:which_key_map['e'] = [ ':CocCommand explorer'               , 'explorer' ]
 let g:which_key_map['h'] = [ '<C-W>s'                             , 'split below']
-" let g:which_key_map['m'] = [ ':call WindowSwap#EasyWindowSwap()'  , 'move window' ]
 let g:which_key_map['n'] = [ ':let @/ = ""'                       , 'no highlight' ]
 let g:which_key_map['p'] = [ ':Files'                             , 'search files' ]
 let g:which_key_map['q'] = [ 'q'                                  , 'quit' ]
@@ -52,14 +51,14 @@ let g:which_key_map['W'] = [ 'w'                                  , 'write' ]
 " a is for actions
 let g:which_key_map.a = {
       \ 'name' : '+Actions' ,
-      \ 'c' : [':ColorToggle'             , 'colorizer'],
-      \ 'e' : [':CocCommand explorer'    , 'explorer'],
-      \ 'n' : [':set nonumber!'          , 'line-numbers'],
-      \ 'l' : [':set list!'              , 'list-characters'],
-      \ 'r' : [':set norelativenumber!'  , 'relative line nums'],
-      \ 's' : [':let @/ = ""'            , 'remove search highlight'],
-      \ 't' : [':FloatermToggle'         , 'terminal'],
-      \ 'w' : [':StripWhitespace'        , 'strip whitespace'],
+      \ 'c' : [':ColorToggle'                       , 'colorizer'],
+      \ 'e' : [':CocCommand explorer'               , 'explorer'],
+      \ 'h' : [':let @/ = ""'                       , 'remove search highlight'],
+      \ 'l' : [':set list!'                         , 'list-characters'],
+      \ 'n' : [':set nonumber! norelativenumber!'   , 'no-line-numbers'],
+      \ 'r' : [':set number relativenumber'         , 'turn-on-line-number'],
+      \ 't' : [':FloatermToggle'                    , 'terminal'],
+      \ 'w' : [':StripWhitespace'                   , 'strip whitespace'],
       \ }
 
 " b is for buffer
@@ -78,8 +77,9 @@ let g:which_key_map.b = {
 " f is for find and replace
 let g:which_key_map.f = {
       \ 'name' : '+Find_Replace' ,
-      \ 'b' : [':Farr --source=vimgrep'    , 'buffer'],
-      \ 'p' : [':Farr --source=rgnvim'     , 'project'],
+      \ 'f' : [':Farf --source=agnvim'      , 'find-in-project'],
+      \ 'b' : [':Farr --source=vimgrep'     , 'replace-in-buffer'],
+      \ 'p' : [':Farr --source=agnvim'      , 'replace-in-project'],
       \ }
 
 " s is for search
@@ -90,22 +90,22 @@ let g:which_key_map.s = {
       \ 'a' : [':Ag'                    , 'text Ag'],
       \ 'b' : [':BLines'                , 'current buffer'],
       \ 'B' : [':Buffers'               , 'open buffers'],
-      \ 'c' : [':Commits'               , 'commits'],
       \ 'C' : [':BCommits'              , 'buffer commits'],
+      \ 'c' : [':Commits'               , 'commits'],
       \ 'f' : [':Files'                 , 'files'],
       \ 'g' : [':GFiles'                , 'git files'],
       \ 'G' : [':GFiles?'               , 'modified git files'],
       \ 'h' : [':History'               , 'file history'],
       \ 'H' : [':History:'              , 'command history'],
       \ 'l' : [':Lines'                 , 'lines'] ,
-      \ 'm' : [':Marks'                 , 'marks'] ,
       \ 'M' : [':Maps'                  , 'normal maps'] ,
+      \ 'm' : [':Marks'                 , 'marks'] ,
       \ 'p' : [':Helptags'              , 'help tags'] ,
       \ 'P' : [':Tags'                  , 'project tags'],
       \ 's' : [':CocList snippets'      , 'snippets'],
       \ 'S' : [':Colors'                , 'color schemes'],
-      \ 't' : [':Rg'                    , 'text Rg'],
       \ 'T' : [':BTags'                 , 'buffer tags'],
+      \ 't' : [':Rg'                    , 'text Rg'],
       \ 'w' : [':Windows'               , 'search windows'],
       \ 'y' : [':Filetypes'             , 'file types'],
       \ 'z' : [':FZF'                   , 'FZF'],
@@ -196,22 +196,22 @@ let g:which_key_map.t = {
       \ }
 
 " T is for tabs
-let g:which_key_map.T = {
-      \ 'name' : '+tabline' ,
-      \ 'b' : [':XTabListBuffers'         , 'list buffers'],
-      \ 'd' : [':XTabCloseBuffer'         , 'close buffer'],
-      \ 'D' : [':XTabDeleteTab'           , 'close tab'],
-      \ 'h' : [':XTabHideBuffer'          , 'hide buffer'],
-      \ 'i' : [':XTabInfo'                , 'info'],
-      \ 'l' : [':XTabLock'                , 'lock tab'],
-      \ 'm' : [':XTabMode'                , 'toggle mode'],
-      \ 'n' : [':tabNext'                 , 'next tab'],
-      \ 'N' : [':XTabMoveBufferNext'      , 'buffer->'],
-      \ 't' : [':tabnew'                  , 'new tab'],
-      \ 'p' : [':tabprevious'             , 'prev tab'],
-      \ 'P' : [':XTabMoveBufferPrev'      , '<-buffer'],
-      \ 'x' : [':XTabPinBuffer'           , 'pin buffer'],
-      \ }
+" let g:which_key_map.T = {
+"       \ 'name' : '+Tabline' ,
+"       \ 'b' : [':XTabListBuffers'         , 'list buffers'],
+"       \ 'd' : [':XTabCloseBuffer'         , 'close buffer'],
+"       \ 'D' : [':XTabDeleteTab'           , 'close tab'],
+"       \ 'h' : [':XTabHideBuffer'          , 'hide buffer'],
+"       \ 'i' : [':XTabInfo'                , 'info'],
+"       \ 'l' : [':XTabLock'                , 'lock tab'],
+"       \ 'm' : [':XTabMode'                , 'toggle mode'],
+"       \ 'n' : [':tabNext'                 , 'next tab'],
+"       \ 'N' : [':XTabMoveBufferNext'      , 'buffer->'],
+"       \ 't' : [':tabnew'                  , 'new tab'],
+"       \ 'p' : [':tabprevious'             , 'prev tab'],
+"       \ 'P' : [':XTabMoveBufferPrev'      , '<-buffer'],
+"       \ 'x' : [':XTabPinBuffer'           , 'pin buffer'],
+"       \ }
 
 " Register which key map
 call which_key#register('<Space>', "g:which_key_map")

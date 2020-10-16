@@ -1,8 +1,7 @@
 " AutoCmd Settings
 
-autocmd FileType php,html setlocal ts=4 sts=4 sw=4 expandtab colorcolumn=100
+autocmd FileType php,html setlocal ts=4 sts=4 sw=4 expandtab
 autocmd FileType javascript,css setlocal ts=2 sts=2 sw=2 expandtab
-      \ colorcolumn=100
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType vim let b:coc_pairs_disabled = ['"']
 autocmd FileType sh setlocal ts=4 sts=4 sw=4 expandtab colorcolumn=80

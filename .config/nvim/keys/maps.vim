@@ -8,6 +8,11 @@ inoremap :wq <ESC>:wq<CR>
 inoremap <C-space> <C-x><C-f>
 inoremap kk <C-O>o
 
+" Colons
+inoremap;; <C-o>A;
+inoremap <M-;> <C-o>A;<ESC>o
+nnoremap <C-;> A;<ESC>
+
 " Visual Mode Maps
 " Move selected line / block of text in visual mode
 " shift + k to move up

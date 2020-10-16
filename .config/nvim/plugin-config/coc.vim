@@ -68,3 +68,6 @@ inoremap <silent><expr> <c-space> coc#refresh()
 
 " Emmet Expand Snippet
 inoremap ,, <Plug>(emmet-expand-abbr)
+
+" Close Explorer if it is the last man standing
+autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif

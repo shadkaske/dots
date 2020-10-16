@@ -38,3 +38,4 @@ function! FloatingFZF()
     call nvim_open_win(buf, v:true, opts)
 endfunction
 
+nnoremap <silent> <C-p> :GFiles<CR>

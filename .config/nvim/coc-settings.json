@@ -16,7 +16,6 @@
   "coc.preferences.formatOnSaveFiletypes": [
     "python"
   ],
-  "xml.java.home": "/usr/lib/jvm/openjdk-11",
   "snippets.ultisnips.enable": true,
   "snippets.ultisnips.directories": [
     "UltiSnips",
@@ -34,5 +33,11 @@
     "blade"
   ],
   "html.format.enable": true,
-  "explorer.icon.enableVimDevicons": true
+  "explorer.width": 30,
+  "explorer.icon.enableNerdfont": true,
+  "explorer.previewAction.onHover": false,
+  "explorer.keyMappings": {
+      "<cr>": ["expandable?", "expand", "open" ],
+      "v": "open:vsplit"
+  }
 }

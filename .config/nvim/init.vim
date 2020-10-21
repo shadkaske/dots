@@ -10,9 +10,9 @@ source $HOME/.config/nvim/plugins.vim
 
 " Editor Settings
 source $HOME/.config/nvim/editor-config/general.vim
-source $HOME/.config/nvim/editor-config/folding.vim
 source $HOME/.config/nvim/editor-config/autocmd.vim
 source $HOME/.config/nvim/editor-config/syntax.vim
+source $HOME/.config/nvim/editor-config/folding.vim
 source $HOME/.config/nvim/editor-config/theme.vim
 
 " Load Plugin Settings

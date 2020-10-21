@@ -2,20 +2,13 @@
   "suggest.noselect": false,
   "python.jediEnabled": true,
   "python.formatting.provider": "autopep8",
-  "python.formatting.autopep8Args": [
-    "--max-line-length 100"
-  ],
+  "python.formatting.autopep8Args": ["--max-line-length 100"],
   "python.linting.enabled": true,
   "python.linting.pylintEnabled": false,
   "python.linting.flake8Enabled": true,
-  "python.linting.flake8Args": [
-    "--max-line-length=100",
-    "--ignore=W605"
-  ],
+  "python.linting.flake8Args": ["--max-line-length=100", "--ignore=W605"],
   "python.autoComplete.addBrackets": true,
-  "coc.preferences.formatOnSaveFiletypes": [
-    "python"
-  ],
+  "coc.preferences.formatOnSaveFiletypes": ["python", "php", "json"],
   "snippets.ultisnips.enable": true,
   "snippets.ultisnips.directories": [
     "UltiSnips",
@@ -28,16 +21,13 @@
   "eslint.options": {
     "configFile": "./.eslintrc.json"
   },
-  "html.filetypes": [
-    "html",
-    "blade"
-  ],
+  "html.filetypes": ["html", "blade"],
   "html.format.enable": true,
   "explorer.width": 30,
   "explorer.icon.enableNerdfont": true,
   "explorer.previewAction.onHover": false,
   "explorer.keyMappings": {
-      "<cr>": ["expandable?", "expand", "open" ],
-      "v": "open:vsplit"
+    "<cr>": ["expandable?", "expand", "open"],
+    "v": "open:vsplit"
   }
 }

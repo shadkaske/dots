@@ -13,10 +13,10 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'ChristianChiarulli/far.vim'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
-    " Plug 'chriskempson/base16-vim'
+    Plug 'chriskempson/base16-vim'
     Plug 'kaicataldo/material.vim', { 'branch': 'main' }
     Plug 'vim-airline/vim-airline'
-    " Plug 'vim-airline/vim-airline-themes'
+    Plug 'vim-airline/vim-airline-themes'
     Plug 'edkolev/tmuxline.vim'
     Plug 'machakann/vim-highlightedyank'
     Plug 'chrisbra/Colorizer'
@@ -31,9 +31,10 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'honza/vim-snippets'
     " language
     Plug 'shadkaske/vim-blade', { 'for': ['php', 'blade'] }
+    Plug 'beanworks/vim-phpfmt', { 'for': ['php'] }
     Plug 'Valloric/MatchTagAlways', {'for': ['php', 'html', 'blade']}
     " Plug 'StanAngeloff/php.vim', { 'for': ['php', 'html'] }
-    Plug 'vim-vdebug/vdebug'
+    Plug 'vim-vdebug/vdebug', { 'for': ['php'] }
     Plug 'arnaud-lb/vim-php-namespace', {'for': 'php'}
     Plug 'mattn/emmet-vim', { 'for': ['html', 'php', 'javascriptn', 'css']}
     Plug 'othree/html5.vim', { 'for': ['html', 'php'] }

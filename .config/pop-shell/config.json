@@ -23,6 +23,10 @@
     {
         "class": "VirtualBox Manager",
         "title": "Oracle VM VirtualBox Manager"
+    },
+    {
+        "class": "com-ibm-iaccess-launch-AcsLaunchPad",
+        "title": "IBM i Access Client Solutions"
     }
   ],
   "log_on_focus": false

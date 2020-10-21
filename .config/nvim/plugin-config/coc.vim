@@ -1,20 +1,23 @@
 " COC Settings
 let g:coc_global_extensions = [
-      \ 'coc-snippets',
-      \ 'coc-tsserver',
-      \ 'coc-eslint',
-      \ 'coc-json',
-      \ 'coc-tag',
-      \ 'coc-pairs',
-      \ 'coc-html',
       \ 'coc-css',
       \ 'coc-dictionary',
-      \ 'coc-yaml',
-      \ 'coc-python',
-      \ 'coc-phpls',
-      \ 'coc-ultisnips',
+      \ 'coc-emmet',
+      \ 'coc-eslint',
       \ 'coc-explorer',
-      \ 'coc-vimlsp'
+      \ 'coc-html',
+      \ 'coc-json',
+      \ 'coc-pairs',
+      \ 'coc-phpls',
+      \ 'coc-prettier',
+      \ 'coc-python',
+      \ 'coc-sh',
+      \ 'coc-snippets',
+      \ 'coc-tag',
+      \ 'coc-tsserver',
+      \ 'coc-ultisnips',
+      \ 'coc-vimlsp',
+      \ 'coc-yaml',
       \ ]
 
 

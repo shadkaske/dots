@@ -55,7 +55,7 @@ inoremap <C-h> <C-\><C-N><C-w>h
 inoremap <C-j> <C-\><C-N><C-w>j
 inoremap <C-k> <C-\><C-N><C-w>k
 inoremap <C-l> <C-\><C-N><C-w>l
-tnoremap <Esc> <C-\><C-n>
+" tnoremap <C-n> <C-\><C-n>
 tnoremap <C-q> <C-\><C-n><C-w>q
 
 " Command Mode Maps

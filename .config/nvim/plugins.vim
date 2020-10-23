@@ -14,6 +14,8 @@ call plug#begin('~/.config/nvim/plugged')
     " Plug 'easymotion/vim-easymotion'
     Plug 'justinmk/vim-sneak'
     Plug 'christoomey/vim-tmux-navigator'
+    Plug 'edkolev/tmuxline.vim'
+    Plug 'benmills/vimux'
     Plug 'moll/vim-bbye'
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-commentary'
@@ -25,13 +27,13 @@ call plug#begin('~/.config/nvim/plugged')
     " Plug 'kaicataldo/material.vim', { 'branch': 'main' }
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
-    Plug 'edkolev/tmuxline.vim'
     Plug 'machakann/vim-highlightedyank'
     Plug 'chrisbra/Colorizer'
     Plug 'voldikss/vim-floaterm'
     Plug 'vim-scripts/ReplaceWithRegister'
     " Git
     Plug 'tpope/vim-fugitive'
+    Plug 'idanarye/vim-merginal'
     Plug 'airblade/vim-gitgutter'
     "  Coc
     Plug 'neoclide/coc.nvim', {'branch': 'release'}

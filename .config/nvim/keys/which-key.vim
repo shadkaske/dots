@@ -30,21 +30,19 @@ autocmd  FileType which_key set laststatus=0 noshowmode noruler
 
 
 " Single mappings
-" let g:which_key_map['/'] = [ ':call Comment()'                    , 'comment' ]
-let g:which_key_map['.'] = [ ':e $MYVIMRC'                        , 'open init' ]
+let g:which_key_map['.'] = [ ':let @/ = ""'                       , 'no highlight' ]
 let g:which_key_map[';'] = [ ':Commands'                          , 'commands' ]
 let g:which_key_map['='] = [ '<C-W>='                             , 'balance windows' ]
 let g:which_key_map['d'] = [ ':Bdelete'                           , 'delete buffer']
 let g:which_key_map['e'] = [ ':CocCommand explorer'               , 'explorer' ]
 let g:which_key_map['h'] = [ '<C-W>s'                             , 'split below']
-let g:which_key_map['n'] = [ ':let @/ = ""'                       , 'no highlight' ]
 let g:which_key_map['p'] = [ ':Files'                             , 'search files' ]
+let g:which_key_map['P'] = [ ':GFiles'                            , 'search git files' ]
 let g:which_key_map['q'] = [ 'q'                                  , 'quit' ]
-let g:which_key_map['r'] = [ ':source $MYVIMRC'                   , 'reload-config' ]
+let g:which_key_map['r'] = [ ':source $MYVIMRC'                   , 'reload config' ]
 let g:which_key_map['u'] = [ ':UndotreeToggle'                    , 'undo tree']
 let g:which_key_map['v'] = [ '<C-W>v'                             , 'split right']
 let g:which_key_map['W'] = [ 'w'                                  , 'write' ]
-" let g:which_key_map['z'] = [ 'Goyo'                               , 'zen' ]
 
 " Group mappings
 
@@ -54,9 +52,10 @@ let g:which_key_map.a = {
       \ 'c' : [':ColorToggle'                       , 'colorizer'],
       \ 'e' : [':CocCommand explorer'               , 'explorer'],
       \ 'h' : [':let @/ = ""'                       , 'remove search highlight'],
-      \ 'l' : [':set list!'                         , 'list-characters'],
-      \ 'n' : [':set nonumber! norelativenumber!'   , 'no-line-numbers'],
-      \ 'r' : [':set number relativenumber'         , 'turn-on-line-number'],
+      \ 'l' : [':set list!'                         , 'toggle list characters'],
+      \ 'm' : ['execute "set colorcolumn=" . (&colorcolumn == "" ? "80" : "")' , 'toggle color column'],
+      \ 'n' : [':set nonumber! norelativenumber!'   , 'toggle line numbers'],
+      \ 'r' : [':set cursorline!'                   , 'toggle cursor line'],
       \ 't' : [':FloatermToggle'                    , 'terminal'],
       \ 'w' : [':StripWhitespace'                   , 'strip whitespace'],
       \ }
@@ -64,22 +63,23 @@ let g:which_key_map.a = {
 " b is for buffer
 let g:which_key_map.b = {
       \ 'name' : '+Buffers' ,
-      \ '1' : ['b1'        , 'buffer 1'],
-      \ '2' : ['b2'        , 'buffer 2'],
-      \ 'b' : [':Buffers'   , 'fzf-buffer'],
-      \ 'd' : [':Bdelete'  , 'delete-buffer'],
-      \ 'f' : ['bfirst'    , 'first-buffer'],
-      \ 'l' : ['blast'     , 'last-buffer'],
-      \ 'n' : ['bnext'     , 'next-buffer'],
-      \ 'p' : ['bprevious' , 'previous-buffer'],
+      \ '1' : ['b1'         , 'buffer 1'],
+      \ '2' : ['b2'         , 'buffer 2'],
+      \ 'b' : [':Buffers'   , 'fzf buffer'],
+      \ 'd' : [':Bdelete'   , 'delete buffer'],
+      \ 'D' : [':Bdelete!'  , 'force delete buffer'],
+      \ 'f' : ['bfirst'     , 'first buffer'],
+      \ 'l' : ['blast'      , 'last buffer'],
+      \ 'n' : ['bnext'      , 'next buffer'],
+      \ 'p' : ['bprevious'  , 'previous buffer'],
       \ }
 
 " f is for find and replace
 let g:which_key_map.f = {
-      \ 'name' : '+Find_Replace' ,
-      \ 'f' : [':Farf --source=agnvim'      , 'find-in-project'],
-      \ 'b' : [':Farr --source=vimgrep'     , 'replace-in-buffer'],
-      \ 'p' : [':Farr --source=agnvim'      , 'replace-in-project'],
+      \ 'name' : '+Find-Replace' ,
+      \ 'f' : [':Farf   source=agnvim'      , 'find in project'],
+      \ 'b' : [':Farr   source=vimgrep'     , 'replace in buffer'],
+      \ 'p' : [':Farr   source=agnvim'      , 'replace in project'],
       \ }
 
 " s is for search
@@ -118,7 +118,7 @@ let g:which_key_map.g = {
       \ 'a' : [':Git add .'                        , 'add all'],
       \ 'A' : [':Git add %'                        , 'add current'],
       \ 'b' : [':Git blame'                        , 'blame'],
-      \ 'B' : [':GBrowse'                          , 'browse'],
+      \ 'B' : [':MerginalToggle'                   , 'branches'],
       \ 'c' : [':Git commit'                       , 'commit'],
       \ 'd' : [':Git diff'                         , 'diff'],
       \ 'D' : [':Gdiffsplit'                       , 'diff split'],

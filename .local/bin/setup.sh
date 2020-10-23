@@ -31,6 +31,10 @@ git clone https://github.com/aaron-williamson/base16-gnome-terminal.git \
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 $HOME/.fzf/install --no-fish --all
 
+# Install Tmux Plugin Manager
+mkdir -p $HOME/.tmux/plugins
+git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
+
 # System update
 sudo apt update && sudo apt dist-upgrade -y
 

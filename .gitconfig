@@ -9,6 +9,7 @@
     tool = nvim
 [mergetool]
     keepBackup = false
+    prompt = false
 [alias]
     lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 [mergetool "vscode"]
@@ -18,4 +19,5 @@
 [difftool "nvim"]
     cmd = nvim -d
 [mergetool "nvim"]
-    cmd = nvim -d $LOCAL $MERGED $REMOTE -c $MERGED
+    cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
+    ; cmd = nvim -d $LOCAL $MERGED $REMOTE -c $MERGED

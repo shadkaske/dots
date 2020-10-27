@@ -130,6 +130,7 @@ let g:which_key_map.g = {
       \ 'j' : ['<Plug>(GitGutterNextHunk)'         , 'next hunk'],
       \ 'k' : ['<Plug>(GitGutterPrevHunk)'         , 'prev hunk'],
       \ 'l' : [':Git log'                          , 'log'],
+      \ 'L' : [':!tmux split-window -h -c "#{pane_current_path}" lazygit'                          , 'lazygit'],
       \ 'm' : ['<Plug>(git-messenger)'             , 'message'],
       \ 'p' : [':Git push'                         , 'push'],
       \ 'P' : [':Git pull'                         , 'pull'],
@@ -194,6 +195,13 @@ let g:which_key_map.t = {
       \ 'r' : [':FloatermNew ranger'                            , 'ranger'],
       \ 't' : [':FloatermToggle'                                , 'toggle'],
       \ }
+
+" v is for Vimux
+" let g:which_key_map.v = {
+"     \ 'name' : '+Vimux',
+"     \ 'v' : [':VimuxPromptCommand'          , 'vimux prompt']
+"   \ }
+
 
 " T is for tabs
 " let g:which_key_map.T = {

@@ -12,6 +12,7 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'ntpeters/vim-better-whitespace'
     " Plug 'ryanoasis/vim-devicons'
     " Plug 'easymotion/vim-easymotion'
+    Plug 'junegunn/vim-easy-align'
     Plug 'justinmk/vim-sneak'
     Plug 'christoomey/vim-tmux-navigator'
     Plug 'edkolev/tmuxline.vim'

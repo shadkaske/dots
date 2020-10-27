@@ -51,6 +51,7 @@ let g:which_key_map.a = {
       \ 'name' : '+Actions' ,
       \ 'c' : [':ColorToggle'                       , 'colorizer'],
       \ 'e' : [':CocCommand explorer'               , 'explorer'],
+      \ 'g' : ['<Plug>(EasyAlign)'                  , 'easy align'],
       \ 'h' : [':let @/ = ""'                       , 'remove search highlight'],
       \ 'l' : [':set list!'                         , 'toggle list characters'],
       \ 'm' : ['execute "set colorcolumn=" . (&colorcolumn == "" ? "80" : "")' , 'toggle color column'],

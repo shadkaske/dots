@@ -9,7 +9,6 @@ let g:coc_global_extensions = [
       \ 'coc-json',
       \ 'coc-pairs',
       \ 'coc-phpls',
-      \ 'coc-prettier',
       \ 'coc-python',
       \ 'coc-sh',
       \ 'coc-snippets',

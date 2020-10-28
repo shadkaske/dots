@@ -12,7 +12,7 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'ntpeters/vim-better-whitespace'
     " Plug 'ryanoasis/vim-devicons'
     " Plug 'easymotion/vim-easymotion'
-    Plug 'junegunn/vim-easy-align'
+    " Plug 'junegunn/vim-easy-align'
     Plug 'justinmk/vim-sneak'
     Plug 'christoomey/vim-tmux-navigator'
     Plug 'edkolev/tmuxline.vim'
@@ -42,7 +42,7 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'honza/vim-snippets'
     " language
     Plug 'shadkaske/vim-blade', { 'for': ['php', 'blade'] }
-    Plug 'beanworks/vim-phpfmt', { 'for': ['php'] }
+    " Plug 'beanworks/vim-phpfmt', { 'for': ['php'] }
     Plug 'Valloric/MatchTagAlways', {'for': ['php', 'html', 'blade']}
     " Plug 'StanAngeloff/php.vim', { 'for': ['php', 'html'] }
     Plug 'vim-vdebug/vdebug', { 'for': ['php'] }

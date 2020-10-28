@@ -17,6 +17,7 @@ let g:coc_global_extensions = [
       \ 'coc-ultisnips',
       \ 'coc-vimlsp',
       \ 'coc-yaml',
+      \ 'coc-prettier'
       \ ]
 
 

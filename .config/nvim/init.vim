@@ -29,6 +29,7 @@ source $HOME/.config/nvim/plugin-config/coc.vim
 source $HOME/.config/nvim/plugin-config/fzf.vim
 source $HOME/.config/nvim/plugin-config/fugitive.vim
 source $HOME/.config/nvim/plugin-config/farr.vim
+" source $HOME/.config/nvim/plugin-config/phpfmt.vim
 
 " Keymaps
 source $HOME/.config/nvim/keys/maps.vim

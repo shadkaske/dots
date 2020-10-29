@@ -21,8 +21,6 @@ source $HOME/.config/nvim/plugin-config/tmuxline.vim
 source $HOME/.config/nvim/plugin-config/vim-test.vim
 source $HOME/.config/nvim/plugin-config/gitgutter.vim
 source $HOME/.config/nvim/plugin-config/sneak.vim
-" source $HOME/.config/nvim/plugin-config/easymotion.vim
-source $HOME/.config/nvim/plugin-config/emmet.vim
 source $HOME/.config/nvim/plugin-config/floatterm.vim
 source $HOME/.config/nvim/plugin-config/vdebug.vim
 source $HOME/.config/nvim/plugin-config/coc.vim
@@ -30,6 +28,8 @@ source $HOME/.config/nvim/plugin-config/fzf.vim
 source $HOME/.config/nvim/plugin-config/fugitive.vim
 source $HOME/.config/nvim/plugin-config/farr.vim
 " source $HOME/.config/nvim/plugin-config/phpfmt.vim
+" source $HOME/.config/nvim/plugin-config/easymotion.vim
+" source $HOME/.config/nvim/plugin-config/emmet.vim
 
 " Keymaps
 source $HOME/.config/nvim/keys/maps.vim

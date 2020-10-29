@@ -10,13 +10,9 @@ call plug#begin('~/.config/nvim/plugged')
 
     " UI / Navigation
     Plug 'ntpeters/vim-better-whitespace'
-    " Plug 'ryanoasis/vim-devicons'
-    " Plug 'easymotion/vim-easymotion'
-    " Plug 'junegunn/vim-easy-align'
     Plug 'justinmk/vim-sneak'
     Plug 'christoomey/vim-tmux-navigator'
     Plug 'edkolev/tmuxline.vim'
-    Plug 'benmills/vimux'
     Plug 'moll/vim-bbye'
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-commentary'
@@ -25,16 +21,16 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
     Plug 'chriskempson/base16-vim'
-    " Plug 'kaicataldo/material.vim', { 'branch': 'main' }
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
     Plug 'machakann/vim-highlightedyank'
     Plug 'chrisbra/Colorizer'
     Plug 'voldikss/vim-floaterm'
     Plug 'vim-scripts/ReplaceWithRegister'
+    Plug 'liuchengxu/vim-which-key'
+    Plug 'mbbill/undotree'
     " Git
     Plug 'tpope/vim-fugitive'
-    Plug 'idanarye/vim-merginal'
     Plug 'airblade/vim-gitgutter'
     "  Coc
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -42,25 +38,29 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'honza/vim-snippets'
     " language
     Plug 'shadkaske/vim-blade', { 'for': ['php', 'blade'] }
-    " Plug 'beanworks/vim-phpfmt', { 'for': ['php'] }
     Plug 'Valloric/MatchTagAlways', {'for': ['php', 'html', 'blade']}
-    " Plug 'StanAngeloff/php.vim', { 'for': ['php', 'html'] }
     Plug 'vim-vdebug/vdebug', { 'for': ['php'] }
     Plug 'arnaud-lb/vim-php-namespace', {'for': 'php'}
-    " Plug 'mattn/emmet-vim', { 'for': ['html', 'php', 'javascriptn', 'css']}
-    Plug 'othree/html5.vim', { 'for': ['html', 'php'] }
-    Plug 'pangloss/vim-javascript', { 'for': ['javascript','html', 'php'] }
-    Plug 'jelera/vim-javascript-syntax', { 'for': ['javascript','html', 'php'] }
-    Plug 'elzr/vim-json', { 'for': ['json', 'php'] }
-    Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
-    Plug 'hail2u/vim-css3-syntax', { 'for': ['javascript','html', 'php'] }
     Plug 'janko/vim-test'
-    Plug 'vim-python/python-syntax', { 'for': 'python'}
-    " Plug 'chr4/nginx.vim'
     Plug 'baskerville/vim-sxhkdrc'
+    " Plug 'vim-python/python-syntax', { 'for': 'python'}
+    " Plug 'benmills/vimux'
+    " Plug 'othree/html5.vim', { 'for': ['html', 'php'] }
+    " Plug 'pangloss/vim-javascript', { 'for': ['javascript','html', 'php'] }
+    " Plug 'jelera/vim-javascript-syntax', { 'for': ['javascript','html', 'php'] }
+    " Plug 'elzr/vim-json', { 'for': ['json', 'php'] }
+    " Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
+    " Plug 'hail2u/vim-css3-syntax', { 'for': ['javascript','html', 'php'] }
+    " Plug 'idanarye/vim-merginal'
     " Plug 'pprovost/vim-ps1'
-    Plug 'liuchengxu/vim-which-key'
-    Plug 'mbbill/undotree'
+    " Plug 'chr4/nginx.vim'
+    " Plug 'mattn/emmet-vim', { 'for': ['html', 'php', 'javascriptn', 'css']}
+    " Plug 'StanAngeloff/php.vim', { 'for': ['php', 'html'] }
+    " Plug 'beanworks/vim-phpfmt', { 'for': ['php'] }
+    " Plug 'kaicataldo/material.vim', { 'branch': 'main' }
+    " Plug 'ryanoasis/vim-devicons'
+    " Plug 'easymotion/vim-easymotion'
+    " Plug 'junegunn/vim-easy-align'
 
 call plug#end()
 

@@ -29,5 +29,7 @@
   "explorer.keyMappings": {
     "<cr>": ["expandable?", "expand", "open"],
     "v": "open:vsplit"
-  }
+  },
+  "emmet.showAbbreviationSuggestions": true,
+  "emmet.includeLanguages": { "blade": "html" }
 }

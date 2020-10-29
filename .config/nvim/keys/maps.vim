@@ -1,6 +1,4 @@
 " Insert Mode Maps
-inoremap jk <Esc>
-inoremap kj <Esc>
 inoremap jj <ESC>
 inoremap :w <ESC>:w<CR>
 inoremap :wq <ESC>:wq<CR>

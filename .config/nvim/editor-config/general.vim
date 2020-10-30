@@ -1,4 +1,3 @@
-
 " set colorcolumn=100
 " Command Bits
 " set noshowcmd
@@ -85,3 +84,5 @@ set signcolumn=yes
 " Set list characters
 set listchars=tab:‣\ ,trail:·,precedes:«,extends:»,eol:¬
 
+" Set cursorline on by default
+set cursorline

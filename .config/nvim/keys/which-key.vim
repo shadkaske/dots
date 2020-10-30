@@ -1,5 +1,3 @@
-" Leader Key Maps
-
 " Map leader to which_key
 nnoremap <silent> <leader> :silent <c-u> :silent WhichKey '<Space>'<CR>
 vnoremap <silent> <leader> :silent <c-u> :silent WhichKeyVisual '<Space>'<CR>
@@ -8,7 +6,6 @@ vnoremap <silent> <leader> :silent <c-u> :silent WhichKeyVisual '<Space>'<CR>
 let g:which_key_map =  {}
 " Define a separator
 let g:which_key_sep = '→'
-" set timeoutlen=100
 
 " Coc Search & refactor
 nnoremap <leader>? :CocSearch <C-R>=expand("<cword>")<CR><CR>
@@ -50,7 +47,6 @@ let g:which_key_map.a = {
       \ 'name' : '+Actions' ,
       \ 'c' : [':ColorToggle'                       , 'colorizer'],
       \ 'e' : [':CocCommand explorer'               , 'explorer'],
-      \ 'g' : ['<Plug>(EasyAlign)'                  , 'easy align'],
       \ 'h' : [':let @/ = ""'                       , 'remove search highlight'],
       \ 'l' : [':set list!'                         , 'toggle list characters'],
       \ 'm' : ['execute "set colorcolumn=" . (&colorcolumn == "" ? "80" : "")' , 'toggle color column'],
@@ -72,6 +68,7 @@ let g:which_key_map.b = {
       \ 'l' : ['blast'      , 'last buffer'],
       \ 'n' : ['bnext'      , 'next buffer'],
       \ 'p' : ['bprevious'  , 'previous buffer'],
+      \ 'o' : [':%bd|e#'     , 'close all other buffers'],
       \ }
 
 " f is for find and replace

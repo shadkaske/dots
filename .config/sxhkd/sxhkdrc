@@ -11,9 +11,6 @@ super + Escape
 super + shift + d
     dmenu-display-config
 
-super + shift + p
-    rofi -show drun
-
 super + shift + v
 	dmenu-greenclip
 

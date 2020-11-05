@@ -35,6 +35,9 @@ set nowrap
 " Completion Clean Up
 set shortmess+=c
 
+" Turn on AutoRead for Changed files
+set autoread
+
 " Turn off autocomments
 set formatoptions-=cro
 

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+flatpak run io.dbeaver.DBeaverCommunity
+
+# vi: ft=sh

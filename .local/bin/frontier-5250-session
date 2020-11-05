@@ -1,0 +1,5 @@
+#!/bin/bash
+
+/opt/ibm/iAccessClientSolutions/Start_Programs/Linux_x86-64/acslaunch_linux-64 /plugin=5250 /system=frontier /nosave /sso /wide
+
+# vi: ft=sh

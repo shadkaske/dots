@@ -13,6 +13,7 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'justinmk/vim-sneak'
     Plug 'christoomey/vim-tmux-navigator'
     Plug 'edkolev/tmuxline.vim'
+    Plug 'tmux-plugins/vim-tmux-focus-events'
     Plug 'moll/vim-bbye'
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-commentary'

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+flatpak run com.getpostman.Postman
+
+# vi: ft=sh

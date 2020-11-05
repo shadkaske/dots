@@ -8,7 +8,7 @@
   "python.linting.flake8Enabled": true,
   "python.linting.flake8Args": ["--max-line-length=100", "--ignore=W605"],
   "python.autoComplete.addBrackets": true,
-  "coc.preferences.formatOnSaveFiletypes": ["python", "php", "json"],
+  "coc.preferences.formatOnSaveFiletypes": [],
   "snippets.ultisnips.enable": true,
   "snippets.ultisnips.directories": [
     "UltiSnips",

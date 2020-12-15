@@ -6,13 +6,16 @@ super + shift + alt + k
     killall -SIGUSR1 sxhkd
 
 super + Escape
-    slock
+    xfce4-screensaver-command --lock
+
+alt + Tab
+    rofi -show window
 
 super + shift + d
     dmenu-display-config
 
 super + shift + v
-	dmenu-greenclip
+	rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}'
 
 super + shift + o
 	dmenu-qutebrowser
@@ -39,7 +42,7 @@ super + ctrl + e
     evolution
 
 super + ctrl + f
-    kitty --class="rangerfm" -e ranger
+    pcmanfm
 
 super + ctrl + v
     virt-manager

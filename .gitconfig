@@ -2,7 +2,7 @@
     name = Shad Kaske
     email = shadkaske@gmail.com
 [core]
-    editor = vscode
+    editor = nvim
 [merge]
     tool = vscode
 [diff]
@@ -21,3 +21,5 @@
 [mergetool "nvim"]
     cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
     ; cmd = nvim -d $LOCAL $MERGED $REMOTE -c $MERGED
+[pull]
+	rebase = false

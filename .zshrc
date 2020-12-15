@@ -1,3 +1,21 @@
+# Check if the PowerLevel10k Plugin is install
+[ ! -d $HOME/.oh-my-zsh/custom/themes/powerlevel10k ] && git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \
+    $HOME/.oh-my-zsh/custom/themes/powerlevel10k
+
+# Check if the Autosuggestions Plugin is installed
+[ ! -d $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions ] && git clone https://github.com/zsh-users/zsh-autosuggestions \
+    $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+
+# Check if the Syntax Highlight Plugin is installed
+[ ! -d $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ] && git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
+    $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+
+
+# Check if the PowerLevel10k Plugin is install
+[ ! -d $HOME/.oh-my-zsh/custom/themes/powerlevel10k ] && git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \
+    $HOME/.oh-my-zsh/custom/themes/powerlevel10k
+
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -10,14 +28,10 @@ fi
 # confirmations, etc.) must go above this block, everything else may go below.
 # typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
-# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-# fi
-
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
-# ZSH_THEME="avit"
+# ZSH_THEME="robbyrussell"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Base16 Shell
@@ -31,13 +45,13 @@ HYPHEN_INSENSITIVE="true"
 COMPLETION_WAITING_DOTS="true"
 
 plugins=(
+    zsh-syntax-highlighting
+    zsh-autosuggestions
     git
     git-flow
     ubuntu
     tmux
     tmuxinator
-    zsh-syntax-highlighting
-    zsh-autosuggestions
     sudo
     systemd
     composer
@@ -46,8 +60,6 @@ plugins=(
     vagrant
     common-aliases
     vi-mode
-    docker
-    docker-compose
 )
 
 # User configuration
@@ -166,7 +178,7 @@ function dots {
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # alias dots='git --git-dir=$HOME/.dots --work-tree=$HOME'
-alias tn='tmux new-session -A -s Terms'
+alias tn='tmux new-session -A -s'
 
 # Fix for systemd unit file completion
 _systemctl_unit_state() {

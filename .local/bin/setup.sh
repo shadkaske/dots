@@ -4,27 +4,27 @@
 export PATH=$HOME/.local/bin:$PATH
 
 # create direcotries if needed
-git clone https://github.com/robbyrussell/oh-my-zsh.git \
-    $HOME/.oh-my-zsh
+# git clone https://github.com/robbyrussell/oh-my-zsh.git \
+#     $HOME/.oh-my-zsh
 
-# Install zsh syntax highlighting
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
-    $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+# # Install zsh syntax highlighting
+# git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
+#     $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 
-# Install ZSH Autosuggestions
-git clone https://github.com/zsh-users/zsh-autosuggestions \
-    $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+# # Install ZSH Autosuggestions
+# git clone https://github.com/zsh-users/zsh-autosuggestions \
+#     $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 
-# Install powerlevel10k
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \
-    $HOME/.oh-my-zsh/custom/themes/powerlevel10k
+# # Install powerlevel10k
+# git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \
+#     $HOME/.oh-my-zsh/custom/themes/powerlevel10k
 
 # Clone base16 repos for gnome terminal and shell
-git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell
+# git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell
 
 # Base16 Gnome Terminal
-git clone https://github.com/aaron-williamson/base16-gnome-terminal.git \
-    ~/.config/base16-gnome-terminal
+# git clone https://github.com/aaron-williamson/base16-gnome-terminal.git \
+#     ~/.config/base16-gnome-terminal
 
 
 # Install FZF
@@ -32,8 +32,8 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 $HOME/.fzf/install --no-fish --all
 
 # Install Tmux Plugin Manager
-mkdir -p $HOME/.tmux/plugins
-git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
+# mkdir -p $HOME/.tmux/plugins
+# git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 
 # System update
 sudo apt update && sudo apt dist-upgrade -y

@@ -14,6 +14,7 @@ source $HOME/.config/nvim/editor-config/autocmd.vim
 source $HOME/.config/nvim/editor-config/syntax.vim
 source $HOME/.config/nvim/editor-config/folding.vim
 source $HOME/.config/nvim/editor-config/theme.vim
+hi Normal guibg=NONE ctermbg=NONE
 
 " Load Plugin Settings
 source $HOME/.config/nvim/plugin-config/airline.vim

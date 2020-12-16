@@ -8,7 +8,16 @@ configuration {
     fake-transparency: true;
 }
 
-@import "themes/Arc-Dark-Sidebar.rasi"
+@import "/usr/share/rofi/themes/Adapta-Nokto.rasi"
+
+window {
+  height: 100%;
+  width: 25%;
+  border: 0;
+  padding: 0;
+  location: west;
+  anchor: west;
+}
 
 /* vim: ft=css
  */

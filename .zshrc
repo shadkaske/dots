@@ -1,3 +1,11 @@
+# Make sure oh-my-zsh is installed
+[ ! -d $HOME/.oh-my-zsh ] && git clone https://github.com/robbyrussell/oh-my-zsh.git \
+    $HOME/.oh-my-zsh
+
+# Make sure fzf is installed
+[ ! -d $HOME/.fzf ] && git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && \
+    $HOME/.fzf/install --no-fish --all
+
 # Check if the PowerLevel10k Plugin is install
 [ ! -d $HOME/.oh-my-zsh/custom/themes/powerlevel10k ] && git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \
     $HOME/.oh-my-zsh/custom/themes/powerlevel10k
@@ -9,12 +17,6 @@
 # Check if the Syntax Highlight Plugin is installed
 [ ! -d $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ] && git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
     $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
-
-
-# Check if the PowerLevel10k Plugin is install
-[ ! -d $HOME/.oh-my-zsh/custom/themes/powerlevel10k ] && git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \
-    $HOME/.oh-my-zsh/custom/themes/powerlevel10k
-
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -50,6 +52,7 @@ plugins=(
     git
     git-flow
     ubuntu
+    archlinux
     tmux
     tmuxinator
     sudo

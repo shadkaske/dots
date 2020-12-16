@@ -18,6 +18,10 @@
 [ ! -d $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ] && git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
     $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 
+# Check if Base16-Shell is Installed
+[ ! -d $HOME/.config/base16-shell ] && git clone https://github.com/chriskempson/base16-shell.git \
+    $HOME/.config/base16-shell
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -41,6 +45,9 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
 [ -n "$PS1" ] && \
     [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
         eval "$("$BASE16_SHELL/profile_helper.sh")"
+
+# Set default color scheme if base16-shell link is missing
+[ ! -f $HOME/.base16_theme ] && base16_helios
 
 HYPHEN_INSENSITIVE="true"
 

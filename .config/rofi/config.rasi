@@ -1,10 +1,11 @@
 configuration {
     modi: "window,drun,run,ssh,combi";
-    font: "JetBrainsMono Nerd Font 16";
+    font: "JetBrainsMono Nerd Font 14";
     terminal: "kitty";
     matching: "fuzzy";
     show-icons: true;
     sidebar-mode: true;
+    fake-transparency: true;
 }
 
 @import "themes/Arc-Dark-Sidebar.rasi"

@@ -134,6 +134,8 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- {{{ Wibar
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock()
+local month_calendar = awful.widget.calendar_popup.month()
+month_calendar:attach(mytextclock, "tr" )
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(

@@ -58,7 +58,7 @@ editor_cmd = terminal .. " -e " .. editor
 -- My Application Variables
 background = "feh --bg-fill --randomize ~/.local/share/backgrounds/*"
 lockscreen = "xfce4-screensaver-command --lock"
-filemanager = "pcmanfm"
+filemanager = "nautilus"
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -129,8 +129,12 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- {{{ Wibar
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock()
-local month_calendar = awful.widget.calendar_popup.month()
-month_calendar:attach(mytextclock, "tr" )
+
+-- Lain Cal Widget
+local mycal = lain.widget.cal { attach_to = { mytextclock },
+    week_start = 1,
+    icons = ''
+}
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -186,7 +190,7 @@ awful.screen.connect_for_each_screen(function(s)
 
     -- Lain Quake Util
     s.quake = lain.util.quake({ app = "kitty",argname = "--title %s",extra = "--class=QuakeDD tmux new-session -A -s DropDown",
-            visible = true, height = 0.4, width = 0.4, vert = "center", horiz = "center"})
+            visible = true, height = 0.4, width = 0.4, vert = "top", horiz = "center"})
 
     -- Each screen has its own tag table.
     awful.tag({ "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  " }, s, awful.layout.layouts[1])

@@ -24,7 +24,8 @@ yay -S --noconfirm --removemake xorg xterm xfce4 lightdm lightdm-gtk-greeter \
     xf86-video-amdgpu vulkan-radeon lib32-vulkan-radeon libva-mesa-driver \
     lib32-libva-mesa-driver mesa-vdpau lib32-mesa-vdpau wine-staging \
     winetricks steam lutris wine-mono wine-gecko vulkan-icd-loader \
-    lib32-vulkan-icd-loader vkd3d lib32-vkd3d gvfs awesome lazygit ranger
+    lib32-vulkan-icd-loader vkd3d lib32-vkd3d gvfs awesome lazygit ranger \
+    grub-theme-vimix rofi rofi-greenclip rofi-dmenu update-grub
 
 # Set up font rendering
 sudo ln -s /etc/fonts/conf.avail/11-lcdfilter-default.conf /etc/fonts/conf.d
@@ -40,6 +41,9 @@ sudo cp $HOME/.config/system/lightdm-gtk-greeter.conf \
 
 # Enable lightdm
 sudo systemctl enable lightdm
+
+# Enable pulseaudio server
+systemctl --user enable pulseaudio.service
 
 # Configure Neovim
 yay -S --noconfirm neovim python-pip python2 python2-pip ruby nodejs yarn
@@ -58,3 +62,8 @@ nvim -u $HOME/.config/nvim/plugins.vim +PlugInstall +qall
 xdg-user-dirs-update
 
 git clone https://github.com/lcpz/lain.git ~/.config/awesome/lain
+
+echo 'GRUB_THEME="/usr/share/grub/themes/Vimix/theme.txt"' | sudo tee -a \
+    /etc/default/grub
+
+sudo sed -i '/SAVEDEFAULT/s/^#//' /etc/default/grub

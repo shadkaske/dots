@@ -11,22 +11,22 @@ cd ~
 
 rm -rf ~/yay-git
 
-# Install tmux
-yay -S --noconfirm tmux tmuxinator
-
-# Install X
-yay -S --noconfirm xorg xterm xfce4 lightdm lightdm-gtk-greeter \
+# Install Packages
+yay -S --noconfirm --removemake xorg xterm xfce4 lightdm lightdm-gtk-greeter \
     adapta-gtk-theme papirus-icon-theme kitty gnu-free-fonts noto-fonts \
     ttf-bitstream-vera ttf-croscore ttf-dejavu ttf-droid ttf-ibm-plex \
     ttf-liberation firefox xcursor-breeze xcursor-breeze-adapta pulseaudio \
     network-manager-applet archlinux-wallpaper xfce4-screenshooter \
     xfce4-screensaver xfce4-whiskermenu-plugin xfce4-weather-plugin \
-    xfce4-pulseaudio-plugin xclip xdg-user-dirs xdg-utils
+    xfce4-pulseaudio-plugin xclip xdg-user-dirs xdg-utils tmux tmuxinator \
+    freetype2 lib32-freetype2 fontconfig lib32-fontconfig cairo \
+    lib32-cairo fonts-meta-base fonts-meta-extended-lt mesa lib32-mesa \
+    xf86-video-amdgpu vulkan-radeon lib32-vulkan-radeon libva-mesa-driver \
+    lib32-libva-mesa-driver mesa-vdpau lib32-mesa-vdpau wine-staging \
+    winetricks steam lutris wine-mono wine-gecko vulkan-icd-loader \
+    lib32-vulkan-icd-loader vkd3d lib32-vkd3d gvfs awesome lazygit ranger
 
 # Set up font rendering
-yay -S --noconfirm freetype2 lib32-freetype2 fontconfig lib32-fontconfig cairo \
-    lib32-cairo fonts-meta-base fonts-meta-extended-lt
-
 sudo ln -s /etc/fonts/conf.avail/11-lcdfilter-default.conf /etc/fonts/conf.d
 sudo ln -s /etc/fonts/conf.avail/10-sub-pixel-rgb.conf /etc/fonts/conf.d
 sudo ln -s /etc/fonts/conf.avail/10-hinting-slight.conf /etc/fonts/conf.d
@@ -56,3 +56,5 @@ yarn global add neovim
 nvim -u $HOME/.config/nvim/plugins.vim +PlugInstall +qall
 
 xdg-user-dirs-update
+
+git clone https://github.com/lcpz/lain.git ~/.config/awesome/lain

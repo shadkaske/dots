@@ -18,7 +18,10 @@ yay -S --noconfirm tmux tmuxinator
 yay -S --noconfirm xorg xterm xfce4 lightdm lightdm-gtk-greeter \
     adapta-gtk-theme papirus-icon-theme kitty gnu-free-fonts noto-fonts \
     ttf-bitstream-vera ttf-croscore ttf-dejavu ttf-droid ttf-ibm-plex \
-    ttf-liberation firefox xcursor-breeze xcursor-breeze-adapta
+    ttf-liberation firefox xcursor-breeze xcursor-breeze-adapta pulseaudio \
+    network-manager-applet archlinux-wallpaper xfce4-screenshooter \
+    xfce4-screensaver xfce4-whiskermenu-plugin xfce4-weather-plugin \
+    xfce4-pulseaudio-plugin xclip xdg-user-dirs xdg-utils
 
 # Set up font rendering
 yay -S --noconfirm freetype2 lib32-freetype2 fontconfig lib32-fontconfig cairo \
@@ -32,7 +35,8 @@ sudo ln -s /etc/fonts/conf.avail/30-infinality-aliases.conf /etc/fonts/conf.d
 sudo sed -i '/ FREETYPE_PROPERTIES/s/^#//' /etc/profile.d/freetype2.sh
 
 # Copy LightDM Greeter Settings
-sudo cp $HOME/.config/system/lightdm-gtk-greeter.conf /etc/lightdm/lightdm-gtk-greeter.conf
+sudo cp $HOME/.config/system/lightdm-gtk-greeter.conf \
+    /etc/lightdm/lightdm-gtk-greeter.conf
 
 # Enable lightdm
 sudo systemctl enable lightdm
@@ -43,9 +47,12 @@ yay -S --noconfirm neovim python-pip python2 python2-pip ruby nodejs yarn
 # Make sure path includes gem bin
 export PATH=$HOME/.gem/ruby/2.7.0/bin:$PATH
 
-pip install neovim neovim-remote
+pip install neovim
+pip install neovim-remote
 pip2 install neovim
 gem install neovim
 yarn global add neovim
 
 nvim -u $HOME/.config/nvim/plugins.vim +PlugInstall +qall
+
+xdg-user-dirs-update

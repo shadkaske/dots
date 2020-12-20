@@ -1,15 +1,5 @@
 #!/bin/bash
 
-# Install pre-reqs
-
-sudo pacman --noconfirm -S tmux tmuxinator openssh
-
-git clone --bare https://github.com/shadkaske/dots.git ~/.dots
-
-git --work-tree=$HOME --git-dir=$HOME/.dots checkout
-
-source ~/.zshrc
-
 # Install Yay
 git clone https://aur.archlinux.org/yay-git.git
 
@@ -20,6 +10,9 @@ makepkg -si --noconfirm
 cd ~
 
 rm -rf ~/yay-git
+
+# Install tmux
+yay -S --noconfirm tmux tmuxinator
 
 # Install X
 yay -S --noconfirm xorg xterm xfce4 lightdm lightdm-gtk-greeter \
@@ -47,12 +40,12 @@ sudo systemctl enable lightdm
 # Configure Neovim
 yay -S --noconfirm neovim python-pip python2 python2-pip ruby nodejs yarn
 
+# Make sure path includes gem bin
+export PATH=$HOME/.gem/ruby/2.7.0/bin:$PATH
+
 pip install neovim neovim-remote
 pip2 install neovim
 gem install neovim
 yarn global add neovim
-
-# Make sure path includes gem bin
-export PATH=$HOME/.gem/ruby/2.7.0/bin:$PATH
 
 nvim -u $HOME/.config/nvim/plugins.vim +PlugInstall +qall

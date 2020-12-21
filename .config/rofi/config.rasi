@@ -11,8 +11,8 @@ configuration {
 @import "/usr/share/rofi/themes/Adapta-Nokto.rasi"
 
 window {
-  height: 100%;
-  width: 25%;
+  height: 85%;
+  width: 25em;
   border: 0;
   padding: 0;
   location: west;

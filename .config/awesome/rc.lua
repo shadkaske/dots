@@ -383,6 +383,10 @@ globalkeys = gears.table.join(
     awful.key({ modkey, "Shift" }, "o", function() awful.spawn("dmenu-qutebrowser") end,
               {description = "qutebrowser bookmarks", group = "launcher"}),
 
+    -- virsh list
+    awful.key({ modkey, "Shift" }, "i", function() awful.spawn("dmenu-virtmanager") end,
+              {description = "virt-manager vms", group = "launcher"}),
+
     -- Clipboard Manager
     awful.key({ modkey, "Shift" }, "v", function() awful.spawn("rofi -modi \"clipboard:greenclip print\" -show clipboard -run-command '{cmd}'") end,
               {description = "clipboard manager", group = "launcher"}),

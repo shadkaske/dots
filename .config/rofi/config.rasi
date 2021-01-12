@@ -8,7 +8,6 @@ configuration {
     fake-transparency: true;
 }
 
-@import "/usr/share/rofi/themes/Adapta-Nokto.rasi"
 
 window {
   height: 85%;
@@ -21,3 +20,4 @@ window {
 
 /* vim: ft=css
  */
+@import "/usr/share/rofi/themes/Arc-Dark.rasi"

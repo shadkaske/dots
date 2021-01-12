@@ -83,5 +83,10 @@
       <property name="style" type="uint" value="0"/>
       <property name="expand" type="bool" value="true"/>
     </property>
+    <property name="clipman" type="empty">
+      <property name="tweaks" type="empty">
+        <property name="popup-at-pointer" type="bool" value="true"/>
+      </property>
+    </property>
   </property>
 </channel>

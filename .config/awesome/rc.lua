@@ -259,8 +259,8 @@ globalkeys = gears.table.join(
               {description = "view previous", group = "tag"}),
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext,
               {description = "view next", group = "tag"}),
-    awful.key({ modkey,           }, "Tab", awful.tag.history.restore,
-              {description = "go back", group = "tag"}),
+    -- awful.key({ modkey,           }, "Tab", awful.tag.history.restore,
+    --           {description = "go back", group = "tag"}),
 
     awful.key({ modkey,           }, "j",
         function ()
@@ -288,14 +288,14 @@ globalkeys = gears.table.join(
               {description = "focus the previous screen", group = "screen"}),
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto,
               {description = "jump to urgent client", group = "client"}),
-    awful.key({ modkey,           }, "Tab",
-        function ()
-            awful.client.focus.history.previous()
-            if client.focus then
-                client.focus:raise()
-            end
-        end,
-        {description = "go back", group = "client"}),
+    -- awful.key({ modkey,           }, "Tab",
+    --     function ()
+    --         awful.client.focus.history.previous()
+    --         if client.focus then
+    --             client.focus:raise()
+    --         end
+    --     end,
+    --     {description = "go back", group = "client"}),
 
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
@@ -380,15 +380,15 @@ globalkeys = gears.table.join(
               {description = "display config", group = "launcher"}),
 
     -- Qutebrowser launcher
-    awful.key({ modkey, "Shift" }, "o", function() awful.spawn("dmenu-qutebrowser") end,
-              {description = "qutebrowser bookmarks", group = "launcher"}),
+    -- awful.key({ modkey, "Shift" }, "o", function() awful.spawn("dmenu-qutebrowser") end,
+    --           {description = "qutebrowser bookmarks", group = "launcher"}),
 
     -- virsh list
     awful.key({ modkey, "Shift" }, "i", function() awful.spawn("dmenu-virtmanager") end,
               {description = "virt-manager vms", group = "launcher"}),
 
     -- Clipboard Manager
-    awful.key({ modkey, "Shift" }, "v", function() awful.spawn("rofi -modi \"clipboard:greenclip print\" -show clipboard -run-command '{cmd}'") end,
+    awful.key({ modkey, "Shift" }, "v", function() awful.spawn("xfce4-popup-clipman-actions") end,
               {description = "clipboard manager", group = "launcher"}),
 
     -- Firefox
@@ -678,24 +678,24 @@ end)
 -- {{{ Autostart windowless processes
 
 -- This function will run once every time Awesome is started
--- local function run_once(cmd_arr)
---     for _, cmd in ipairs(cmd_arr) do
---         awful.spawn.with_shell(string.format("pgrep -u $USER -fx '%s' > /dev/null || (%s)", cmd, cmd))
---     end
--- end
+local function run_once(cmd_arr)
+    for _, cmd in ipairs(cmd_arr) do
+        awful.spawn.with_shell(string.format("pgrep -u $USER -fx '%s' > /dev/null || (%s)", cmd, cmd))
+    end
+end
 
--- run_once({
---     "picom --config ~/.config/picom/picom.conf",
---     "nm-applet",
---     "volumeicon",
---     "autokey",
---     "greenclip daemon",
---     "unclutter -root",
---     "xfce4-screensaver",
---     "onedrive monitor",
---     "/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1",
---     "udevadm monitor"
--- }) -- entries must be separated by commas
+run_once({
+    "picom --config ~/.config/picom/picom.conf",
+    "nm-applet",
+    "volumeicon",
+    -- "autokey",
+    "xfce4-clipman",
+    "unclutter -root",
+    "xfce4-screensaver",
+    "onedrive monitor",
+    "/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1",
+    "udevadm monitor"
+}) -- entries must be separated by commas
 
 set_wallpaper()
 

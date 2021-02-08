@@ -4,7 +4,7 @@ configuration {
     terminal: "kitty";
     matching: "fuzzy";
     show-icons: true;
-    sidebar-mode: true;
+    /* sidebar-mode: true; */
     fake-transparency: true;
 }
 

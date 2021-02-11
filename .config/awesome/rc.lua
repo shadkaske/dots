@@ -54,6 +54,7 @@ beautiful.init(gears.filesystem.get_themes_dir() .. "gtk/theme.lua")
 terminal = "x-terminal-emulator"
 editor = os.getenv("EDITOR") or "editor"
 editor_cmd = terminal .. " -e " .. editor
+emacs_cmd = "emacs"
 
 -- My Application Variables
 background = "feh --bg-fill --randomize ~/.local/share/backgrounds/*"
@@ -386,6 +387,10 @@ globalkeys = gears.table.join(
     -- virsh list
     awful.key({ modkey, "Shift" }, "i", function() awful.spawn("dmenu-virtmanager") end,
               {description = "virt-manager vms", group = "launcher"}),
+
+    -- Emacs
+    awful.key({ modkey, "Shift" }, "e", function() awful.spawn(emacs_cmd) end,
+              {description = "Start Emacs", group = "launcher"}),
 
     -- Clipboard Manager
     awful.key({ modkey, "Shift" }, "v", function() awful.spawn("xfce4-popup-clipman-actions") end,

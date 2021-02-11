@@ -1,0 +1,226 @@
+#+TITLE: Shadk's Doom Emacs Config
+#+AUTHOR: Shad Kaske
+#+EMAIL: shadkaske@gmail.com
+#+LANGUAGE: en
+#+STARTUP: inlineimages
+
+* Table of Contents :TOC_3_gh:
+- [[#configuration][Configuration]]
+  - [[#user-informaiton][User Informaiton]]
+    - [[#name-and-email-address][Name and Email Address]]
+  - [[#emacs-ui-settings][Emacs UI Settings]]
+    - [[#no-close-confirmation][No Close Confirmation]]
+    - [[#clipboard-settings][Clipboard Settings]]
+    - [[#theme-settings][Theme Settings]]
+    - [[#font-settings][Font Settings]]
+    - [[#line-numbers][Line Numbers]]
+    - [[#line-spacing][Line Spacing]]
+    - [[#all-the-icons][All The Icons]]
+    - [[#highlight-trailing-whitespace][Highlight Trailing Whitespace]]
+  - [[#keybindinds][Keybindinds]]
+    - [[#global-keybinds][Global Keybinds]]
+    - [[#leader-keybinds][Leader Keybinds]]
+    - [[#convenience-keybinds][Convenience Keybinds]]
+  - [[#toolsapp][Tools/App]]
+    - [[#mu4e][mu4e]]
+    - [[#org-mode][Org-Mode]]
+    - [[#neotree][NeoTree]]
+  - [[#languages][Languages]]
+
+* Configuration
+** User Informaiton
+*** Name and Email Address
+
+    #+BEGIN_SRC emacs-lisp
+    (setq user-full-name "Shad Kaske"
+        user-mail-address "shadkaske@gmail.com")
+    #+END_SRC
+
+** Emacs UI Settings
+*** No Close Confirmation
+    Don't bother me will a close confirmation
+
+    #+begin_src emacs-lisp
+    (setq confirm-kill-emacs nil)
+    #+end_src
+
+*** Clipboard Settings
+    I prefer to manage what gets jammed into my system clipboard thank you.
+
+   #+begin_src emacs-lisp
+    (setq select-enable-clipboard nil
+        x-select-enable-clipboard-manager nil)
+   #+end_src
+
+*** Theme Settings
+    Default theme, currently material, and enable bold/italic fonts for the theme
+
+    #+begin_src emacs-lisp
+
+    (setq doom-theme 'doom-material)
+    (after! doom-themes
+    (setq doom-themes-enable-bold t
+            doom-themes-enable-italic t))
+    #+end_src
+
+*** Font Settings
+    Use JetBrains Mono for mono spaced and Big Font. Ubuntu currently for variable. Use italics for keywords and comments
+
+   #+begin_src emacs-lisp
+    (setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 16)
+        doom-variable-pitch-font (font-spec :family "Ubuntu" :size 16)
+        doom-big-font (font-spec :family "JetBrainsMono Nerd Font" :size 24))
+    (custom-set-faces!
+    '(font-lock-comment-face :slant italic)
+    '(font-lock-keyword-face :slant italic))
+   #+end_src
+
+*** Line Numbers
+    I prefer using a relative line number setting
+
+    #+begin_src emacs-lisp
+    (setq display-line-numbers-type 'relative)
+    #+end_src
+
+*** Line Spacing
+    Sometimes I like to mess with the spacing on the lines, sometimes not so much
+
+    #+begin_src emacs-lisp
+    ;; (setq default-text-properties '(line-spacing 0.1  line-height 1.1))
+    #+end_src
+
+*** All The Icons
+
+    #+BEGIN_SRC emacs-lisp
+    (after! all-the-icons
+        (setq all-the-icons-scale-factor 1.0))
+    #+END_SRC
+
+*** Highlight Trailing Whitespace
+
+    #+BEGIN_SRC emacs-lisp
+    (setq show-trailing-whitespace t)
+    #+END_SRC
+
+** Keybindinds
+    Custom keybindings
+*** Global Keybinds
+*** Leader Keybinds
+**** NeoTree
+
+
+*** Convenience Keybinds
+    Just a few bits that I like to user
+**** Insert New Lines Above and Below
+    #+begin_src emacs-lisp
+    (map!
+     (:after evil
+        :m "] SPC" #'evil-motion-insert-newline-below
+        :m "[ SPC" #'evil-motion-insert-newline-after))
+    #+end_src
+**** Simple Window Navigation
+    #+BEGIN_SRC emacs-lisp
+    (map!
+     (:after evil
+       :en "C-h"   #'evil-window-left
+       :en "C-j"   #'evil-window-down
+       :en "C-k"   #'evil-window-up
+       :en "C-l"   #'evil-window-right))
+    #+END_SRC
+
+** Tools/App
+*** mu4e
+    Configure mu4e to manage my email
+
+    #+BEGIN_SRC emacs-lisp
+    (remove-hook! 'mu4e-compose-pre-hook #'org-msg-mode)
+    (after! mu4e
+    (setq! mu4e-maildir (expand-file-name "~/Mail/kaskshad-showplace") ; the rest of the mu4e folders are RELATIVE to this one
+            mu4e-get-mail-command "mbsync -c ~/.config/mu4e/mbsyncrc -a"
+            mu4e-index-update-in-background t
+            mu4e-compose-signature-auto-include nil
+            mu4e-use-fancy-chars t
+            mu4e-view-show-addresses t
+            mu4e-view-show-images t
+            mu4e-compose-format-flowed t
+            ;mu4e-compose-in-new-frame t
+            mu4e-change-filenames-when-moving t ;; http://pragmaticemacs.com/emacs/fixing-duplicate-uid-errors-when-using-mbsync-and-mu4e/
+            mu4e-maildir-shortcuts
+            '( ("/Inbox" . ?i)
+                ("/Archive" . ?a)
+                ("/Drafts" . ?d)
+                ("/Deleted Items" . ?t)
+                ("/Sent Items" . ?s))
+
+            ;; Message Formatting and sending
+            message-send-mail-function 'smtpmail-send-it
+            message-signature-file "~/.config/mu4e/mailsignature"
+            message-citation-line-format "On %a %d %b %Y at %R, %f wrote:\n"
+            message-citation-line-function 'message-insert-formatted-citation-line
+            message-kill-buffer-on-exit t))
+
+    (set-email-account! "kaskshad@showplacewood.com"
+                        '((user-mail-address      . "kaskshad@showplacewood.com")
+                        (user-full-name         . "Shad Kaske")
+                        (smtpmail-smtp-server   . "smtp.office365.com")
+                        (smtpmail-smtp-service  . 587)
+                        (smtpmail-stream-type   . starttls)
+                        (smtpmail-debug-info    . t)
+                        (mu4e-drafts-folder     . "/Drafts")
+                        (mu4e-refile-folder     . "/Archive")
+                        (mu4e-sent-folder       . "/Sent Items")
+                        (mu4e-trash-folder      . "/Deleted Items")
+                        (mu4e-update-interval   . 300)
+                        ;(mu4e-sent-messages-behavior . 'delete)
+                        )
+                        nil)
+
+    (mu4e-alert-set-default-style 'libnotify)
+    (add-hook 'after-init-hook #'mu4e-alert-enable-notifications)
+    #+END_SRC
+
+*** Org-Mode
+My Quirky Settings for using Org to GTD
+**** Path Config
+
+#+BEGIN_SRC emacs-lisp
+(setq org-directory "~/Nextcloud/org/")
+(setq org-noter-notes-search-path '("~/Nextcloud/org/reference/"))
+#+END_SRC
+
+**** Agenda
+
+#+BEGIN_SRC emacs-lisp
+(use-package! org-agenda
+  :ensure t
+  :after org
+  :config
+  (org-agenda-files (list org-directory))
+  (setq org-agenda-custom-commands '(("g" "Scheduled today and all NEXT items" ((agenda "" ((org-agenda-span 1))) (todo "NEXT"))))))
+#+END_SRC
+
+**** Archive Settings
+
+#+BEGIN_SRC emacs-lisp
+(after! org
+  (setq org-archive-tag "archive"))
+  (setq org-archive-location (concat org-directory "archive.org::* From %s"))
+#+END_SRC
+
+**** Refile Targets
+
+#+BEGIN_SRC emacs-lisp
+(after! org
+  (setq org-refile-targets '((nil :maxlevel . 3)
+                             (org-agenda-files :maxlevel . 3))))
+#+END_SRC
+
+*** NeoTree
+
+   #+BEGIN_SRC emacs-lisp
+    (after! neotree
+        (setq neo-smart-open t
+              neo-windows-fixed-size nil))
+   #+END_SRC
+
+** Languages

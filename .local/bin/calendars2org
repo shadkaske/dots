@@ -17,14 +17,14 @@ get_cal () {
 } 
 
 # Google Calendar
-ORGFILE=~/Dropbox/org/cal/googlecal.org
+ORGFILE=~/Nextcloud/org/cal/googlecal.org
 URL=https://calendar.google.com/calendar/ical/shadkaske%40gmail.com/private-91fe3878adc8d39efbd4be78f7f19d55/basic.ics
 
 echo "Getting Google Calendar ICS File ..."
 get_cal
 
 # Showplace Calendar
-ORGFILE=~/Dropbox/org/cal/showplacecal.org
+ORGFILE=~/Nextcloud/org/cal/showplacecal.org
 URL=https://outlook.office365.com/owa/calendar/afae5af3c90240e49772e95fdd884005@showplacewood.com/9877606e7f544b92ab11d45fd16d88d84825421122270417822/calendar.ics
  
 echo "Getting Showplace Calendar ICS File ..."

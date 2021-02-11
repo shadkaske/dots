@@ -8,8 +8,14 @@
 
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)
-(package! org-gtd)
-(package! org-super-agenda)
+;; (package! org)
+;; (package! org-gtd)
+;; (package! org-super-agenda)
+;; (package! org-bullets)
+(package! all-the-icons-dired)
+(package! dired-open)
+(package! peep-dired)
+(package! mu4e-alert)
 
 ;; To install a package directly from a remote git repo, you must specify a
 ;; `:recipe'. You'll find documentation on what `:recipe' accepts here:

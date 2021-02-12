@@ -2,7 +2,7 @@
 
 ;; Basic Emacs Setup
 (setq user-full-name "Shad Kaske"
-    user-mail-address "shadkaske@gmail.com")
+    user-mail-address "skaske@showplacewood.com")
 
 ;; Don't Ask to Close
 (setq confirm-kill-emacs nil)
@@ -26,7 +26,7 @@
 '(font-lock-keyword-face :slant italic))
 
 ;; Relatvie Line Numbers
-(setq display-line-numbers-type 'relative)
+(setq display-line-numbers-type 'visual)
 
 ;; Line Height / Spacing
 ;; (setq default-text-properties '(line-spacing 0.1  line-height 1.1))
@@ -81,7 +81,7 @@
         message-kill-buffer-on-exit t))
 
 (set-email-account! "kaskshad@showplacewood.com"
-                    '((user-mail-address      . "kaskshad@showplacewood.com")
+                    '((user-mail-address      . "skaske@showplacewood.com")
                     (user-full-name         . "Shad Kaske")
                     (smtpmail-smtp-server   . "smtp.office365.com")
                     (smtpmail-smtp-service  . 587)
@@ -104,6 +104,9 @@
 (setq org-directory "~/Nextcloud/org/")
 (setq org-noter-notes-search-path '("~/Nextcloud/org/reference/"))
 
+;;;; Disable LineNumber in Org Mode
+(add-hook! 'org-mode-hook #'doom-disable-line-numbers-h)
+
 ;;;; Hide Emphasis Markers
 (after! org (setq org-hide-emphasis-markers t)
   ;;;; Turn On Logging
@@ -111,30 +114,57 @@
   (setq org-log-into-drawer t))
 
 ;;;; Disable Electric Indent Mode
-(add-hook! org-mode (electric-indent-local-mode -1))
+;; (add-hook! org-mode (electric-indent-local-mode -1))
 
 ;;;; Use Variable Pitch Fonts in Org Mode
 (add-hook! org-mode :append
            #'variable-pitch-mode)
 
-;;;; Org Agenda
-(use-package! org-agenda
-  :ensure t
+;;;; Archiving
+(use-package! org-archive
   :after org
   :config
-  (org-agenda-files (list org-directory))
-  (setq org-agenda-custom-commands '(("g" "Scheduled today and all NEXT items" ((agenda "" ((org-agenda-span 1))) (todo "NEXT"))))))
+  (setq org-archive-location "archive.org::datetree/"))
 
-;;;; Archiving
-(after! org
-  (setq org-archive-tag "archive"))
-  (setq org-archive-location (concat org-directory "archive.org::* From %s"))
+;;;; Org Agenda Files
+(setq org-agenda-files '("~/Nextcloud/org/inbox.org"
+                        "~/Nextcloud/org/projects.org"
+                        "~/Nextcloud/org/tickler.org"
+                        "~/Nextcloud/org/cal/googlecal.org"
+                        "~/Nextcloud/org/cal/showplacecal.org"))
 
-;;;; Refile Targets
-(after! org
-  (setq org-refile-targets '((nil :maxlevel . 3)
-                             (org-agenda-files :maxlevel . 3))))
+;;;; Org Capture Templates
+(setq org-capture-templates
+      '(("t" "ToDo [Inbox]"
+         entry (file "~/Nextcloud/org/inbox.org")
+                "* TODO %?\n")
+        ("T" "Tickler"
+         entry (file+headline "~/Nextcloud/org/tickler.org" "Reminders")
+                "* TODO %i%? \nSCHEDULED: <%(org-read-date nil nil \"+1d\")>")
+        ("e" "Email [Inbox]"
+         entry (file "~/Nextcloud/org/inbox.org")
+                "* TODO %? \n %a\n")))
+
+;;;; Org Refiler Targets
+(setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
+
+"  Org ToDo Keywords"
+(setq org-todo-keywords '((sequence "TODO(t!)" "NEXT(n!)" "WAITING(w!)" "|" "DONE(d!)" "CANCELLED(c!)")))
+
+"  Org Todo Keywords Colors"
+(setq org-todo-keyword-faces '(("TODO" . "IndianRed")
+                                ("NEXT" . "DarkOrange")
+                                ("WAITING" . "DimGray")
+                                ("DONE" . "OliveDrab")
+                                ("CANCELLED" . "MediumPurple")))
+
 ;; NeoTree
 (after! neotree
     (setq neo-smart-open t
           neo-windows-fixed-size nil))
+
+;; Centaur Tabs
+;; (setq centaur-tabs-set-bar 'over)
+;; (setq centaur-tabs-close-button nil)
+
+;; Dired

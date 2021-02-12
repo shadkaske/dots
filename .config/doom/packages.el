@@ -9,9 +9,8 @@
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)
 ;; (package! org)
-(package! org-gtd)
+;; (package! org-gtd)
 ;; (package! org-super-agenda)
-;; (package! org-bullets)
 (package! all-the-icons-dired)
 (package! dired-open)
 (package! peep-dired)

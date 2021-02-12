@@ -87,6 +87,15 @@
 (setq org-directory "~/Nextcloud/org/")
 (setq org-noter-notes-search-path '("~/Nextcloud/org/reference/"))
 
+(after! org (setq org-hide-emphasis-markers t)
+  (setq org-log-done t)
+  (setq org-log-into-drawer t))
+
+(add-hook! org-mode (electric-indent-local-mode -1))
+
+(add-hook! org-mode :append
+           #'variable-pitch-mode)
+
 (use-package! org-agenda
   :ensure t
   :after org

@@ -188,6 +188,22 @@ My Quirky Settings for using Org to GTD
 (setq org-noter-notes-search-path '("~/Nextcloud/org/reference/"))
 #+END_SRC
 
+**** General Org Settings
+- Hide Emphasis Markers
+- Enable logging
+- Disable electric-mode
+
+#+BEGIN_SRC emacs-lisp
+(after! org (setq org-hide-emphasis-markers t)
+  (setq org-log-done t)
+  (setq org-log-into-drawer t))
+
+(add-hook! org-mode (electric-indent-local-mode -1))
+
+(add-hook! org-mode :append
+           #'variable-pitch-mode)
+#+END_SRC
+
 **** Agenda
 
 #+BEGIN_SRC emacs-lisp

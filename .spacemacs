@@ -43,24 +43,19 @@ This function should only modify configuration layer settings."
      emacs-lisp
      git
      helm
-     themes-megapack
+     lsp
      markdown
-     lua
-     systemd
      multiple-cursors
      org
-     (mu4e :variables
-           mu4e-maildirs-extension t
-           mu4e-enable-async-operations t)
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
-     spell-checking
-     syntax-checking
+     ;; spell-checking
+     ;; syntax-checking
      ;; version-control
-     ;; lsp
-     evil-snipe
-     evil-commentary
+     (mu4e :variables
+           mu4e-installation-path "/usr/share/emacs/site-lisp"
+           mu4e-enable-notifications t)
      treemacs)
 
 
@@ -223,8 +218,7 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(doom-one
-                         spacemacs-dark
+   dotspacemacs-themes '(spacemacs-dark
                          spacemacs-light)
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
@@ -234,10 +228,7 @@ It should only modify the values of Spacemacs settings."
    ;; refer to the DOCUMENTATION.org for more info on how to create your own
    ;; spaceline theme. Value can be a symbol or list with additional properties.
    ;; (default '(spacemacs :separator wave :separator-scale 1.5))
-   ;; dotspacemacs-mode-line-theme '(all-the-icons :separator wave)
-   ;; dotspacemacs-mode-line-theme '(spacemacs :separator slant)
-   dotspacemacs-mode-line-theme '(doom)
-   ;; dotspacemacs-mode-line-theme '(vim-powerline)
+   dotspacemacs-mode-line-theme '(spacemacs :separator wave :separator-scale 1.5)
 
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
    ;; (default t)
@@ -246,7 +237,7 @@ It should only modify the values of Spacemacs settings."
    ;; Default font or prioritized list of fonts. The `:size' can be specified as
    ;; a non-negative integer (pixel size), or a floating-point (point size).
    ;; Point size is recommended, because it's device independent. (default 10.0)
-   dotspacemacs-default-font '("JetBrains Mono Nerd Font"
+   dotspacemacs-default-font '("Source Code Pro"
                                :size 12.0
                                :weight normal
                                :width normal)
@@ -402,7 +393,7 @@ It should only modify the values of Spacemacs settings."
    ;; When used in a plist, `visual' takes precedence over `relative'.
    ;; (default nil)
    dotspacemacs-line-numbers '(:relative t
-                               :visual nil)
+                               :visual t)
 
    ;; Code folding method. Possible values are `evil', `origami' and `vimish'.
    ;; (default 'evil)
@@ -440,7 +431,7 @@ It should only modify the values of Spacemacs settings."
    ;; List of search tool executable names. Spacemacs uses the first installed
    ;; tool of the list. Supported tools are `rg', `ag', `pt', `ack' and `grep'.
    ;; (default '("rg" "ag" "pt" "ack" "grep"))
-   dotspacemacs-search-tools '("ag" "rg" "pt" "ack" "grep")
+   dotspacemacs-search-tools '("rg" "ag" "pt" "ack" "grep")
 
    ;; Format specification for setting the frame title.
    ;; %a - the `abbreviated-file-name', or `buffer-name'
@@ -519,7 +510,7 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
-  )
+)
 
 (defun dotspacemacs/user-load ()
   "Library to load while dumping.
@@ -529,44 +520,46 @@ dump."
   )
 
 (defun dotspacemacs/user-config ()
-  ;; Generic Emacs stuff
+  "Configuration for user code:
+This function is called at the very end of Spacemacs startup, after layer
+configuration.
+Put your configuration code here, except for variables that should be set
+before packages are loaded."
+  ;; Set User name and email address
   (setq user-full-name "Shad Kaske"
-        user-mail-address "kaskshad@showplacewood.com")
-  (setq x-select-enable-clipboard nil)
-  (setq confirm-kill-emacs nil)
-  (setq frame-resize-pixelwise t)
+        user-mail-address "skaske@showplacewood.com")
 
-  ;; Org Mode Settings
-  (with-eval-after-load 'org
-    (add-hook 'org-capture-mode-hook 'evil-insert-state))
+  ;; Turn off the x clipboard manager
+  (setq x-select-enable-clipboard-manager nil)
 
-  ;; Mu4e Config
-  (setq mu4e-installation-path              "/usr/share/emacs/site-lisp"
-        mu4e-maildir                        "~/Mail/kaskshad-showplace"
-        mu4e-trash-folder                   "/Deleted Items"
-        mu4e-refile-folder                  "/Archive"
-        mu4e-drafts-folder                  "/Drafts"
-        mu4e-sent-folder                    "/Sent Items"
-        mu4e-get-mail-command               "mbsync -a"
-        mu4e-update-interval                nil
+  ;; mu4e
+  (setq mu4e-maidir "~/Mail/kaskshad-showplace"
+        mu4e-trash-folder "/Deleted Items"
+        mu4e-refile-folder "/Archive"
+        mu4e-drafts-folder "/Drafts"
+        mu4e-sent-folder "/Sent Items"
+        mu4e-get-mail-command "mbsync -a"
+        mu4e-update-interval 300
         mu4e-compose-signature-auto-include nil
-        nu4e-view-show-images               t
-        mu4e-view-show-addresses            t
-        mu4e-change-filenames-when-moving   t)
+        mu4e-index-update-in-background t
+        mu4e-use-fancy-chars t
+        mu4e-compose-format-flowed t
+        mu4e-view-show-images t
+        mu4e-view-show-addresses t
+        mu4e-change-filenames-when-moving t
+        mu4e-confirm-quit nil
+        mu4e-maildir-shortcuts
+        '(("/INBOX" . ?i)
+          ("/Archive" . ?a)
+          ("/Drafts" . ?d)
+          ("/Deleted Items" . ?t)
+          ("/Sent Items" . ?s)))
 
-  (with-eval-after-load 'mu4e-alert
-    (mu4e-alert-set-default-style 'notifications))
+  ;; Org Mode Configuration
+  (with-eval-after-load 'org
+    (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
 
-  (setq smtpmail-default-smtp-server "smtp.office365.com")
-  (require 'smtpmail)
-
-  (setq send-mail-function 'smtpmail-send-it
-        message-send-mail-function 'smtpmail-send-it
-        smtpmail-smtp-server "smtp.office365.com"
-        smtpmail-smtp-service 587
-        smtpmail-stream-type 'starttls)
-
-  )
+ )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
@@ -580,29 +573,9 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   '("77113617a0642d74767295c4408e17da3bfd9aa80aaa2b4eeb34680f6172d71a" "7922b14d8971cce37ddb5e487dbc18da5444c47f766178e5a4e72f90437c0711" "d2e0c53dbc47b35815315fae5f352afd2c56fa8e69752090990563200daae434" "d9646b131c4aa37f01f909fbdd5a9099389518eb68f25277ed19ba99adeb7279" "c560237b7505f67a271def31c706151afd7aa6eba9f69af77ec05bde5408dbcd" "e6df46d5085fde0ad56a46ef69ebb388193080cc9819e2d6024c9c6e27388ba9" "c48551a5fb7b9fc019bf3f61ebf14cf7c9cdca79bcb2a4219195371c02268f11" default))
  '(evil-want-Y-yank-to-eol nil)
- '(hl-todo-keyword-faces
-   '(("TODO" . "#dc752f")
-     ("NEXT" . "#dc752f")
-     ("THEM" . "#2d9574")
-     ("PROG" . "#4f97d7")
-     ("OKAY" . "#4f97d7")
-     ("DONT" . "#f2241f")
-     ("FAIL" . "#f2241f")
-     ("DONE" . "#86dc2f")
-     ("NOTE" . "#b1951d")
-     ("KLUDGE" . "#b1951d")
-     ("HACK" . "#b1951d")
-     ("TEMP" . "#b1951d")
-     ("FIXME" . "#dc752f")
-     ("XXX+" . "#dc752f")
-     ("\\?\\?\\?+" . "#dc752f")))
- '(linum-format " %7i ")
  '(package-selected-packages
-   '(doom-modeline shrink-path zenburn-theme zen-and-art-theme white-sand-theme underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme toxi-theme tao-theme tangotango-theme tango-plus-theme tango-2-theme sunny-day-theme sublime-themes subatomic256-theme subatomic-theme spacegray-theme soothe-theme solarized-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme seti-theme reverse-theme rebecca-theme railscasts-theme purple-haze-theme professional-theme planet-theme phoenix-dark-pink-theme phoenix-dark-mono-theme organic-green-theme omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme noctilux-theme naquadah-theme mustang-theme monokai-theme monochrome-theme molokai-theme moe-theme modus-vivendi-theme modus-operandi-theme minimal-theme material-theme majapahit-theme madhat2r-theme lush-theme light-soap-theme kaolin-themes jbeans-theme jazz-theme ir-black-theme inkpot-theme heroku-theme hemisu-theme hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme gandalf-theme flatui-theme flatland-theme farmhouse-theme eziam-theme exotica-theme evil-commentary espresso-theme dracula-theme doom-themes django-theme darktooth-theme darkokai-theme darkmine-theme darkburn-theme dakrone-theme cyberpunk-theme color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized clues-theme chocolate-theme autothemer cherry-blossom-theme busybee-theme bubbleberry-theme birds-of-paradise-plus-theme badwolf-theme apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes afternoon-theme unfill systemd mwim mu4e-maildirs-extension mu4e-alert helm-mu flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip company-lua lua-mode auto-dictionary yasnippet-snippets treemacs-magit smeargle orgit org-rich-yank org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-cliplink org-brain mmm-mode markdown-toc magit-svn magit-section magit-gitflow magit-popup htmlize helm-org-rifle helm-gitignore helm-git-grep helm-company helm-c-yasnippet gnuplot gitignore-templates gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy forge markdown-mode magit ghub closql emacsql-sqlite emacsql treepy git-commit with-editor transient evil-org company auto-yasnippet yasnippet ac-ispell auto-complete ws-butler writeroom-mode winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil toc-org symon symbol-overlay string-inflection spaceline-all-the-icons restart-emacs request rainbow-delimiters popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless move-text macrostep lorem-ipsum link-hint indent-guide hybrid-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-ls-git helm-flx helm-descbinds helm-ag google-translate golden-ratio font-lock+ flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav editorconfig dumb-jump dotenv-mode dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile aggressive-indent ace-link ace-jump-helm-line))
- '(paradox-github-token t))
+   '(mu4e-maildirs-extension mu4e-alert helm-mu yasnippet-snippets unfill treemacs-magit smeargle orgit org-rich-yank org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-cliplink org-brain mwim mmm-mode markdown-toc magit-svn magit-section magit-gitflow magit-popup lsp-ui lsp-treemacs lsp-origami origami htmlize helm-org-rifle helm-lsp lsp-mode dash-functional helm-gitignore helm-git-grep helm-company helm-c-yasnippet gnuplot gitignore-templates gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy forge markdown-mode magit ghub closql emacsql-sqlite emacsql treepy git-commit with-editor transient flycheck-pos-tip pos-tip evil-org company auto-yasnippet yasnippet ac-ispell auto-complete ws-butler writeroom-mode winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil toc-org symon symbol-overlay string-inflection spaceline-all-the-icons restart-emacs request rainbow-delimiters popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless move-text macrostep lorem-ipsum link-hint indent-guide hybrid-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-ls-git helm-flx helm-descbinds helm-ag google-translate golden-ratio font-lock+ flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav editorconfig dumb-jump dotenv-mode dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile aggressive-indent ace-link ace-jump-helm-line)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

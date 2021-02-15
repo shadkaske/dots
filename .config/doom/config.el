@@ -114,11 +114,11 @@
   (setq org-log-into-drawer t))
 
 ;;;; Disable Electric Indent Mode
-;; (add-hook! org-mode (electric-indent-local-mode -1))
+(add-hook! org-mode (electric-indent-local-mode -1))
 
 ;;;; Use Variable Pitch Fonts in Org Mode
-(add-hook! org-mode :append
-           #'variable-pitch-mode)
+;; (add-hook! org-mode :append
+;;            #'variable-pitch-mode 1)
 
 ;;;; Archiving
 (use-package! org-archive
@@ -139,11 +139,11 @@
          entry (file "~/Nextcloud/org/inbox.org")
                 "* TODO %?\n")
         ("T" "Tickler"
-         entry (file+headline "~/Nextcloud/org/tickler.org" "Reminders")
+         entry (file "~/Nextcloud/org/tickler.org")
                 "* TODO %i%? \nSCHEDULED: <%(org-read-date nil nil \"+1d\")>")
         ("e" "Email [Inbox]"
          entry (file "~/Nextcloud/org/inbox.org")
-                "* TODO %? \n %a\n")))
+                "* TODO %?\n%U\n%a\n")))
 
 ;;;; Org Refiler Targets
 (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))

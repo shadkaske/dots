@@ -427,7 +427,7 @@ globalkeys = gears.table.join(
               {description = "Virt-Manager", group = "applications"}),
 
     -- Lazy Git Dots
-    awful.key({ modkey, "Control" }, "l", function() awful.spawn("lazygit-dots") end,
+    awful.key({ modkey, "Control" }, "d", function() awful.spawn("lazygit-dots") end,
               {description = "Dot Files Manager", group = "applications"})
 
 )

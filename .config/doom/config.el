@@ -111,52 +111,44 @@
 (after! org (setq org-hide-emphasis-markers t)
   ;;;; Turn On Logging
   (setq org-log-done t)
-  (setq org-log-into-drawer t))
+  (setq org-log-into-drawer t)
+  ;;  Org ToDo Keywords
+  (setq org-todo-keywords '((sequence
+                             "TODO(t!)" "NEXT(n!)" "WAITING(w!)" "|" "DONE(d!)" "CANCELLED(c!)")))
+  ;;  Org Todo Keywords Colors
+  (setq org-todo-keyword-faces '(("TODO" . "IndianRed")
+                                 ("NEXT" . "DarkOrange")
+                                 ("WAITING" . "DimGray")
+                                 ("DONE" . "OliveDrab")
+                                 ("CANCELLED" . "MediumPurple")))
+  ;;;; Org Agenda Files
+  (setq org-agenda-files '("~/Nextcloud/org/inbox.org"
+                          "~/Nextcloud/org/projects.org"
+                          "~/Nextcloud/org/tickler.org"
+                          "~/Nextcloud/org/cal/googlecal.org"
+                          "~/Nextcloud/org/cal/showplacecal.org"))
+  ;;;; Org Capture Templates
+  (setq org-capture-templates
+        '(("t" "ToDo [Inbox]"
+           entry (file "~/Nextcloud/org/inbox.org")
+                  "* TODO %?\n")
+          ("T" "Tickler"
+           entry (file "~/Nextcloud/org/tickler.org")
+                  "* TODO %i%? \nSCHEDULED: <%(org-read-date nil nil \"+1d\")>")
+          ("e" "Email [Inbox]"
+           entry (file "~/Nextcloud/org/inbox.org")
+                  "* TODO %?\n%U\n%a\n")))
+  ;;;; Org Refiler Targets
+  (setq org-refile-targets '((org-agenda-files :maxlevel . 3))))
 
 ;;;; Disable Electric Indent Mode
 (add-hook! org-mode (electric-indent-local-mode -1))
-
-;;;; Use Variable Pitch Fonts in Org Mode
-;; (add-hook! org-mode :append
-;;            #'variable-pitch-mode 1)
 
 ;;;; Archiving
 (use-package! org-archive
   :after org
   :config
   (setq org-archive-location "archive.org::datetree/"))
-
-;;;; Org Agenda Files
-(setq org-agenda-files '("~/Nextcloud/org/inbox.org"
-                        "~/Nextcloud/org/projects.org"
-                        "~/Nextcloud/org/tickler.org"
-                        "~/Nextcloud/org/cal/googlecal.org"
-                        "~/Nextcloud/org/cal/showplacecal.org"))
-
-;;;; Org Capture Templates
-(setq org-capture-templates
-      '(("t" "ToDo [Inbox]"
-         entry (file "~/Nextcloud/org/inbox.org")
-                "* TODO %?\n")
-        ("T" "Tickler"
-         entry (file "~/Nextcloud/org/tickler.org")
-                "* TODO %i%? \nSCHEDULED: <%(org-read-date nil nil \"+1d\")>")
-        ("e" "Email [Inbox]"
-         entry (file "~/Nextcloud/org/inbox.org")
-                "* TODO %?\n%U\n%a\n")))
-
-;;;; Org Refiler Targets
-(setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
-
-"  Org ToDo Keywords"
-(setq org-todo-keywords '((sequence "TODO(t!)" "NEXT(n!)" "WAITING(w!)" "|" "DONE(d!)" "CANCELLED(c!)")))
-
-"  Org Todo Keywords Colors"
-(setq org-todo-keyword-faces '(("TODO" . "IndianRed")
-                                ("NEXT" . "DarkOrange")
-                                ("WAITING" . "DimGray")
-                                ("DONE" . "OliveDrab")
-                                ("CANCELLED" . "MediumPurple")))
 
 ;; NeoTree
 (after! neotree
@@ -168,3 +160,6 @@
 ;; (setq centaur-tabs-close-button nil)
 
 ;; Dired
+
+;; LSP Settings
+(setq lsp-file-watch-threshold nil)

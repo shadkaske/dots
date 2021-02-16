@@ -175,3 +175,10 @@
 
 ;; LSP Settings
 (setq lsp-file-watch-threshold nil)
+
+;; Company Mode Settings
+(set-company-backend! 'org-mode '(company-yasnippet company-capf company-files company-elisp))
+(set-company-backend! 'emacs-lisp-mode '(company-yasnippet company-elisp))
+(setq company-idle-delay 0.25
+      company-minimum-prefix-length 2)
+(add-to-list 'company-backends '(company-capf company-files company-yasnippet company-semantic company-bbdb company-cmake company-keywords))

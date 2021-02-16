@@ -46,12 +46,12 @@
     :m "[ SPC" #'evil-motion-insert-newline-after))
 
 ;;;; Evil Mode Simplified Navigation
-(map!
- (:after evil
-   :en "C-h"   #'evil-window-left
-   :en "C-j"   #'evil-window-down
-   :en "C-k"   #'evil-window-up
-   :en "C-l"   #'evil-window-right))
+;; (map!
+;;  (:after evil
+;;    :en "C-h"   #'evil-window-left
+;;    :en "C-j"   #'evil-window-down
+;;    :en "C-k"   #'evil-window-up
+;;    :en "C-l"   #'evil-window-right))
 
 ;; mu4e
 (remove-hook! 'mu4e-compose-pre-hook #'org-msg-mode)
@@ -65,7 +65,7 @@
         mu4e-view-show-images t
         mu4e-compose-format-flowed t
         ;mu4e-compose-in-new-frame t
-        mu4e-change-filenames-when-moving t ;; http://pragmaticemacs.com/emacs/fixing-duplicate-uid-errors-when-using-mbsync-and-mu4e/
+        mu4e-change-filenames-when-moving nil ;; Setting this to true causes issues tracking refiled emails that are link from org docs
         mu4e-maildir-shortcuts
         '( ("/Inbox" . ?i)
             ("/Archive" . ?a)
@@ -108,7 +108,8 @@
 (add-hook! 'org-mode-hook #'doom-disable-line-numbers-h)
 
 ;;;; Hide Emphasis Markers
-(after! org (setq org-hide-emphasis-markers t)
+(after! org
+  (setq org-hide-emphasis-markers t)
   ;;;; Turn On Logging
   (setq org-log-done t)
   (setq org-log-into-drawer t)
@@ -133,13 +134,20 @@
            entry (file "~/Nextcloud/org/inbox.org")
                   "* TODO %?\n")
           ("T" "Tickler"
-           entry (file "~/Nextcloud/org/tickler.org")
+           entry (file+headline "~/Nextcloud/org/tickler.org" "Ticklers")
                   "* TODO %i%? \nSCHEDULED: <%(org-read-date nil nil \"+1d\")>")
+          ("P" "New Project"
+           entry (file+headline "~/Nextcloud/org/projects.org" "Projects")
+                  "* [%] %i%? ")
           ("e" "Email [Inbox]"
            entry (file "~/Nextcloud/org/inbox.org")
-                  "* TODO %?\n%U\n%a\n")))
+           "* TODO %?\n%U\n%a\n")
+          ("f" "Link File [Inbox]"
+           entry (file "~/Nextcloud/org/inbox.org")
+           "* TODO %?\n %A\n")))
   ;;;; Org Refiler Targets
-  (setq org-refile-targets '((org-agenda-files :maxlevel . 3))))
+  (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
+  (advice-add 'org-refile :after 'org-save-all-org-buffers))
 
 ;;;; Disable Electric Indent Mode
 (add-hook! org-mode (electric-indent-local-mode -1))

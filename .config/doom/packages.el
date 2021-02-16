@@ -15,6 +15,7 @@
 (package! dired-open)
 (package! peep-dired)
 (package! mu4e-alert)
+(package! org-appear :recipe (:host github :repo "awth13/org-appear"))
 
 ;; To install a package directly from a remote git repo, you must specify a
 ;; `:recipe'. You'll find documentation on what `:recipe' accepts here:

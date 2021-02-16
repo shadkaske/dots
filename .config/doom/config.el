@@ -158,6 +158,10 @@
   :config
   (setq org-archive-location "archive.org::datetree/"))
 
+;;;; Org Appear Mode - Show emphasis markers on cursor
+(add-hook! 'org-mode-hook #'org-appear-mode)
+(setq org-appear-autolinks t)
+
 ;; NeoTree
 (after! neotree
     (setq neo-smart-open t

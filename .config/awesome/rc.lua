@@ -705,7 +705,8 @@ run_once({
     "xfce4-screensaver",
     "onedrive monitor",
     "/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1",
-    "udevadm monitor"
+    "udevadm monitor",
+    "nexcloud --background"
 }) -- entries must be separated by commas
 
 set_wallpaper()

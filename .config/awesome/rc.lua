@@ -54,7 +54,7 @@ beautiful.init(gears.filesystem.get_themes_dir() .. "gtk/theme.lua")
 terminal = "x-terminal-emulator"
 editor = os.getenv("EDITOR") or "editor"
 editor_cmd = terminal .. " -e " .. editor
-emacs_cmd = "emacs"
+emacs_cmd = "emacsclient -c -a emacs"
 
 -- My Application Variables
 background = "feh --bg-fill --randomize ~/.local/share/backgrounds/*"

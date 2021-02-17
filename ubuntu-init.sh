@@ -69,3 +69,6 @@ sudo apt install lazygit --yes
 # Check if Base16-Shell is Installed
 [ ! -d $HOME/.config/base16-shell ] && git clone https://github.com/chriskempson/base16-shell.git \
     $HOME/.config/base16-shell
+
+# Setting up dot files
+# stow --adopt *

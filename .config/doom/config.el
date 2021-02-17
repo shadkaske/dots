@@ -65,7 +65,7 @@
         mu4e-view-show-images t
         mu4e-compose-format-flowed t
         ;mu4e-compose-in-new-frame t
-        mu4e-change-filenames-when-moving nil ;; Setting this to true causes issues tracking refiled emails that are link from org docs
+        mu4e-change-filenames-when-moving t ;; Setting this to true causes issues tracking refiled emails that are link from org docs
         mu4e-maildir-shortcuts
         '( ("/Inbox" . ?i)
             ("/Archive" . ?a)
@@ -98,6 +98,7 @@
 
 (mu4e-alert-set-default-style 'libnotify)
 (add-hook 'after-init-hook #'mu4e-alert-enable-notifications)
+(setq mu4e-compose-format-flowed t)
 
 ;; Org Mode
 ;;;; Doom Emacs Org Settings
@@ -147,7 +148,18 @@
            "* TODO %?\n %A\n")))
   ;;;; Org Refiler Targets
   (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
-  (advice-add 'org-refile :after 'org-save-all-org-buffers))
+  (advice-add 'org-refile :after 'org-save-all-org-buffers)
+  (setq org-ellipsis "  ▼")
+  (setq org-superstar-headline-bullets-list '("◉" "○" "●" "○" "●" "○" "●"))
+  (dolist (face '((org-level-1 . 1.2)
+                  (org-level-2 . 1.1)
+                  (org-level-3 . 1.05)
+                  (org-level-4 . 1.0)
+                  (org-level-5 . 0.9)
+                  (org-level-6 . 0.85)
+                  (org-level-7 . 0.8)
+                  (org-level-8 . 0.75))))
+  )
 
 ;;;; Disable Electric Indent Mode
 (add-hook! org-mode (electric-indent-local-mode -1))
@@ -179,6 +191,7 @@
 ;; Company Mode Settings
 (set-company-backend! 'org-mode '(company-yasnippet company-capf company-files company-elisp))
 (set-company-backend! 'emacs-lisp-mode '(company-yasnippet company-elisp))
+(set-company-backend! 'mu4e-compose-edit '(company-mu))
 (setq company-idle-delay 0.25
-      company-minimum-prefix-length 2)
+      company-minimum-prefix-length 3)
 (add-to-list 'company-backends '(company-capf company-files company-yasnippet company-semantic company-bbdb company-cmake company-keywords))

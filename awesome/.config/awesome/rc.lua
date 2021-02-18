@@ -703,7 +703,7 @@ run_once({
     "xfce4-clipman",
     "unclutter -root",
     "xfce4-screensaver",
-    "onedrive monitor",
+    -- "onedrive monitor",
     "/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1",
     "udevadm monitor",
     "nexcloud --background"

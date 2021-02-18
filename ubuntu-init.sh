@@ -97,7 +97,8 @@ git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
 $HOME/.emacs.d/bin/doom sync
 
 # Install apps
-sudo apt install --yes kitty awesome dunst neovim ranger rofi
+sudo apt install --yes kitty awesome dunst neovim ranger rofi volumeicon-alsa \
+    xfce4-clipman unclutter nextcloud-desktop
 
 # Set Up Neovim
 nvim -u $HOME/.config/nvim/plugins.vim +PlugInstall +qall

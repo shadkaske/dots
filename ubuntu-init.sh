@@ -87,7 +87,7 @@ mkdir "${HOME}/.npm-global"
 npm config set prefix "${HOME}/.npm-global"
 
 # Install Python Bits
-pip3 install black pyflakes isort pipenv nose pytest
+pip3 install black pyflakes isort pipenv nose pytest neovim neovim-remote
 
 # Mark Down Compiler
 npm install --global markdownlint marked js-beautify stylelint
@@ -99,4 +99,5 @@ $HOME/.emacs.d/bin/doom sync
 # Install apps
 sudo apt install --yes kitty awesome dunst neovim
 
+# Set Up Neovim
 nvim -u $HOME/.config/nvim/plugins.vim +PlugInstall +qall

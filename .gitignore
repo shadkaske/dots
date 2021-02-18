@@ -1,2 +1,3 @@
 .config/nvim/autoload/plug.vim.old
-.dots
+fonts/.local/share/fonts/.uuid
+

@@ -16,3 +16,5 @@ bin/.local/bin/pyflakes
 bin/.local/bin/pytest
 bin/.local/bin/virtualenv
 bin/.local/bin/virtualenv-clone
+nvim/.config/nvim/autoload/plug.vim
+nvim/.config/nvim/plugged/

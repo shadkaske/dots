@@ -79,8 +79,12 @@ fc-cache -f
 git clone https://github.com/lcpz/lain.git $HOME/.config/awesome/lain
 
 # Doom PreReqs
-sudo apt install ripgrep silversearcher-ag fd-find build-essential cmake libtool-bin --yes
+sudo apt install --yes ripgrep silversearcher-ag fd-find build-essential cmake \
+    libtool-bin isync mu4e xapian-tools nodejs npm
 
 # Doom Install
 git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
 $HOME/.emacs.d/bin/doom sync
+
+# Install apps
+sudo apt install --yes kitty

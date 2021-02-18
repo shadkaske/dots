@@ -78,3 +78,7 @@ fc-cache -f
 
 # Clone lain repo for awesome
 git clone https://github.com/lcpz/lain.git $HOME/.config/awesome/lain
+
+# Doom Install
+git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
+$HOME/.emacs.d/doom sync

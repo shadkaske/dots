@@ -98,7 +98,7 @@ $HOME/.emacs.d/bin/doom sync
 
 # Install apps
 sudo apt install --yes kitty awesome dunst neovim ranger rofi volumeicon-alsa \
-    xfce4-clipman unclutter nextcloud-desktop
+    xfce4-clipman unclutter nextcloud-desktop lxappearance breeze-cursor-theme
 
 # Set Up Neovim
 nvim -u $HOME/.config/nvim/plugins.vim +PlugInstall +qall

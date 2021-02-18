@@ -97,4 +97,4 @@ git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
 $HOME/.emacs.d/bin/doom sync
 
 # Install apps
-sudo apt install --yes kitty awesome
+sudo apt install --yes kitty awesome dunst

@@ -51,8 +51,7 @@ sudo apt install lazygit --yes
     $HOME/.oh-my-zsh
 
 # Make sure fzf is installed
-[ ! -d $HOME/.fzf ] && git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && \
-    $HOME/.fzf/install --no-fish --all
+[ ! -d $HOME/.fzf ] && git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 
 # Check if the PowerLevel10k Plugin is install
 [ ! -d $HOME/.oh-my-zsh/custom/themes/powerlevel10k ] && git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \
@@ -79,6 +78,9 @@ fc-cache -f
 # Clone lain repo for awesome
 git clone https://github.com/lcpz/lain.git $HOME/.config/awesome/lain
 
+# Doom PreReqs
+sudo apt install ripgrep silversearcher-ag fd-find build-essential cmake libtool-bin --yes
+
 # Doom Install
 git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
-$HOME/.emacs.d/doom sync
+$HOME/.emacs.d/bin/doom sync

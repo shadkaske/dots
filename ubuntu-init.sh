@@ -97,7 +97,7 @@ git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
 $HOME/.emacs.d/bin/doom sync
 
 # Install apps
-sudo apt install --yes kitty awesome dunst neovim
+sudo apt install --yes kitty awesome dunst neovim ranger rofi
 
 # Set Up Neovim
 nvim -u $HOME/.config/nvim/plugins.vim +PlugInstall +qall
@@ -117,3 +117,9 @@ pip3 install --user meson
 git clone https://github.com/jonaburg/picom $HOME/Downloads/picom
 cd $HOME/Downloads/picom
 git submodule update --init --recursive
+meson configure -Dprefix=$HOME/.local/ build
+ninja -C build
+ninja -C build install
+
+# Clone Ranger Dev Icons Plugin
+git clone https://github.com/alexanderjeurissen/ranger_devicons ~/.config/ranger/plugins/ranger_devicons

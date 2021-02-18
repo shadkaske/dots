@@ -83,11 +83,11 @@ sudo apt install --yes ripgrep silversearcher-ag fd-find build-essential cmake \
     libtool-bin isync mu4e xapian-tools nodejs npm jq
 
 # Set Up Npm for Local Install
-mkdir "${HOME}/.npm-packages"
-npm config set prefix "${HOME}/.npm-packages"
+mkdir "${HOME}/.npm-global"
+npm config set prefix "${HOME}/.npm-global"
 
 # Mark Down Compiler
-npm install --global markdownlint
+npm install --global markdownlint marked
 
 # Doom Install
 git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d

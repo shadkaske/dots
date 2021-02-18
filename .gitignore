@@ -20,3 +20,12 @@ nvim/.config/nvim/autoload/plug.vim
 nvim/.config/nvim/plugged/
 
 bin/.local/bin/nvr
+bin/.local/bin/meson
+bin/.local/bin/share/applications/compton.desktop
+bin/.local/bin/share/applications/picom.desktop
+bin/.local/bin/share/icons/hicolor/48x48/apps/compton.png
+bin/.local/bin/share/icons/hicolor/scalable/apps/compton.svg
+bin/.local/bin/compton
+bin/.local/bin/compton-trans
+bin/.local/bin/picom
+bin/.local/bin/picom-trans

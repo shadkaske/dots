@@ -101,3 +101,19 @@ sudo apt install --yes kitty awesome dunst neovim
 
 # Set Up Neovim
 nvim -u $HOME/.config/nvim/plugins.vim +PlugInstall +qall
+
+# Setup picom
+# Build Bits
+sudo apt install --yes libxext-dev libxcb1-dev libxcb-damage0-dev \
+    libxcb-xfixes0-dev libxcb-shape0-dev libxcb-render-util0-dev libxcb-render0-dev \
+    libxcb-randr0-dev libxcb-composite0-dev libxcb-image0-dev libxcb-present-dev \
+    libxcb-xinerama0-dev libxcb-glx0-dev libpixman-1-dev libdbus-1-dev libconfig-dev \
+    libgl1-mesa-dev  libpcre2-dev  libevdev-dev uthash-dev libev-dev libx11-xcb-dev \
+    python3-setuptools python3-wheel ninja-build
+
+# Meson
+pip3 install --user meson
+
+git clone https://github.com/jonaburg/picom $HOME/Downloads/picom
+cd $HOME/Downloads/picom
+git submodule update --init --recursive

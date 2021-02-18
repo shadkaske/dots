@@ -80,11 +80,18 @@ git clone https://github.com/lcpz/lain.git $HOME/.config/awesome/lain
 
 # Doom PreReqs
 sudo apt install --yes ripgrep silversearcher-ag fd-find build-essential cmake \
-    libtool-bin isync mu4e xapian-tools nodejs npm
+    libtool-bin isync mu4e xapian-tools nodejs npm jq
+
+# Set Up Npm for Local Install
+mkdir "${HOME}/.npm-packages"
+npm config set prefix "${HOME}/.npm-packages"
+
+# Mark Down Compiler
+npm install --global markdownlint
 
 # Doom Install
 git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
 $HOME/.emacs.d/bin/doom sync
 
 # Install apps
-sudo apt install --yes kitty
+sudo apt install --yes kitty awesome

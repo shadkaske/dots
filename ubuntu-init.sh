@@ -72,3 +72,9 @@ sudo apt install lazygit --yes
 
 # Setting up dot files
 # stow --adopt *
+
+# Update the Font Cache
+fc-cache -f
+
+# Clone lain repo for awesome
+git clone https://github.com/lcpz/lain.git $HOME/.config/awesome/lain

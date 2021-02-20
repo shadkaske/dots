@@ -8,8 +8,8 @@
 (setq confirm-kill-emacs nil)
 
 ;; Disable Clipboard Selection and Manager
-(setq select-enable-clipboard nil
-    x-select-enable-clipboard-manager nil)
+;; (setq select-enable-clipboard nil
+;;     x-select-enable-clipboard-manager nil)
 
 ;; Theme Settings
 (setq doom-theme 'doom-material)
@@ -116,36 +116,64 @@
   (setq org-log-into-drawer t)
   ;;  Org ToDo Keywords
   (setq org-todo-keywords '((sequence
-                             "TODO(t!)" "NEXT(n!)" "WAITING(w!)" "|" "DONE(d!)" "CANCELLED(c!)")))
+                             "TODO(t)" "NEXT(n)" "WAITING(w)" "|" "DONE(d!)" "CANC(k!)")
+                            (sequence
+                             "ACTIVE(a)" "PLAN(p)" "HOLD(h)" "|" "COMPLETE(c!)" )))
   ;;  Org Todo Keywords Colors
-  (setq org-todo-keyword-faces '(("TODO" . "IndianRed")
+  (setq org-todo-keyword-faces '(("TODO" . "DarkCyan")
                                  ("NEXT" . "DarkOrange")
                                  ("WAITING" . "DimGray")
-                                 ("DONE" . "OliveDrab")
-                                 ("CANCELLED" . "MediumPurple")))
+                                 ("ACTIVE" . "LightCoral")
+                                 ("PLAN" . "BlanchedAlmond")
+                                 ("HOLD" . "DimGray")))
   ;;;; Org Agenda Files
   (setq org-agenda-files '("~/Nextcloud/org/inbox.org"
                           "~/Nextcloud/org/projects.org"
                           "~/Nextcloud/org/tickler.org"
                           "~/Nextcloud/org/cal/googlecal.org"
                           "~/Nextcloud/org/cal/showplacecal.org"))
+
   ;;;; Org Capture Templates
   (setq org-capture-templates
         '(("t" "ToDo [Inbox]"
            entry (file "~/Nextcloud/org/inbox.org")
                   "* TODO %?\n")
           ("T" "Tickler"
-           entry (file+headline "~/Nextcloud/org/tickler.org" "Ticklers")
+           entry (file "~/Nextcloud/org/tickler.org")
                   "* TODO %i%? \nSCHEDULED: <%(org-read-date nil nil \"+1d\")>")
           ("P" "New Project"
-           entry (file+headline "~/Nextcloud/org/projects.org" "Projects")
-                  "* [%] %i%? ")
+           entry (file "~/Nextcloud/org/projects.org")
+                  "* %i%? ")
           ("e" "Email [Inbox]"
            entry (file "~/Nextcloud/org/inbox.org")
            "* TODO %?\n%U\n%a\n")
           ("f" "Link File [Inbox]"
            entry (file "~/Nextcloud/org/inbox.org")
            "* TODO %?\n %A\n")))
+
+  ;;;; Org Agenda Views
+  (setq org-agenda-custom-commands
+        '(("d" "Dashboard"
+           ((agenda "" ((org-deadline-warning-days 7)))
+            (todo "NEXT"
+                  ((org-agenda-overriding-header "Next Task")))
+            (todo "ACTIVE" ((org-agenda-overriding-header "Active Projects")))))
+          ))
+
+  ;;;; Org Tag Settings
+  (setq org-tags-column -80)
+
+  (setq org-tag-alist '((:startgroup . nil)
+                        ("@work" . ?w)
+                        ("@home" . ?h)
+                        ("@errands" . ?e)
+                        ("@email" . ?@)
+                        ("@dev" . ?d)
+                        (:endgroup . nil)
+                        ("chad" . ?c)
+                        ("andy" . ?a)
+                        ("travis" . ?t)))
+
   ;;;; Org Refiler Targets
   (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
   (advice-add 'org-refile :after 'org-save-all-org-buffers)
@@ -158,8 +186,7 @@
                   (org-level-5 . 0.9)
                   (org-level-6 . 0.85)
                   (org-level-7 . 0.8)
-                  (org-level-8 . 0.75))))
-  )
+                  (org-level-8 . 0.75)))))
 
 ;;;; Disable Electric Indent Mode
 (add-hook! org-mode (electric-indent-local-mode -1))
@@ -170,9 +197,23 @@
   :config
   (setq org-archive-location "archive.org::datetree/"))
 
+;;;; Visual Fill Column Mode
+(defun smk/org-mode-visual-fill ()
+  (setq visual-fill-column-width 120
+        visual-fill-column-center-text t)
+  (visual-fill-column-mode 1))
+
+(use-package! visual-fill-column
+  :hook (org-mode . smk/org-mode-visual-fill))
+
 ;;;; Org Appear Mode - Show emphasis markers on cursor
 (add-hook! 'org-mode-hook #'org-appear-mode)
 (setq org-appear-autolinks t)
+
+;;;; Org Alerts
+(use-package org-alert)
+(setq alert-default-style 'libnotify)
+(org-alert-enable)
 
 ;; NeoTree
 (after! neotree
@@ -191,7 +232,7 @@
 ;; Company Mode Settings
 (set-company-backend! 'org-mode '(company-yasnippet company-capf company-files company-elisp))
 (set-company-backend! 'emacs-lisp-mode '(company-yasnippet company-elisp))
-(set-company-backend! 'mu4e-compose-edit '(company-mu))
+;; (set-company-backend! 'mu4e-compose-edit '(company-mu company-yasnippet))
 (setq company-idle-delay 0.25
       company-minimum-prefix-length 3)
 (add-to-list 'company-backends '(company-capf company-files company-yasnippet company-semantic company-bbdb company-cmake company-keywords))

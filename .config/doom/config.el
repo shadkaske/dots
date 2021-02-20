@@ -151,8 +151,17 @@
            entry (file "~/Nextcloud/org/inbox.org")
            "* TODO %?\n %A\n")))
 
+  ;;;; Org Agenda Views
+  (setq org-agenda-custom-commands
+        '(("d" "Dashboard"
+           ((agenda "" ((org-deadline-warning-days 7)))
+            (todo "NEXT"
+                  ((org-agenda-overriding-header "Next Task")))
+            (todo "ACTIVE" ((org-agenda-overriding-header "Active Projects")))))
+          ))
+
   ;;;; Org Tag Settings
-  (setq org-tags-column -100)
+  (setq org-tags-column -80)
 
   (setq org-tag-alist '((:startgroup . nil)
                         ("@work" . ?w)
@@ -200,6 +209,11 @@
 ;;;; Org Appear Mode - Show emphasis markers on cursor
 (add-hook! 'org-mode-hook #'org-appear-mode)
 (setq org-appear-autolinks t)
+
+;;;; Org Alerts
+(use-package org-alert)
+(setq alert-default-style 'libnotify)
+(org-alert-enable)
 
 ;; NeoTree
 (after! neotree

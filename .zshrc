@@ -154,6 +154,9 @@ function dots {
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# Set FZF Options
+export FZF_COMPLETION_OPTS='--border --info=inline'
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Fix for systemd unit file completion

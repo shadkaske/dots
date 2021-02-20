@@ -17,6 +17,7 @@
 (package! mu4e-alert)
 (package! org-appear :recipe (:host github :repo "awth13/org-appear"))
 (package! visual-fill-column)
+(package! org-alert)
 
 ;; To install a package directly from a remote git repo, you must specify a
 ;; `:recipe'. You'll find documentation on what `:recipe' accepts here:

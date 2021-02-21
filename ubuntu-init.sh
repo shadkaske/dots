@@ -81,7 +81,7 @@ git clone https://github.com/lcpz/lain.git $HOME/.config/awesome/lain
 # Doom PreReqs
 sudo apt install --yes ripgrep silversearcher-ag fd-find build-essential cmake \
     libtool-bin isync mu4e xapian-tools nodejs npm jq python3-pip shellcheck \
-    msmtp
+    msmtp fonts-cantarell
 
 # Set Up Npm for Local Install
 mkdir "${HOME}/.npm-global"

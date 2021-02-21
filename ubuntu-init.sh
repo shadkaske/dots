@@ -1,6 +1,9 @@
 #!/bin/bash
 setxkbmap -option ctrl:nocaps
 
+# Set the directory for this script
+DOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
 # Gaming
 sudo dpkg --add-architecture i386
 
@@ -69,12 +72,6 @@ sudo apt install lazygit --yes
 [ ! -d $HOME/.config/base16-shell ] && git clone https://github.com/chriskempson/base16-shell.git \
     $HOME/.config/base16-shell
 
-# Setting up dot files
-# stow --adopt *
-
-# Update the Font Cache
-fc-cache -f
-
 # Clone lain repo for awesome
 git clone https://github.com/lcpz/lain.git $HOME/.config/awesome/lain
 
@@ -125,3 +122,20 @@ ninja -C build install
 
 # Clone Ranger Dev Icons Plugin
 git clone https://github.com/alexanderjeurissen/ranger_devicons ~/.config/ranger/plugins/ranger_devicons
+
+# Link config files
+# Make sure we are in the dotfiles directory
+cd $DOT_DIR
+
+# Loop through the directories here and stow them
+for f in *; do
+    if [ -d "$f" ]; then
+        stow "$f"
+    fi
+done
+
+# Now update the font cache
+fc-cache -f
+
+#change default shell
+chsh -s /bin/zsh $USER

@@ -3,240 +3,438 @@
 #+EMAIL: shadkaske@gmail.com
 #+LANGUAGE: en
 #+STARTUP: inlineimages
+#+PROPERTY: header-args:emacs-lisp :tangle ./config.el :mkdirp yes
 
-* Table of Contents :TOC_3_gh:
-- [[#configuration][Configuration]]
-  - [[#user-informaiton][User Informaiton]]
-    - [[#name-and-email-address][Name and Email Address]]
-  - [[#emacs-ui-settings][Emacs UI Settings]]
-    - [[#no-close-confirmation][No Close Confirmation]]
-    - [[#clipboard-settings][Clipboard Settings]]
+* Table of Contents :TOC_4_gh:
+- [[#doom-emacs][Doom Emacs]]
+  - [[#custom-functions][Custom Functions]]
+    - [[#set-buffer-to-variable-pitch-mode][Set Buffer To Variable Pitch Mode]]
+    - [[#set-visual-fill-columns-to-100][Set Visual Fill Columns to 100]]
+  - [[#basic-emacs-config][Basic Emacs Config]]
+    - [[#set-user-name][Set User Name]]
+    - [[#disable-exit-confirmation][Disable Exit Confirmation]]
+    - [[#disable-x-clipboard-sync-on-exit][Disable X Clipboard Sync on Exit]]
     - [[#theme-settings][Theme Settings]]
     - [[#font-settings][Font Settings]]
-    - [[#line-numbers][Line Numbers]]
-    - [[#line-spacing][Line Spacing]]
-    - [[#all-the-icons][All The Icons]]
-    - [[#highlight-trailing-whitespace][Highlight Trailing Whitespace]]
-  - [[#keybindinds][Keybindinds]]
-    - [[#global-keybinds][Global Keybinds]]
-    - [[#leader-keybinds][Leader Keybinds]]
-    - [[#convenience-keybinds][Convenience Keybinds]]
-  - [[#toolsapp][Tools/App]]
-    - [[#mu4e][mu4e]]
-    - [[#org-mode][Org-Mode]]
-    - [[#neotree][NeoTree]]
-  - [[#languages][Languages]]
+    - [[#use-relative-line-numbers][Use Relative Line Numbers]]
+    - [[#line-height-settings][Line Height Settings]]
+    - [[#all-the-icons-scale][All The Icons Scale]]
+    - [[#show-trailing-whitespace][Show Trailing Whitespace]]
+  - [[#custom-keybindings][Custom Keybindings]]
+  - [[#mu4e-settings][mu4e Settings]]
+    - [[#set-load-path-for-mu4e][Set Load Path for mu4e]]
+    - [[#accounts-and-basic-settings][Accounts and Basic Settings]]
+    - [[#mail-notifications][Mail Notifications]]
+  - [[#org-mode-settings][Org Mode Settings]]
+    - [[#set-org-directory][Set Org Directory]]
+    - [[#disable-line-numbers-in-org-mode][Disable Line Numbers in Org Mode]]
+    - [[#set-fonts-for-org-mode-buffers-to-variable-pitch][Set Fonts for Org Mode Buffers to Variable Pitch]]
+    - [[#set-up-after-org-settings][Set Up After Org Settings]]
+      - [[#hide-emphasis-markers][Hide emphasis markers]]
+      - [[#turn-on-logging][Turn On Logging]]
+      - [[#keywords][Keywords]]
+      - [[#agenda-files][Agenda Files]]
+      - [[#capture-templates][Capture Templates]]
+      - [[#custom-agenda-views][Custom Agenda Views]]
+      - [[#tags-display-column][Tags Display Column]]
+      - [[#tags-list][Tags List]]
+      - [[#refile-targets-max-level][Refile Targets Max Level]]
+      - [[#save-org-buffers-on-refile][Save Org Buffers on refile]]
+      - [[#set-org-ellipses][Set Org Ellipses]]
+      - [[#headline-bullets][Headline Bullets]]
+      - [[#custom-headings-height][Custom Headings Height]]
+      - [[#disable-electric-indent-mode][Disable Electric Indent Mode]]
+      - [[#set-up-org-archive][Set up Org Archive]]
+    - [[#use-visual-fill-column][Use Visual Fill Column]]
+    - [[#set-up-appear-mode][Set Up Appear Mode]]
+    - [[#notifications-for-org-items][Notifications for Org Items]]
+  - [[#neotree][Neotree]]
+  - [[#lsp-mode][LSP Mode]]
+    - [[#set-watch-threshhold-to-nil][Set watch threshhold to nil]]
+- [[#mbsysnc][Mbsysnc]]
+- [[#msmtp][Msmtp]]
 
-* Configuration
-** User Informaiton
-*** Name and Email Address
+* Doom Emacs
+** Custom Functions
+Small functions to group similar functionality together
 
-    #+BEGIN_SRC emacs-lisp
-    (setq user-full-name "Shad Kaske"
-        user-mail-address "shadkaske@gmail.com")
-    #+END_SRC
+*** Set Buffer To Variable Pitch Mode
+When used in a hook for a mode, it set the buffer variable pitch mode with the exception of the listed items that get set back to fixed
 
-** Emacs UI Settings
-*** No Close Confirmation
-    Don't bother me will a close confirmation
+#+begin_src emacs-lisp :tangle yes
 
-    #+begin_src emacs-lisp
-    (setq confirm-kill-emacs nil)
-    #+end_src
+(defun smk/set-buffer-variable-pitch ()
+  (interactive)
+  (variable-pitch-mode t)
+  (setq line-spacing 3)
+  (set-face-attribute 'org-table nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-link nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-code nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-block nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-date nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-special-keyword nil :inherit 'fixed-pitch))
 
-*** Clipboard Settings
-    I prefer to manage what gets jammed into my system clipboard thank you.
+#+end_src
 
-   #+begin_src emacs-lisp
-    (setq select-enable-clipboard nil
-        x-select-enable-clipboard-manager nil)
-   #+end_src
+*** Set Visual Fill Columns to 100
+Mostly used for org mode
 
+#+begin_src emacs-lisp :tangle yes
+
+(defun smk/org-mode-visual-fill ()
+  (setq visual-fill-column-width 100
+        visual-fill-column-center-text t)
+  (visual-fill-column-mode 1))
+#+end_src
+** Basic Emacs Config
+*** Set User Name
+#+begin_src emacs-lisp :tangle yes
+
+(setq user-full-name "Shad Kaske"
+    user-mail-address "skaske@showplacewood.com")
+
+#+end_src
+*** Disable Exit Confirmation
+#+begin_src emacs-lisp :tangle yes
+
+(setq confirm-kill-emacs nil)
+
+#+end_src
+*** Disable X Clipboard Sync on Exit
+Mostly this steaming pile just hangs the exit of emacs, so why bother. By default the selections are put into the system clipboard anyway.
+#+begin_src emacs-lisp :tangle yes
+
+(setq x-select-enable-clipboard-manager nil)
+
+#+end_src
 *** Theme Settings
-    Default theme, currently material, and enable bold/italic fonts for the theme
+#+begin_src emacs-lisp :tangle yes
 
-    #+begin_src emacs-lisp
+(setq doom-theme 'doom-one)
+(after! doom-themes
+(setq doom-themes-enable-bold t
+        doom-themes-enable-italic t))
 
-    (setq doom-theme 'doom-material)
-    (after! doom-themes
-    (setq doom-themes-enable-bold t
-            doom-themes-enable-italic t))
-    #+end_src
-
+#+end_src
 *** Font Settings
-    Use JetBrains Mono for mono spaced and Big Font. Ubuntu currently for variable. Use italics for keywords and comments
+#+begin_src emacs-lisp :tangle yes
 
-   #+begin_src emacs-lisp
-    (setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 16)
-        doom-variable-pitch-font (font-spec :family "Ubuntu" :size 16)
-        doom-big-font (font-spec :family "JetBrainsMono Nerd Font" :size 24))
-    (custom-set-faces!
-    '(font-lock-comment-face :slant italic)
-    '(font-lock-keyword-face :slant italic))
-   #+end_src
+(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 16)
+    doom-variable-pitch-font (font-spec :family "Cantarell" :size 16)
+    doom-big-font (font-spec :family "JetBrainsMono Nerd Font" :size 24))
+(custom-set-faces!
+'(font-lock-comment-face :slant italic)
+'(font-lock-keyword-face :slant italic))
 
-*** Line Numbers
-    I prefer using a relative line number setting
+#+end_src
+*** Use Relative Line Numbers
+#+begin_src emacs-lisp :tangle yes
 
-    #+begin_src emacs-lisp
-    (setq display-line-numbers-type 'relative)
-    #+end_src
+(setq display-line-numbers-type 'visual)
 
-*** Line Spacing
-    Sometimes I like to mess with the spacing on the lines, sometimes not so much
+#+end_src
+*** Line Height Settings
+#+begin_src emacs-lisp :tangle yes
 
-    #+begin_src emacs-lisp
-    ;; (setq default-text-properties '(line-spacing 0.1  line-height 1.1))
-    #+end_src
+(setq default-text-properties '(line-spacing 0.1  line-height 1.1))
 
-*** All The Icons
+#+end_src
+*** All The Icons Scale
+#+begin_src emacs-lisp :tangle yes
 
-    #+BEGIN_SRC emacs-lisp
-    (after! all-the-icons
-        (setq all-the-icons-scale-factor 1.0))
-    #+END_SRC
+(after! all-the-icons
+    (setq all-the-icons-scale-factor 1.0))
 
-*** Highlight Trailing Whitespace
+#+end_src
+*** Show Trailing Whitespace
+#+begin_src emacs-lisp :tangle yes
 
-    #+BEGIN_SRC emacs-lisp
-    (setq show-trailing-whitespace t)
-    #+END_SRC
+(setq show-trailing-whitespace t)
 
-** Keybindinds
-    Custom keybindings
-*** Global Keybinds
-*** Leader Keybinds
-**** NeoTree
+#+end_src
 
+** Custom Keybindings
+Doom has a huge selection of leader keybinds and all of the other searchable bits, I only have a couple that I like to add
+#+begin_src emacs-lisp :tangle yes
 
-*** Convenience Keybinds
-    Just a few bits that I like to user
-**** Insert New Lines Above and Below
-    #+begin_src emacs-lisp
-    (map!
-     (:after evil
-        :m "] SPC" #'evil-motion-insert-newline-below
-        :m "[ SPC" #'evil-motion-insert-newline-after))
-    #+end_src
-**** Simple Window Navigation
-    #+BEGIN_SRC emacs-lisp
-    (map!
-     (:after evil
-       :en "C-h"   #'evil-window-left
-       :en "C-j"   #'evil-window-down
-       :en "C-k"   #'evil-window-up
-       :en "C-l"   #'evil-window-right))
-    #+END_SRC
+(map!
+ (:after evil
+    :m "] SPC" #'evil-motion-insert-newline-below
+    :m "[ SPC" #'evil-motion-insert-newline-after))
 
-** Tools/App
-*** mu4e
-    Configure mu4e to manage my email
+#+end_src
 
-    #+BEGIN_SRC emacs-lisp
-    (remove-hook! 'mu4e-compose-pre-hook #'org-msg-mode)
-    (after! mu4e
-    (setq! mu4e-maildir (expand-file-name "~/Mail/kaskshad-showplace") ; the rest of the mu4e folders are RELATIVE to this one
-            mu4e-get-mail-command "mbsync -c ~/.config/mu4e/mbsyncrc -a"
-            mu4e-index-update-in-background t
-            mu4e-compose-signature-auto-include nil
-            mu4e-use-fancy-chars t
-            mu4e-view-show-addresses t
-            mu4e-view-show-images t
-            mu4e-compose-format-flowed t
-            ;mu4e-compose-in-new-frame t
-            mu4e-change-filenames-when-moving t ;; http://pragmaticemacs.com/emacs/fixing-duplicate-uid-errors-when-using-mbsync-and-mu4e/
-            mu4e-maildir-shortcuts
-            '( ("/Inbox" . ?i)
-                ("/Archive" . ?a)
-                ("/Drafts" . ?d)
-                ("/Deleted Items" . ?t)
-                ("/Sent Items" . ?s))
+** mu4e Settings
+This is a huge mess as mu4e can be a bit of a bear
+*** Set Load Path for mu4e
+#+begin_src emacs-lisp :tangle yes
 
-            ;; Message Formatting and sending
-            message-send-mail-function 'smtpmail-send-it
-            message-signature-file "~/.config/mu4e/mailsignature"
-            message-citation-line-format "On %a %d %b %Y at %R, %f wrote:\n"
-            message-citation-line-function 'message-insert-formatted-citation-line
-            message-kill-buffer-on-exit t))
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
 
-    (set-email-account! "kaskshad@showplacewood.com"
-                        '((user-mail-address      . "kaskshad@showplacewood.com")
-                        (user-full-name         . "Shad Kaske")
-                        (smtpmail-smtp-server   . "smtp.office365.com")
-                        (smtpmail-smtp-service  . 587)
-                        (smtpmail-stream-type   . starttls)
-                        (smtpmail-debug-info    . t)
-                        (mu4e-drafts-folder     . "/Drafts")
-                        (mu4e-refile-folder     . "/Archive")
-                        (mu4e-sent-folder       . "/Sent Items")
-                        (mu4e-trash-folder      . "/Deleted Items")
-                        (mu4e-update-interval   . 300)
-                        ;(mu4e-sent-messages-behavior . 'delete)
-                        )
-                        nil)
+#+end_src
+*** Accounts and Basic Settings
+All of the following is loaded after mu4e so we don't get a ton of messages about void functions
+- Make sure that we require mu4e-org
+- But disable the org-msg-mode
+- Configure system wide mail settings ( mbsync, Maildir, message format options )
+- Set up contexts
+- Set sendmail options to use msmtp
+#+begin_src emacs-lisp :tangle yes
 
-    (mu4e-alert-set-default-style 'libnotify)
-    (add-hook 'after-init-hook #'mu4e-alert-enable-notifications)
-    #+END_SRC
+(after! mu4e
+  (require 'mu4e-org)
+  (remove-hook! 'mu4e-compose-pre-hook 'org-msg-mode)
+  (setq! mu4e-attachment-dir "~/Downloads")
+  (setq! mu4e-maildir (expand-file-name "~/Mail")
+         mu4e-get-mail-command "mbsync -a"
+         mu4e-index-update-in-background t
+         mu4e-compose-signature-auto-include nil
+         mu4e-view-show-addresses t
+         mu4e-view-show-images t
+         mu4e-use-fancy-chars t
+         mu4e-compose-format-flowed t
+         mu4e-change-filenames-when-moving t
+         mu4e-sent-messages-behavior 'sent)
 
-*** Org-Mode
-My Quirky Settings for using Org to GTD
-**** Path Config
+  (setq! mu4e-contexts
+         (list
+          ;; Work Account
+          (make-mu4e-context
+           :name "Showplace"
+           :match-func
+           (lambda (msg)
+             (when msg (string-prefix-p "/showplacewood" (mu4e-message-field msg :maildir) t)))
+           :vars '((user-mail-address . "skaske@showplacewood.com")
+                   (mu4e-drafts-folder . "/showplacewood/Drafts")
+                   (mu4e-sent-folder . "/showplacewood/Sent Items")
+                   (mu4e-refile-folder . "/showplacewood/Archive")
+                   (mu4e-trash-folder . "/showplacewood/Deleted Items")))
+          (make-mu4e-context
+           ;; Personal Account
+           :name "Gmail"
+           :match-func
+           (lambda (msg)
+             (when msg (string-prefix-p "/gmail" (mu4e-message-field msg :maildir) t)))
+           :vars '((user-mail-address . "shadkaske@gmail.com")
+                   (mu4e-drafts-folder . "/gmail/Drafts")
+                   (mu4e-sent-folder . "/gmail/Sent Mail")
+                   (mu4e-refile-folder . "/gmail/All Mail")
+                   (mu4e-trash-folder . "/gmail/Trash")))))
 
-#+BEGIN_SRC emacs-lisp
+  ;;;; Send Mail Settings
+  (setq! sendmail-program "/usr/bin/msmtp"
+         send-mail-function 'smtpmail-send-it
+         message-sendmail-f-is-evil t
+         message-sendmail-extra-arguments '("--read-envelope-from")
+         message-send-mail-function 'message-send-mail-with-sendmail))
+#+end_src
+*** Mail Notifications
+#+begin_src emacs-lisp :tangle yes
+
+(mu4e-alert-set-default-style 'libnotify)
+(add-hook 'after-init-hook #'mu4e-alert-enable-notifications)
+(setq mu4e-compose-format-flowed t)
+
+#+end_src
+** Org Mode Settings
+*** Set Org Directory
+#+begin_src emacs-lisp :tangle yes
+
 (setq org-directory "~/Nextcloud/org/")
-(setq org-noter-notes-search-path '("~/Nextcloud/org/reference/"))
-#+END_SRC
 
-**** General Org Settings
-- Hide Emphasis Markers
-- Enable logging
-- Disable electric-mode
+#+end_src
+*** Disable Line Numbers in Org Mode
+#+begin_src emacs-lisp :tangle yes
 
-#+BEGIN_SRC emacs-lisp
-(after! org (setq org-hide-emphasis-markers t)
-  (setq org-log-done t)
-  (setq org-log-into-drawer t))
+(add-hook! 'org-mode-hook #'doom-disable-line-numbers-h)
+
+#+end_src
+*** Set Fonts for Org Mode Buffers to Variable Pitch
+#+begin_src emacs-lisp :tangle yes
+
+(add-hook! 'org-mode-hook 'smk/set-buffer-variable-pitch)
+
+#+end_src
+*** Set Up After Org Settings
+More items that should probably be loaded after loading org mode
+#+begin_src emacs-lisp :tangle yes
+(after! org
+#+end_src
+**** Hide emphasis markers
+#+begin_src emacs-lisp :tangle yes
+(setq org-hide-emphasis-markers t)
+#+end_src
+**** Turn On Logging
+#+begin_src emacs-lisp :tangle yes
+(setq org-log-done t
+      org-log-into-drawer t)
+#+end_src
+**** Todo Keywords
+#+begin_src emacs-lisp :tangle yes
+
+  (setq org-todo-keywords '((sequence
+                             "TODO(t)" "NEXT(n)" "WAITING(w)" "|" "DONE(d!)" "CANC(k!)")
+                            (sequence
+                             "ACTIVE(a)" "PLAN(p)" "HOLD(h)" "|" "COMPLETE(c!)" )))
+  ;;  Org Todo Keywords Colors
+  (setq org-todo-keyword-faces '(("TODO" . "DarkCyan")
+                                 ("NEXT" . "DarkOrange")
+                                 ("WAITING" . "DimGray")
+                                 ("ACTIVE" . "LightCoral")
+                                 ("PLAN" . "BlanchedAlmond")
+                                 ("HOLD" . "DimGray")))
+
+#+end_src
+**** Agenda Files
+#+begin_src emacs-lisp :tangle yes
+
+  (setq org-agenda-files '("~/Nextcloud/org/inbox.org"
+                          "~/Nextcloud/org/projects.org"
+                          "~/Nextcloud/org/tickler.org"
+                          "~/Nextcloud/org/cal/googlecal.org"
+                          "~/Nextcloud/org/cal/showplacecal.org"))
+
+#+end_src
+**** Capture Templates
+#+begin_src emacs-lisp :tangle yes
+
+  (setq org-capture-templates
+        '(("t" "ToDo [Inbox]"
+           entry (file "~/Nextcloud/org/inbox.org")
+                  "* TODO %?\n")
+          ("T" "Tickler"
+           entry (file "~/Nextcloud/org/tickler.org")
+                  "* TODO %i%? \nSCHEDULED: <%(org-read-date nil nil \"+1d\")>")
+          ("P" "New Project"
+           entry (file "~/Nextcloud/org/projects.org")
+                  "* %i%? ")
+          ("e" "Email [Inbox]"
+           entry (file "~/Nextcloud/org/inbox.org")
+           "* TODO %?\n%U\n%a\n")
+          ("f" "Link File [Inbox]"
+           entry (file "~/Nextcloud/org/inbox.org")
+           "* TODO %?\n %A\n")))
+
+#+end_src
+**** Custom Agenda Views
+#+begin_src emacs-lisp :tangle yes
+
+  (setq org-agenda-custom-commands
+        '(("d" "Dashboard"
+           ((agenda "" ((org-deadline-warning-days 7)))
+            (todo "NEXT"
+                  ((org-agenda-overriding-header "Next Task")))
+            (todo "ACTIVE" ((org-agenda-overriding-header "Active Projects")))))
+          ))
+
+#+end_src
+**** Tags Display Column
+Move the org tags over to the right
+#+begin_src emacs-lisp :tangle yes
+
+  (setq org-tags-column -80)
+
+#+end_src
+**** Tags List
+#+begin_src emacs-lisp :tangle yes
+
+  (setq org-tag-alist '((:startgroup . nil)
+                        ("@work" . ?w)
+                        ("@home" . ?h)
+                        ("@errands" . ?e)
+                        ("@email" . ?@)
+                        ("@dev" . ?d)
+                        (:endgroup . nil)
+                        ("chad" . ?c)
+                        ("andy" . ?a)
+                        ("travis" . ?t)
+                        ("personal" . ?p)))
+
+#+end_src
+**** Refile Targets Max Level
+#+begin_src emacs-lisp :tangle yes
+
+  (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
+#+end_src
+**** Save Org Buffers on refile
+#+begin_src emacs-lisp :tangle yes
+
+  (advice-add 'org-refile :after 'org-save-all-org-buffers)
+#+end_src
+**** Set Org Ellipses
+#+begin_src emacs-lisp :tangle yes
+
+  (setq org-ellipsis "  ▼")
+#+end_src
+**** Headline Bullets
+#+begin_src emacs-lisp :tangle yes
+
+  (setq org-superstar-headline-bullets-list '("◉" "○" "●" "○" "●" "○" "●")))
+#+end_src
+**** Custom Headings Height
+#+begin_src emacs-lisp :tangle yes
+
+  (custom-set-faces
+   '(org-level-1 ((t (:inherit outline-1 :height 1.2))))
+   '(org-level-2 ((t (:inherit outline-2 :height 1.1))))
+   '(org-level-3 ((t (:inherit outline-3 :height 1.0))))
+   '(org-level-4 ((t (:inherit outline-4 :height 0.9))))
+   '(org-level-5 ((t (:inherit outline-5 :height 0.85)))))
+
+#+end_src
+**** Disable Electric Indent Mode
+Sometimes things jump around in org mode with this, so it gets disabled
+#+begin_src emacs-lisp :tangle yes
 
 (add-hook! org-mode (electric-indent-local-mode -1))
 
-(add-hook! org-mode :append
-           #'variable-pitch-mode)
-#+END_SRC
+#+end_src
+**** Set up Org Archive
+#+begin_src emacs-lisp :tangle yes
 
-**** Agenda
-
-#+BEGIN_SRC emacs-lisp
-(use-package! org-agenda
-  :ensure t
+(use-package! org-archive
   :after org
   :config
-  (org-agenda-files (list org-directory))
-  (setq org-agenda-custom-commands '(("g" "Scheduled today and all NEXT items" ((agenda "" ((org-agenda-span 1))) (todo "NEXT"))))))
-#+END_SRC
+  (setq org-archive-location "archive.org::datetree/")) ;; end after! org
 
-**** Archive Settings
+#+end_src
+*** Use Visual Fill Column
+Install visual fill column and set the sizes with defined function
+#+begin_src emacs-lisp :tangle yes
 
-#+BEGIN_SRC emacs-lisp
-(after! org
-  (setq org-archive-tag "archive"))
-  (setq org-archive-location (concat org-directory "archive.org::* From %s"))
-#+END_SRC
+(use-package! visual-fill-column
+  :hook (org-mode . smk/org-mode-visual-fill))
+#+end_src
+*** Set Up Appear Mode
+Show the link information when your cursor moves over links in org documents
+#+begin_src emacs-lisp :tangle yes
 
-**** Refile Targets
+(add-hook! 'org-mode-hook #'org-appear-mode)
+(setq org-appear-autolinks t)
 
-#+BEGIN_SRC emacs-lisp
-(after! org
-  (setq org-refile-targets '((nil :maxlevel . 3)
-                             (org-agenda-files :maxlevel . 3))))
-#+END_SRC
+#+end_src
+*** Notifications for Org Items
+#+begin_src emacs-lisp :tangle yes
 
-*** NeoTree
+(use-package org-alert)
+(setq alert-default-style 'libnotify)
+(org-alert-enable)
 
-   #+BEGIN_SRC emacs-lisp
-    (after! neotree
-        (setq neo-smart-open t
-              neo-windows-fixed-size nil))
-   #+END_SRC
+#+end_src
+** Neotree
+#+begin_src emacs-lisp :tangle yes
 
-** Languages
+(after! neotree
+    (setq neo-smart-open t
+          neo-windows-fixed-size nil))
+
+#+end_src
+** LSP Mode
+*** Set watch threshhold to nil
+This will ignore the warning from LSP mode when opening a project with a lot of files, like a Larvel project
+#+begin_src emacs-lisp :tangle yes
+
+(setq lsp-file-watch-threshold nil)
+#+end_src
+* Mbsysnc
+* Msmtp

@@ -1,25 +1,35 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
-;; Basic Emacs Setup
+;; Custom functions
+(defun smk/set-buffer-variable-pitch ()
+  (interactive)
+  (variable-pitch-mode t)
+  (setq line-spacing 3)
+  (set-face-attribute 'org-table nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-link nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-code nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-block nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-date nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-special-keyword nil :inherit 'fixed-pitch))
+
 (setq user-full-name "Shad Kaske"
     user-mail-address "skaske@showplacewood.com")
 
-;; Don't Ask to Close
 (setq confirm-kill-emacs nil)
 
 ;; Disable Clipboard Selection and Manager
 ;; (setq select-enable-clipboard nil
-   (setq x-select-enable-clipboard-manager nil)
+(setq x-select-enable-clipboard-manager nil)
 
 ;; Theme Settings
-(setq doom-theme 'doom-material)
+(setq doom-theme 'doom-one)
 (after! doom-themes
 (setq doom-themes-enable-bold t
         doom-themes-enable-italic t))
 
 ;; Font Settings
 (setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 16)
-    doom-variable-pitch-font (font-spec :family "Ubuntu" :size 16)
+    doom-variable-pitch-font (font-spec :family "Cantarell" :size 16)
     doom-big-font (font-spec :family "JetBrainsMono Nerd Font" :size 24))
 (custom-set-faces!
 '(font-lock-comment-face :slant italic)
@@ -44,14 +54,6 @@
  (:after evil
     :m "] SPC" #'evil-motion-insert-newline-below
     :m "[ SPC" #'evil-motion-insert-newline-after))
-
-;;;; Evil Mode Simplified Navigation
-;; (map!
-;;  (:after evil
-;;    :en "C-h"   #'evil-window-left
-;;    :en "C-j"   #'evil-window-down
-;;    :en "C-k"   #'evil-window-up
-;;    :en "C-l"   #'evil-window-right))
 
 ;; mu4e
 (add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
@@ -79,7 +81,6 @@
            (lambda (msg)
              (when msg (string-prefix-p "/showplacewood" (mu4e-message-field msg :maildir) t)))
            :vars '((user-mail-address . "skaske@showplacewood.com")
-                   (user-full-name . "Shad Kaske")
                    (mu4e-drafts-folder . "/showplacewood/Drafts")
                    (mu4e-sent-folder . "/showplacewood/Sent Items")
                    (mu4e-refile-folder . "/showplacewood/Archive")
@@ -90,12 +91,19 @@
            (lambda (msg)
              (when msg (string-prefix-p "/gmail" (mu4e-message-field msg :maildir) t)))
            :vars '((user-mail-address . "shadkaske@gmail.com")
-                   (user-full-name . "Shad Kaske")
                    (mu4e-drafts-folder . "/gmail/Drafts")
                    (mu4e-sent-folder . "/gmail/Sent Mail")
                    (mu4e-refile-folder . "/gmail/All Mail")
-                   (mu4e-trash-folder . "/gmail/Trash"))))))
+                   (mu4e-trash-folder . "/gmail/Trash")))))
 
+  ;;;; Send Mail Settings
+  (setq! sendmail-program "/usr/bin/msmtp"
+         send-mail-function 'smtpmail-send-it
+         message-sendmail-f-is-evil t
+         message-sendmail-extra-arguments '("--read-envelope-from")
+         message-send-mail-function 'message-send-mail-with-sendmail))
+
+;;;; mu4e Notifications
 (mu4e-alert-set-default-style 'libnotify)
 (add-hook 'after-init-hook #'mu4e-alert-enable-notifications)
 (setq mu4e-compose-format-flowed t)
@@ -103,10 +111,12 @@
 ;; Org Mode
 ;;;; Doom Emacs Org Settings
 (setq org-directory "~/Nextcloud/org/")
-(setq org-noter-notes-search-path '("~/Nextcloud/org/reference/"))
 
 ;;;; Disable LineNumber in Org Mode
 (add-hook! 'org-mode-hook #'doom-disable-line-numbers-h)
+
+;;;; Use Variable pitch font mode
+(add-hook! 'org-mode-hook 'smk/set-buffer-variable-pitch)
 
 ;;;; Hide Emphasis Markers
 (after! org
@@ -126,6 +136,9 @@
                                  ("ACTIVE" . "LightCoral")
                                  ("PLAN" . "BlanchedAlmond")
                                  ("HOLD" . "DimGray")))
+
+  (add-hook! org-agenda-mode-hook 'smk/set-buffer-variable-pitch)
+
   ;;;; Org Agenda Files
   (setq org-agenda-files '("~/Nextcloud/org/inbox.org"
                           "~/Nextcloud/org/projects.org"
@@ -172,21 +185,20 @@
                         (:endgroup . nil)
                         ("chad" . ?c)
                         ("andy" . ?a)
-                        ("travis" . ?t)))
+                        ("travis" . ?t)
+                        ("personal" . ?p)))
 
   ;;;; Org Refiler Targets
   (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
   (advice-add 'org-refile :after 'org-save-all-org-buffers)
   (setq org-ellipsis "  ▼")
   (setq org-superstar-headline-bullets-list '("◉" "○" "●" "○" "●" "○" "●")))
-  ;; (dolist (face '((org-level-1 . 1.2)
-  ;;                 (org-level-2 . 1.1)
-  ;;                 (org-level-3 . 1.05)
-  ;;                 (org-level-4 . 1.0)
-  ;;                 (org-level-5 . 0.9)
-  ;;                 (org-level-6 . 0.85)
-  ;;                 (org-level-7 . 0.8)
-  ;;                 (org-level-8 . 0.75))))
+  (custom-set-faces
+   '(org-level-1 ((t (:inherit outline-1 :height 1.2))))
+   '(org-level-2 ((t (:inherit outline-2 :height 1.1))))
+   '(org-level-3 ((t (:inherit outline-3 :height 1.0))))
+   '(org-level-4 ((t (:inherit outline-4 :height 0.9))))
+   '(org-level-5 ((t (:inherit outline-5 :height 0.85)))))
 
 ;;;; Disable Electric Indent Mode
 (add-hook! org-mode (electric-indent-local-mode -1))
@@ -199,7 +211,7 @@
 
 ;;;; Visual Fill Column Mode
 (defun smk/org-mode-visual-fill ()
-  (setq visual-fill-column-width 120
+  (setq visual-fill-column-width 100
         visual-fill-column-center-text t)
   (visual-fill-column-mode 1))
 

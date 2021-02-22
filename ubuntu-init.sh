@@ -16,12 +16,12 @@ sudo apt install --install-recommends winehq-staging --yes
 sudo apt install winetricks --yes
 
 # Mesa Drivers
-sudo add-apt-repository ppa:kisak/kisak-mesa
+sudo add-apt-repository ppa:kisak/kisak-mesa --yes
 sudo apt upgrade --yes
 sudo apt install libgl1-mesa-dri:i386 mesa-vulkan-drivers mesa-vulkan-drivers:i386 --yes
 
 # Lutris and Steam
-sudo add-apt-repository ppa:lutris-team/lutris
+sudo add-apt-repository ppa:lutris-team/lutris --yes
 sudo apt install lutris --yes
 sudo apt install steam --yes
 
@@ -30,7 +30,7 @@ sudo apt remove --purge snapd --yes
 
 # Set Up Flatpak
 sudo apt install flatpak gnome-software-plugin-flatpak --yes
-flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
 # Install A Couple of App
 sudo apt install gamemode zsh git tmux stow xclip --yes
@@ -80,19 +80,19 @@ sudo apt install --yes ripgrep silversearcher-ag fd-find build-essential cmake \
     libtool-bin isync mu4e xapian-tools nodejs npm jq python3-pip shellcheck \
     msmtp fonts-cantarell
 
+# Install Python Bits
+pip3 install black pyflakes isort pipenv nose pytest neovim neovim-remote
+
 # Set Up Npm for Local Install
 mkdir "${HOME}/.npm-global"
 npm config set prefix "${HOME}/.npm-global"
-
-# Install Python Bits
-pip3 install black pyflakes isort pipenv nose pytest neovim neovim-remote
 
 # Mark Down Compiler
 npm install --global markdownlint marked js-beautify stylelint
 
 # Doom Install
 git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
-$HOME/.emacs.d/bin/doom sync
+$HOME/.emacs.d/bin/doom install
 
 # Install apps
 sudo apt install --yes kitty awesome dunst neovim ranger rofi volumeicon-alsa \
@@ -130,7 +130,7 @@ cd $DOT_DIR
 # Loop through the directories here and stow them
 for f in *; do
     if [ -d "$f" ]; then
-        stow "$f"
+        stow --adopt "$f"
     fi
 done
 

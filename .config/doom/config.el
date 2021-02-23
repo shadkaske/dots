@@ -9,7 +9,7 @@
 
 ;; Disable Clipboard Selection and Manager
 ;; (setq select-enable-clipboard nil
-;;     x-select-enable-clipboard-manager nil)
+(setq x-select-enable-clipboard-manager nil)
 
 ;; Theme Settings
 (setq doom-theme 'doom-material)
@@ -155,10 +155,9 @@
   (setq org-agenda-custom-commands
         '(("d" "Dashboard"
            ((agenda "" ((org-deadline-warning-days 7)))
-            (todo "NEXT"
-                  ((org-agenda-overriding-header "Next Task")))
-            (todo "ACTIVE" ((org-agenda-overriding-header "Active Projects")))))
-          ))
+            (todo "NEXT" ((org-agenda-overriding-header "Next Task")))
+            (todo "ACTIVE" ((org-agenda-overriding-header "Active Projects")))
+            (todo "WAITING" ((org-agenda-overriding-header "Waiting Tasks")))))))
 
   ;;;; Org Tag Settings
   (setq org-tags-column -80)
@@ -175,10 +174,13 @@
                         ("travis" . ?t)))
 
   ;;;; Org Refiler Targets
-  (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
+  (setq org-refile-targets '((org-agenda-files :maxlevel . 3)
+                             ("~/Nextcloud/org/someday.org" :maxlevel . 2)))
+  (setq org-refile-allow-creating-parent-nodes 'confirm)
   (advice-add 'org-refile :after 'org-save-all-org-buffers)
   (setq org-ellipsis "  ▼")
   (setq org-superstar-headline-bullets-list '("◉" "○" "●" "○" "●" "○" "●"))
+  ;;;; Org Headline Sizes
   (dolist (face '((org-level-1 . 1.2)
                   (org-level-2 . 1.1)
                   (org-level-3 . 1.05)
@@ -236,3 +238,6 @@
 (setq company-idle-delay 0.25
       company-minimum-prefix-length 3)
 (add-to-list 'company-backends '(company-capf company-files company-yasnippet company-semantic company-bbdb company-cmake company-keywords))
+
+;; Evil Mode Customizations
+(setq evil-move-cursor-back nil)

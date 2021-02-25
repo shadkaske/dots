@@ -4,7 +4,7 @@
 [core]
     editor = nvim
 [merge]
-    tool = nvim
+    tool = vscode
 [diff]
     tool = vscode
 [mergetool]

@@ -49,6 +49,7 @@ end
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init(gears.filesystem.get_themes_dir() .. "gtk/theme.lua")
+-- beautiful.init(gears.filesystem.get_themes_dir() .. "xresources/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "x-terminal-emulator"
@@ -231,7 +232,7 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             -- mylauncher,
             s.mytaglist,
-            s.mypromptbox,
+            -- s.mypromptbox,
         },
         s.mytasklist, -- Middle widget
         { -- Right widgets
@@ -713,9 +714,11 @@ set_wallpaper()
 
 -- Awesome Configs
 -- Theme overrides
-beautiful.useless_gap = 8
-beautiful.gap_single_client = false
-beautiful.taglist_font = "FontAwesome 11"
+beautiful.useless_gap = 6
+beautiful.gap_single_client = true
+beautiful.taglist_font = "FontAwesome 12"
+beautiful.wibar_opacity = 0.1
+-- theme.tasklist_disable_icon = true
 
 -- Toggle title bar when toggling floating
 client.connect_signal("property::floating", function(c)

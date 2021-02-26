@@ -23,3 +23,4 @@
     $HOME/.config/base16-shell
 
 export PATH="$HOME/.emacs.d/bin:$PATH"
+export QT_STYLE_OVERRIDE=kvantum

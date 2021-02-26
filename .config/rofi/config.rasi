@@ -9,14 +9,14 @@ configuration {
 }
 
 
-window {
+/*window {
   height: 85%;
   width: 25em;
   border: 0;
   padding: 0;
   location: west;
   anchor: west;
-}
+}*/
 
 /* vim: ft=css
  */

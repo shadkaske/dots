@@ -66,7 +66,7 @@
   (remove-hook! 'mu4e-compose-pre-hook 'org-msg-mode)
   (setq! mu4e-attachment-dir "~/Downloads")
   (setq! mu4e-maildir (expand-file-name "~/Mail")
-         mu4e-get-mail-command "mbsync -a"
+         mu4e-get-mail-command "update-mail.sh"
          mu4e-update-interval 300
          mu4e-index-update-in-background t
          mu4e-compose-signature-auto-include nil
@@ -181,7 +181,8 @@
   (setq org-agenda-custom-commands
         '(("d" "Dashboard"
            ((agenda "" ((org-deadline-warning-days 7)))
-            (todo "NEXT" ((org-agenda-overriding-header "Next Task")))
+            (todo "NEXT" ((org-agenda-overriding-header "Next Task")
+                          (org-agenda-sorting-strategy '(priority-down))))
             (todo "ACTIVE" ((org-agenda-overriding-header "Active Projects")))
             (todo "WAITING" ((org-agenda-overriding-header "Waiting Tasks")))))))
 

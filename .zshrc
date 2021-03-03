@@ -140,7 +140,7 @@ bindkey '^ ' autosuggest-accept
 # Custom functions
 
 function homestead() {
-    ( cd ~/.config/homestead && vagrant $* )
+    ( cd ~/Homestead && vagrant $* )
 }
 
 function kkssh() {

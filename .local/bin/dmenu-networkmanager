@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # encoding:utf8
-"""NetworkManager command line dmenu -i script.
+"""NetworkManager command line dmenu script.
 
 To add new connections or enable/disable networking requires policykit
 permissions setup per:
@@ -8,10 +8,12 @@ https://wiki.archlinux.org/index.php/NetworkManager#Set_up_PolicyKit_permissions
 
 OR running the script as root
 
-Add dmenu -i formatting options and default terminal if desired to
-~/.config/networkmanager-dmenu -i/config.ini
+Add dmenu formatting options and default terminal if desired to
+~/.config/networkmanager-dmenu/config.ini
 
 """
+import pathlib
+import struct
 import configparser
 import itertools
 import locale
@@ -34,39 +36,39 @@ CLIENT = NM.Client.new(None)
 LOOP = GLib.MainLoop()
 CONNS = CLIENT.get_connections()
 
+CONF = configparser.ConfigParser()
+CONF.read(expanduser("~/.config/networkmanager-dmenu/config.ini"))
 
-def dmenu cmd(num_lines, prompt="Networks", active_lines=None):  # pylint: disable=too-many-branches
-    """Parse config.ini if it exists and add options to the dmenu -i command
+def dmenu_cmd(num_lines, prompt="Networks", active_lines=None):  # pylint: disable=too-many-branches
+    """Parse config.ini if it exists and add options to the dmenu command
 
     Args: args - num_lines: number of lines to display
                  prompt: prompt to show
     Returns: command invocation (as a list of strings) for
-                dmenu -i -l <num_lines> -p <prompt> -i ...
+                dmenu -l <num_lines> -p <prompt> -i ...
 
     """
-    dmenu -i_command = "dmenu -i"
-    conf = configparser.ConfigParser()
-    conf.read(expanduser("~/.config/networkmanager-dmenu -i/config.ini"))
-    if not conf.sections():
-        res = [dmenu -i_command, "-i", "-l", str(num_lines), "-p", str(prompt)]
+    dmenu_command = "dmenu"
+    if not CONF.sections():
+        res = [dmenu_command, "-i", "-l", str(num_lines), "-p", str(prompt)]
         res.extend(sys.argv[1:])
         return res
-    if conf.has_section('dmenu -i'):
-        args = conf.items('dmenu -i')
+    if CONF.has_section('dmenu'):
+        args = CONF.items('dmenu')
         args_dict = dict(args)
-        dmenu -i_args = []
-        if "dmenu -i_command" in args_dict:
-            command = shlex.split(args_dict["dmenu -i_command"])
-            dmenu -i_command = command[0]
-            dmenu -i_args = command[1:]
-            del args_dict["dmenu -i_command"]
+        dmenu_args = []
+        if "dmenu_command" in args_dict:
+            command = shlex.split(args_dict["dmenu_command"])
+            dmenu_command = command[0]
+            dmenu_args = command[1:]
+            del args_dict["dmenu_command"]
         if "p" in args_dict and prompt == "Networks":
             prompt = args_dict["p"]
             del args_dict["p"]
         elif "p" in args_dict:
             del args_dict["p"]
-        if "rofi" in dmenu -i_command:
-            lines = "-i -dmenu -i -lines"
+        if "rofi" in dmenu_command:
+            lines = "-i -dmenu -lines"
             # rofi doesn't support 0 length line, it requires at least -lines=1
             # see https://github.com/DaveDavenport/rofi/issues/252
             num_lines = num_lines or 1
@@ -75,7 +77,7 @@ def dmenu cmd(num_lines, prompt="Networks", active_lines=None):  # pylint: disab
         if "l" in args_dict:
             # rofi doesn't support 0 length line, it requires at least -lines=1
             # see https://github.com/DaveDavenport/rofi/issues/252
-            if "rofi" in dmenu -i_command:
+            if "rofi" in dmenu_command:
                 args_dict['l'] = min(num_lines, int(args_dict['l'])) or 1
             lines = "{} {}".format(lines, args_dict['l'])
             del args_dict['l']
@@ -87,28 +89,30 @@ def dmenu cmd(num_lines, prompt="Networks", active_lines=None):  # pylint: disab
             del args_dict["compact"]
         if "wifi_chars" in args_dict:
             del args_dict["wifi_chars"]
-        if conf.has_option('dmenu -i', 'rofi_highlight'):
-            rofi_highlight = conf.getboolean('dmenu -i', 'rofi_highlight')
+        rofi_highlight = CONF.getboolean('dmenu', 'rofi_highlight', fallback=False)
+        if CONF.has_option('dmenu', 'rofi_highlight'):
             del args_dict["rofi_highlight"]
-        else:
-            rofi_highlight = False
-        if rofi_highlight is True and "rofi" in dmenu -i_command:
+        if rofi_highlight is True and "rofi" in dmenu_command:
             if active_lines:
-                dmenu -i_args.extend(["-a", ",".join([str(num)
+                dmenu_args.extend(["-a", ",".join([str(num)
                                                    for num in active_lines])])
     if prompt == "Passphrase":
-        if conf.has_section('dmenu -i_passphrase'):
-            args = conf.items('dmenu -i_passphrase')
+        if CONF.has_section('dmenu_passphrase'):
+            args = CONF.items('dmenu_passphrase')
             args_dict.update(args)
-        rofi_obscure = True
-        if conf.has_option('dmenu -i_passphrase', 'rofi_obscure'):
-            rofi_obscure = conf.getboolean('dmenu -i_passphrase', 'rofi_obscure')
+        rofi_obscure = CONF.getboolean('dmenu_passphrase', 'rofi_obscure', fallback=True)
+        if CONF.has_option('dmenu_passphrase', 'rofi_obscure'):
             del args_dict["rofi_obscure"]
-        if rofi_obscure is True and "rofi" in dmenu -i_command:
-            dmenu -i_args.extend(["-password"])
+        if rofi_obscure is True and "rofi" in dmenu_command:
+            dmenu_args.extend(["-password"])
+        dmenu_password = CONF.getboolean('dmenu_passphrase', 'dmenu_password', fallback=False)
+        if CONF.has_option('dmenu_passphrase', 'dmenu_password'):
+            del args_dict["dmenu_password"]
+        if dmenu_password is True:
+            dmenu_args.extend(["-P"])
     extras = (["-" + str(k), str(v)] for (k, v) in args_dict.items())
-    res = [dmenu -i_command, "-p", str(prompt)]
-    res.extend(dmenu -i_args)
+    res = [dmenu_command, "-p", str(prompt)]
+    res.extend(dmenu_args)
     res += list(itertools.chain.from_iterable(extras))
     res[1:1] = lines.split()
     res = list(filter(None, res))  # Remove empty list elements
@@ -127,7 +131,7 @@ def choose_adapter(client):
     elif len(devices) == 1:
         return devices[0]
     device_names = "\n".join([d.get_iface() for d in devices]).encode(ENC)
-    sel = Popen(dmenu -i_cmd(len(devices), "CHOOSE ADAPTER:"),
+    sel = Popen(dmenu_cmd(len(devices), "CHOOSE ADAPTER:"),
                 stdin=PIPE,
                 stdout=PIPE,
                 env=ENV).communicate(input=device_names)[0].decode(ENC)
@@ -148,20 +152,40 @@ def is_modemmanager_installed():
         return True
 
 
+def bluetooth_get_enabled():
+    """Check if bluetooth is enabled via rfkill.
+
+    Returns None if no bluetooth device was found.
+    """
+    # See https://www.kernel.org/doc/Documentation/ABI/stable/sysfs-class-rfkill
+    for path in pathlib.Path('/sys/class/rfkill/').glob('rfkill*'):
+        if (path / 'type').read_text().strip() == 'bluetooth':
+            return (path / 'soft').read_text().strip() == '0'
+    return None
+
+
 def create_other_actions(client):
     """Return list of other actions that can be taken
 
     """
     networking_enabled = client.networking_get_enabled()
     networking_action = "Disable" if networking_enabled else "Enable"
+
     wifi_enabled = client.wireless_get_enabled()
     wifi_action = "Disable" if wifi_enabled else "Enable"
+
+    bluetooth_enabled = bluetooth_get_enabled()
+    bluetooth_action = "Disable" if bluetooth_enabled else "Enable"
+
     actions = [Action("{} Wifi".format(wifi_action), toggle_wifi,
                       not wifi_enabled),
                Action("{} Networking".format(networking_action),
-                      toggle_networking, not networking_enabled),
-               Action("Launch Connection Manager", launch_connection_editor),
-               Action("Delete a Connection", delete_connection)]
+                      toggle_networking, not networking_enabled)]
+    if bluetooth_enabled is not None:
+        actions.append(Action("{} Bluetooth".format(bluetooth_action),
+                              toggle_bluetooth, not bluetooth_enabled))
+    actions += [Action("Launch Connection Manager", launch_connection_editor),
+                Action("Delete a Connection", delete_connection)]
     if wifi_enabled:
         actions.append(Action("Rescan Wifi Networks", rescan_wifi))
     return actions
@@ -174,11 +198,24 @@ def rescan_wifi():
     for dev in CLIENT.get_devices():
         if gi.repository.NM.DeviceWifi == type(dev):
             try:
-                dev.request_scan()
+                dev.request_scan_async(None, rescan_cb, None)
+                LOOP.run()
             except gi.repository.GLib.Error as err:
                 # Too frequent rescan error
+                notify("Wifi rescan failed", urgency="critical")
                 if not err.code == 6:  # pylint: disable=no-member
                     raise err
+
+
+def rescan_cb(dev, res, data):
+    """Callback for rescan_wifi. Just for notifications
+
+    """
+    if dev.request_scan_finish(res) is True:
+        notify("Wifi scan complete")
+    else:
+        notify("Wifi scan failed", urgency="critical")
+    LOOP.quit()
 
 
 def ssid_to_utf8(nm_ap):
@@ -188,6 +225,13 @@ def ssid_to_utf8(nm_ap):
         return ""
     ret = NM.utils_ssid_to_utf8(ssid.get_data())
     return ret
+
+
+def prompt_saved(saved_cons):
+    """Prompt for a saved connection."""
+    actions = create_saved_actions(saved_cons)
+    sel = get_selection(actions)
+    sel()
 
 
 def ap_security(nm_ap):
@@ -243,7 +287,7 @@ class Action():  # pylint: disable=too-few-public-methods
 def process_ap(nm_ap, is_active, adapter):
     """Activate/Deactivate a connection and get password if required"""
     if is_active:
-        CLIENT.deactivate_connection_async(nm_ap)
+        CLIENT.deactivate_connection_async(nm_ap, None, deactivate_cb, nm_ap)
     else:
         conns_cur = [i for i in CONNS if
                      i.get_setting_wireless() is not None and
@@ -254,21 +298,53 @@ def process_ap(nm_ap, is_active, adapter):
             raise ValueError("There are multiple connections possible")
 
         if len(con) == 1:
-            CLIENT.activate_connection_async(con[0])
+            CLIENT.activate_connection_async(con[0], adapter, nm_ap.get_path(),
+                                             None, activate_cb, nm_ap)
         else:
             if ap_security(nm_ap) != "--":
                 password = get_passphrase()
             else:
                 password = ""
             set_new_connection(nm_ap, password, adapter)
+    LOOP.run()
+
+
+def activate_cb(dev, res, data):
+    """Notification if activate connection completed successfully
+
+    """
+    try:
+        conn = dev.activate_connection_finish(res)
+    except GLib.Error:
+        conn = None
+    if conn is not None:
+        notify("Activated {}".format(conn.get_id()))
+    else:
+        notify("Problem activating {}".format(data.get_id()),
+               urgency="critical")
+    LOOP.quit()
+
+
+def deactivate_cb(dev, res, data):
+    """Notification if deactivate connection completed successfully
+
+    """
+    if dev.deactivate_connection_finish(res) is True:
+        notify("Deactivated {}".format(data.get_id()))
+    else:
+        notify("Problem deactivating {}".format(data.get_id()),
+               urgency="critical")
+    LOOP.quit()
 
 
 def process_vpngsm(con, activate):
     """Activate/deactive VPN or GSM connections"""
     if activate:
-        CLIENT.activate_connection_async(con)
+        CLIENT.activate_connection_async(con, None, None,
+                                         None, activate_cb, con)
     else:
-        CLIENT.deactivate_connection_async(con)
+        CLIENT.deactivate_connection_async(con, None, deactivate_cb, con)
+    LOOP.run()
 
 
 def create_ap_actions(aps, active_ap, active_connection, adapter):  # pylint: disable=too-many-locals
@@ -276,8 +352,6 @@ def create_ap_actions(aps, active_ap, active_connection, adapter):  # pylint: di
     (activate/deactivate)
 
     """
-    conf = configparser.ConfigParser()
-    conf.read(expanduser("~/.config/networkmanager-dmenu -i/config.ini"))
     active_ap_bssid = active_ap.get_bssid() if active_ap is not None else ""
 
     names = [ssid_to_utf8(ap) for ap in aps]
@@ -289,13 +363,11 @@ def create_ap_actions(aps, active_ap, active_connection, adapter):  # pylint: di
 
     for nm_ap, name, sec in zip(aps, names, secs):
         bars = NM.utils_wifi_strength_bars(nm_ap.get_strength())
-        wifi_chars = conf.get("dmenu -i", "wifi_chars") \
-            if conf.has_option("dmenu -i", "wifi_chars") else False
+        wifi_chars = CONF.get("dmenu", "wifi_chars", fallback=False)
         if wifi_chars:
             bars = "".join([wifi_chars[i] for i, j in enumerate(bars) if j == '*'])
         is_active = nm_ap.get_bssid() == active_ap_bssid
-        compact = conf.getboolean("dmenu -i", "compact") \
-            if conf.has_option('dmenu -i', 'compact') else False
+        compact = CONF.getboolean("dmenu", "compact", fallback=False)
         if compact:
             action_name = u"{}  {}  {}".format(name, sec, bars)
         else:
@@ -356,6 +428,14 @@ def create_blue_actions(blues, active):
     return _create_vpngsm_actions(blues, active_blues, "Bluetooth")
 
 
+def create_saved_actions(saved):
+    """Create the list of strings to display with associated function
+    (activate/deactivate) for VPN connections.
+
+    """
+    return _create_vpngsm_actions(saved, [], "SAVED")
+
+
 def _create_vpngsm_actions(cons, active_cons, label):
     active_con_ids = [a.get_id() for a in active_cons]
     actions = []
@@ -387,9 +467,8 @@ def create_wwan_actions(client):
     return [Action("{} WWAN".format(wwan_action), toggle_wwan, not wwan_enabled)]
 
 
-def get_selection(eths, aps, vpns, wgs, gsms, blues, wwan, others):
-    """Combine the arg lists and send to dmenu -i for selection.
-    Also executes the associated action.
+def combine_actions(eths, aps, vpns, wgs, gsms, blues, wwan, others, saved):
+    """Combine all given actions into a list of actions.
 
     Args: args - eths: list of Actions
                  aps: list of Actions
@@ -398,15 +477,8 @@ def get_selection(eths, aps, vpns, wgs, gsms, blues, wwan, others):
                  blues: list of Actions
                  wwan: list of Actions
                  others: list of Actions
-
     """
-    conf = configparser.ConfigParser()
-    conf.read(expanduser("~/.config/networkmanager-dmenu -i/config.ini"))
-    rofi_highlight = conf.getboolean('dmenu -i', 'rofi_highlight') \
-        if conf.has_option('dmenu -i', 'rofi_highlight') else False
-    compact = conf.getboolean("dmenu -i", "compact") \
-        if conf.has_option('dmenu -i', 'compact') else False
-    inp = []
+    compact = CONF.getboolean("dmenu", "compact", fallback=False)
     empty_action = [Action('', None)] if not compact else []
     all_actions = []
     all_actions += eths + empty_action if eths else []
@@ -416,7 +488,15 @@ def get_selection(eths, aps, vpns, wgs, gsms, blues, wwan, others):
     all_actions += gsms + empty_action if (gsms and wwan) else []
     all_actions += blues + empty_action if blues else []
     all_actions += wwan + empty_action if wwan else []
-    all_actions += others
+    all_actions += others + empty_action if others else []
+    all_actions += saved + empty_action if saved else []
+    return all_actions
+
+
+def get_selection(all_actions):
+    """Spawn dmenu for selection and execute the associated action."""
+    rofi_highlight = CONF.getboolean('dmenu', 'rofi_highlight', fallback=False)
+    inp = []
 
     if rofi_highlight is True:
         inp = [str(action) for action in all_actions]
@@ -427,7 +507,7 @@ def get_selection(eths, aps, vpns, wgs, gsms, blues, wwan, others):
                     if action.is_active]
 
     inp_bytes = "\n".join(inp).encode(ENC)
-    command = dmenu -i_cmd(len(inp), active_lines=active_lines)
+    command = dmenu_cmd(len(inp), active_lines=active_lines)
     sel = Popen(command, stdin=PIPE, stdout=PIPE,
                 env=ENV).communicate(input=inp_bytes)[0].decode(ENC)
 
@@ -435,14 +515,13 @@ def get_selection(eths, aps, vpns, wgs, gsms, blues, wwan, others):
         sys.exit()
 
     if rofi_highlight is False:
-        action = [i for i in eths + aps + vpns + wgs + gsms + blues + wwan + others
+        action = [i for i in all_actions
                   if ((str(i).strip() == str(sel.strip())
                        and not i.is_active) or
                       ('== ' + str(i) == str(sel.rstrip('\n'))
                        and i.is_active))]
     else:
-        action = [i for i in eths + aps + vpns + wgs + gsms + blues + wwan + others
-                  if str(i).strip() == sel.strip()]
+        action = [i for i in all_actions if str(i).strip() == sel.strip()]
     assert len(action) == 1, \
         u"Selection was ambiguous: '{}'".format(str(sel.strip()))
     return action[0]
@@ -454,7 +533,14 @@ def toggle_networking(enable):
     Args: enable - boolean
 
     """
-    CLIENT.networking_set_enabled(enable)
+    toggle = GLib.Variant.new_tuple(GLib.Variant.new_boolean(enable))
+    try:
+        CLIENT.dbus_call(NM.DBUS_PATH, NM.DBUS_INTERFACE, "Enable", toggle,
+                         None, -1, None, None, None)
+    except AttributeError:
+        # Workaround for older versions of python-gobject
+        CLIENT.networking_set_enabled(enable)
+    notify("Networking {}".format("enabled" if enable is True else "disabled"))
 
 
 def toggle_wifi(enable):
@@ -463,7 +549,14 @@ def toggle_wifi(enable):
     Args: enable - boolean
 
     """
-    CLIENT.wireless_set_enabled(enable)
+    toggle = GLib.Variant.new_boolean(enable)
+    try:
+        CLIENT.dbus_set_property(NM.DBUS_PATH, NM.DBUS_INTERFACE, "WirelessEnabled", toggle,
+                                 -1, None, None, None)
+    except AttributeError:
+        # Workaround for older versions of python-gobject
+        CLIENT.wireless_set_enabled(enable)
+    notify("Wifi {}".format("enabled" if enable is True else "disabled"))
 
 
 def toggle_wwan(enable):
@@ -472,28 +565,61 @@ def toggle_wwan(enable):
     Args: enable - boolean
 
     """
-    CLIENT.wwan_set_enabled(enable)
+    toggle = GLib.Variant.new_boolean(enable)
+    try:
+        CLIENT.dbus_set_property(NM.DBUS_PATH, NM.DBUS_INTERFACE, "WwanEnabled", toggle,
+                                 -1, None, None, None)
+    except AttributeError:
+        # Workaround for older versions of python-gobject
+        CLIENT.wwan_set_enabled(enable)
+    notify("Wwan {}".format("enabled" if enable is True else "disabled"))
+
+
+def toggle_bluetooth(enable):
+    """Enable/disable Bluetooth
+
+    Args: enable - boolean
+
+    References:
+    https://github.com/blueman-project/blueman/blob/master/blueman/plugins/mechanism/RfKill.py
+    https://www.kernel.org/doc/html/latest/driver-api/rfkill.html
+    https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tree/include/uapi/linux/rfkill.h?h=v5.8.9
+
+    """
+    type_bluetooth = 2
+    op_change_all = 3
+    idx = 0
+    soft_state = 0 if enable else 1
+    hard_state = 0
+
+    data = struct.pack("IBBBB", idx, type_bluetooth, op_change_all,
+                       soft_state, hard_state)
+
+    try:
+        with open('/dev/rfkill', 'r+b', buffering=0) as rff:
+            rff.write(data)
+    except PermissionError:
+        notify("Lacking permission to write to /dev/rfkill.",
+               "Maybe you need to add your user to the 'rfkill' group?",
+               urgency="critical")
+    else:
+        notify("Bluetooth {}".format("enabled" if enable else "disabled"))
 
 
 def launch_connection_editor():
     """Launch nmtui or the gui nm-connection-editor
 
     """
-    conf = configparser.ConfigParser()
-    conf.read(expanduser("~/.config/networkmanager-dmenu -i/config.ini"))
-    if conf.has_option("editor", "terminal"):
-        terminal = conf.get("editor", "terminal")
-    else:
-        terminal = "xterm"
-    if conf.has_option("editor", "gui_if_available"):
-        gui_if_available = conf.get("editor", "gui_if_available")
-    else:
-        gui_if_available = "True"
-    if gui_if_available == "True":
+    terminal = CONF.get("editor", "terminal", fallback="xterm")
+    gui_if_available = CONF.getboolean("editor", "gui_if_available", fallback=True)
+    if gui_if_available is True:
         try:
-            Popen(["nm-connection-editor"]).communicate()
+            Popen(["gnome-control-center", "network"]).communicate()
         except OSError:
-            Popen([terminal, "-e", "nmtui"]).communicate()
+            try:
+                Popen(["nm-connection-editor"]).communicate()
+            except OSError:
+                Popen([terminal, "-e", "nmtui"]).communicate()
     else:
         Popen([terminal, "-e", "nmtui"]).communicate()
 
@@ -504,12 +630,7 @@ def get_passphrase():
     Returns: string
 
     """
-
-    conf = configparser.ConfigParser()
-    conf.read(expanduser("~/.config/networkmanager-dmenu -i/config.ini"))
-    pinentry = None
-    if conf.has_option("dmenu -i", "pinentry"):
-        pinentry = conf.get("dmenu -i", "pinentry")
+    pinentry = CONF.get("dmenu", "pinentry", fallback=None)
     if pinentry:
         pin = ""
         out = Popen(pinentry,
@@ -520,7 +641,7 @@ def get_passphrase():
             if res.startswith("D "):
                 pin = res.split("D ")[1]
         return pin
-    return Popen(dmenu -i_cmd(0, "Passphrase"),
+    return Popen(dmenu_cmd(0, "Passphrase"),
                  stdin=PIPE, stdout=PIPE).communicate()[0].decode(ENC)
 
 
@@ -528,9 +649,9 @@ def delete_connection():
     """Display list of NM connections and delete the selected one
 
     """
-    conn_acts = [Action(i.get_id(), i.delete) for i in CONNS]
+    conn_acts = [Action(i.get_id(), i.delete_async, args=[None, delete_cb, None]) for i in CONNS]
     conn_names = "\n".join([str(i) for i in conn_acts]).encode(ENC)
-    sel = Popen(dmenu -i_cmd(len(conn_acts), "CHOOSE CONNECTION TO DELETE:"),
+    sel = Popen(dmenu_cmd(len(conn_acts), "CHOOSE CONNECTION TO DELETE:"),
                 stdin=PIPE,
                 stdout=PIPE,
                 env=ENV).communicate(input=conn_names)[0].decode(ENC)
@@ -539,6 +660,18 @@ def delete_connection():
     action = [i for i in conn_acts if str(i) == sel.rstrip("\n")]
     assert len(action) == 1, u"Selection was ambiguous: {}".format(str(sel))
     action[0]()
+    LOOP.run()
+
+
+def delete_cb(dev, res, data):
+    """Notification if delete completed successfully
+
+    """
+    if dev.delete_finish(res) is True:
+        notify("Deleted {}".format(dev.get_id()))
+    else:
+        notify("Problem deleting {}".format(dev.get_id()), urgency="critical")
+    LOOP.quit()
 
 
 def set_new_connection(nm_ap, nm_pw, adapter):
@@ -613,13 +746,17 @@ def verify_conn(client, result, data):
     try:
         act_conn = client.add_and_activate_connection_finish(result)
         conn = act_conn.get_connection()
-        conn.verify()
-        conn.verify_secrets()
-        data.verify()
-        data.verify_secrets()
+        if not all([conn.verify(),
+                    conn.verify_secrets(),
+                    data.verify(),
+                    data.verify_secrets()]):
+            raise GLib.Error
+        notify("Added {}".format(conn.get_id()))
     except GLib.Error:  # pylint: disable=catching-non-exception
         try:
-            conn.delete()
+            notify("Connection to {} failed".format(conn.get_id()),
+                   urgency="critical")
+            conn.delete_async(None, None, None)
         except UnboundLocalError:
             pass
     finally:
@@ -670,6 +807,21 @@ def create_ap_list(adapter, active_connections):
     return aps, active_ap, active_ap_con, adapter
 
 
+def notify(message, details=None, urgency="low"):
+    """Use notify-send if available for notifications
+
+    """
+    args = ["-u", urgency, message]
+    if details is not None:
+        args.append(details)
+
+    try:
+        Popen(["notify-send"] + args,
+              stdout=PIPE, stderr=PIPE).communicate()
+    except FileNotFoundError:
+        pass
+
+
 def run():
     """Main script entrypoint"""
     active = CLIENT.get_active_connections()
@@ -680,7 +832,11 @@ def run():
         ap_actions = []
 
     vpns = [i for i in CONNS if i.is_type(NM.SETTING_VPN_SETTING_NAME)]
-    wgs = [i for i in CONNS if i.is_type(NM.SETTING_WIREGUARD_SETTING_NAME)]
+    try:
+        wgs = [i for i in CONNS if i.is_type(NM.SETTING_WIREGUARD_SETTING_NAME)]
+    except AttributeError:
+        # Workaround for older versions of python-gobject with no wireguard support
+        wgs = []
     eths = [i for i in CONNS if i.is_type(NM.SETTING_WIRED_SETTING_NAME)]
     blues = [i for i in CONNS if i.is_type(NM.SETTING_BLUETOOTH_SETTING_NAME)]
 
@@ -698,8 +854,17 @@ def run():
         gsm_actions = []
         wwan_actions = []
 
-    sel = get_selection(eth_actions, ap_actions, vpn_actions, wg_actions,
-                        gsm_actions, blue_actions, wwan_actions, other_actions)
+    list_saved = CONF.getboolean('dmenu', 'list_saved', fallback=False)
+    saved_cons = [i for i in CONNS if i not in vpns + wgs + eths + blues]
+    if list_saved:
+        saved_actions = create_saved_actions(saved_cons)
+    else:
+        saved_actions = [Action("Saved connections", prompt_saved, [saved_cons])]
+
+    actions = combine_actions(eth_actions, ap_actions, vpn_actions, wg_actions,
+                              gsm_actions, blue_actions, wwan_actions,
+                              other_actions, saved_actions)
+    sel = get_selection(actions)
     sel()
 
 

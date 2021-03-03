@@ -1,2 +1,4 @@
 .config/nvim/autoload/plug.vim.old
 .dots
+
+.config/xfce4/xfconf/xfce-perchannel-xml/thunar.xml

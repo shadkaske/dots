@@ -399,7 +399,7 @@ globalkeys = gears.table.join(
               {description = "Start Emacs", group = "launcher"}),
 
     -- Clipboard Manager
-    awful.key({ modkey, "Shift" }, "v", function() awful.spawn("xfce4-popup-clipman-actions") end,
+    awful.key({ modkey, "Shift" }, "v", function() awful.spawn("dmenu-greenclip") end,
               {description = "clipboard manager", group = "launcher"}),
 
     -- Firefox
@@ -432,7 +432,26 @@ globalkeys = gears.table.join(
 
     -- Lazy Git Dots
     awful.key({ modkey, "Control" }, "d", function() awful.spawn("lazygit-dots") end,
-              {description = "Dot Files Manager", group = "applications"})
+              {description = "Dot Files Manager", group = "applications"}),
+
+    -- Media Keys
+    awful.key({}, "XF86AudioRaiseVolume", function() os.execute("pactl set-sink-volume @DEFAULT_SINK@ +5%") end,
+              {description = "Raise Default Volume", group = "Media"}),
+
+    awful.key({}, "XF86AudioLowerVolume", function() os.execute("pactl set-sink-volume @DEFAULT_SINK@ -5%") end,
+              {description = "Lower Default Volume", group = "Media"}),
+
+    awful.key({}, "XF86AudioMute", function() os.execute("pactl set-sink-mute @DEFAULT_SINK@ toggle") end,
+              {description = "Mute Default Volume", group = "Media"}),
+
+    awful.key({}, "XF86AudioPlay", function() os.execute("mpc toggle") end,
+              {description = "MPC Play/Pause", group = "Media"}),
+
+    awful.key({}, "XF86AudioNext", function() os.execute("mpc next") end,
+              {description = "MPC Next", group = "Media"}),
+
+    awful.key({}, "XF86AudioPrev", function() os.execute("mpc prv") end,
+              {description = "MPC Next", group = "Media"})
 
 )
 
@@ -704,7 +723,7 @@ run_once({
     "nm-applet",
     "volumeicon",
     -- "autokey",
-    "xfce4-clipman",
+    "greenclip daemon",
     "unclutter -root",
     "xfce4-screensaver",
     "onedrive monitor",

@@ -66,7 +66,7 @@
   (remove-hook! 'mu4e-compose-pre-hook 'org-msg-mode)
   (setq! mu4e-attachment-dir "~/Downloads")
   (setq! mu4e-maildir (expand-file-name "~/Mail")
-         mu4e-get-mail-command "update-mail.sh"
+         mu4e-get-mail-command "mbsync -a"
          mu4e-update-interval 300
          mu4e-index-update-in-background t
          mu4e-compose-signature-auto-include nil

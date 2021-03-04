@@ -32,3 +32,9 @@ bin/.local/bin/picom-trans
 ranger/.config/ranger/plugins/ranger_devicons/
 ranger/.config/ranger/plugins/__pycache__/__init__.cpython-38.opt-1.pyc
 emacs/.config/doom/config.el
+
+nvim/.config/nvim/.netrwhist
+bin/.local/bin/dmenu
+bin/.local/bin/flake8
+bin/.local/bin/greenclip
+bin/.local/bin/pycodestyle

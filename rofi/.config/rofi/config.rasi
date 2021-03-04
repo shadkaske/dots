@@ -8,8 +8,7 @@ configuration {
     fake-transparency: true;
 }
 
-
-window {
+/*window {
   height: 85%;
   width: 25em;
   border: 0;
@@ -17,7 +16,7 @@ window {
   location: west;
   anchor: west;
 }
-
+*/
 /* vim: ft=css
  */
 @import "/usr/share/rofi/themes/Arc-Dark.rasi"

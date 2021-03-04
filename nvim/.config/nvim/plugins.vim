@@ -30,6 +30,7 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'vim-scripts/ReplaceWithRegister'
     Plug 'liuchengxu/vim-which-key'
     Plug 'mbbill/undotree'
+    Plug 'godlygeek/tabular'
     " Git
     Plug 'tpope/vim-fugitive'
     Plug 'airblade/vim-gitgutter'

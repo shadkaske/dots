@@ -6,7 +6,7 @@
 [merge]
     tool = vscode
 [diff]
-    tool = vscode
+    tool = vscode:
 [mergetool]
     keepBackup = false
     prompt = false

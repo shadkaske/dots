@@ -48,18 +48,19 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init(gears.filesystem.get_themes_dir() .. "gtk/theme.lua")
+beautiful.init("~/.config/awesome/themes/gtk/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "x-terminal-emulator"
-editor = os.getenv("EDITOR") or "editor"
-editor_cmd = terminal .. " -e " .. editor
 emacs_cmd = "emacsclient -c -a emacs"
+-- editor = os.getenv("EDITOR") or "editor"
+editor = emacs_cmd
+editor_cmd = emacs_cmd
 
 -- My Application Variables
-background = "feh --bg-fill --randomize ~/.local/share/backgrounds/*"
+background = "feh --bg-fill --randomize ~/.local/share/backgrounds/light/*"
 lockscreen = "xfce4-screensaver-command --lock"
-filemanager = "nautilus"
+filemanager = "thunar"
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -131,13 +132,13 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock()
 
--- Lain Cal Widget
+-- -- Lain Cal Widget
 local mycal = lain.widget.cal { attach_to = { mytextclock },
     week_start = 1,
     icons = ''
 }
 
--- Create a wibox for each screen and add it
+-- -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
                     awful.button({ }, 1, function(t) t:view_only() end),
                     awful.button({ modkey }, 1, function(t)
@@ -214,12 +215,24 @@ awful.screen.connect_for_each_screen(function(s)
         buttons = taglist_buttons
     }
 
-    -- Create a tasklist widget
-    s.mytasklist = awful.widget.tasklist {
-        screen  = s,
-        filter  = awful.widget.tasklist.filter.currenttags,
-        buttons = tasklist_buttons
-    }
+    if beautiful.taglist_shape_container then
+        local background_shape_wrapper = wibox.container.background(s.mytaglist)
+        background_shape_wrapper._do_taglist_update_now = s.mytaglist._do_taglist_update_now
+        background_shape_wrapper._do_taglist_update = s.mytaglist._do_taglist_update
+        background_shape_wrapper.shape = beautiful.taglist_shape_container
+        background_shape_wrapper.shape_clip = beautiful.taglist_shape_clip_container
+        background_shape_wrapper.shape_border_width = beautiful.taglist_shape_border_width_container
+        background_shape_wrapper.shape_border_color = beautiful.taglist_shape_border_color_container
+        s.mytaglist = background_shape_wrapper
+    end
+
+     -- Create a tasklist widget
+     s.mytasklist = awful.widget.tasklist {
+         screen  = s,
+         filter  = awful.widget.tasklist.filter.currenttags,
+        buttons = tasklist_buttons,
+        widget_template = beautiful.tasklist_widget_template
+     }
 
     -- Create the wibox
     s.mywibox = awful.wibar({ position = "top", screen = s })
@@ -395,7 +408,9 @@ globalkeys = gears.table.join(
               {description = "Start Emacs", group = "launcher"}),
 
     -- Clipboard Manager
-    awful.key({ modkey, "Shift" }, "v", function() awful.spawn("xfce4-popup-clipman-actions") end,
+    -- awful.key({ modkey, "Shift" }, "v", function() awful.spawn("xfce4-popup-clipman-actions") end,
+    --           {description = "clipboard manager", group = "launcher"}),
+    awful.key({ modkey, "Shift" }, "v", function() awful.spawn("dmenu-greenclip") end,
               {description = "clipboard manager", group = "launcher"}),
 
     -- Firefox
@@ -614,6 +629,14 @@ awful.rules.rules = {
     -- Set Windows 10 VM to go to tag 8
     { rule = { name = "Windows10 on QEMU/KVM" },
       properties = { tag = "8" } },
+
+    -- Set Polybar as dockable and undecorated
+    { rule = { class = "Polybar" },
+      properties = {
+          dockable = true,
+          titlebars_enabled = false,
+          requests_no_titlebar = true
+    }},
 }
 -- }}}
 
@@ -700,23 +723,25 @@ run_once({
     "nm-applet",
     "volumeicon",
     -- "autokey",
-    "xfce4-clipman",
+    "greenclip daemon",
     "unclutter -root",
     "xfce4-screensaver",
     "xfce4-power-manager --sm-client-disable",
     -- "onedrive monitor",
     "/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1",
     "udevadm monitor",
-    "nexcloud --background"
+    "nextcloud --background",
+    -- "polybar example"
 }) -- entries must be separated by commas
 
 set_wallpaper()
 
 -- Awesome Configs
 -- Theme overrides
-beautiful.useless_gap = 8
-beautiful.gap_single_client = false
+beautiful.useless_gap = 6
+beautiful.gap_single_client = true
 beautiful.taglist_font = "FontAwesome 11"
+client.connect_signal("focus", function(c) c.border_color = "#FFFFFF" end)
 
 -- Toggle title bar when toggling floating
 client.connect_signal("property::floating", function(c)

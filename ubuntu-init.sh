@@ -81,7 +81,8 @@ sudo apt install --yes ripgrep silversearcher-ag fd-find build-essential cmake \
     msmtp fonts-cantarell
 
 # Install Python Bits
-pip3 install black pyflakes isort pipenv nose pytest neovim neovim-remote
+pip3 install black pyflakes isort pipenv nose pytest
+# neovim neovim-remote
 
 # Set Up Npm for Local Install
 mkdir "${HOME}/.npm-global"
@@ -95,11 +96,11 @@ git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
 $HOME/.emacs.d/bin/doom install
 
 # Install apps
-sudo apt install --yes kitty awesome dunst neovim ranger rofi volumeicon-alsa \
+sudo apt install --yes kitty awesome dunst ranger rofi volumeicon-alsa \
     xfce4-clipman unclutter nextcloud-desktop lxappearance breeze-cursor-theme
 
 # Set Up Neovim
-nvim -u $HOME/.config/nvim/plugins.vim +PlugInstall +qall
+# vim -u $HOME/.config/nvim/plugins.vim +PlugInstall +qall
 
 # Setup picom
 # Build Bits

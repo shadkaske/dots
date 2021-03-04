@@ -437,7 +437,7 @@ This will ignore the warning from LSP mode when opening a project with a lot of 
 (setq lsp-file-watch-threshold nil)
 #+end_src
 * Mbsysnc
-#+begin_src conf :tangle ~/.mbsynrc 
+#+begin_src conf :tangle ~/.mbsyncrc
 # Office 365 Work Account
 IMAPAccount showplacewood
 Host outlook.office365.com
@@ -448,7 +448,7 @@ SSLVersion TLSv1.2
 AuthMechs PLAIN
 Timeout 120
 CertificateFile /etc/ssl/certs/ca-certificates.crt
-PipelineDepth 1
+PipelineDepth 5
 
 IMAPStore showplacewood-remote
 Account showplacewood

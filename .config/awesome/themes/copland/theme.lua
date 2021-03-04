@@ -19,19 +19,19 @@ theme.dir                                       = os.getenv("HOME") .. "/.config
 -- theme.wallpaper                                 = theme.dir .. "/wall.png"
 theme.font                                      = "JetBrainsMono Nerd Font 12"
 theme.fg_normal                                 = "#BBBBBB"
-theme.fg_focus                                  = "#78A4FF"
-theme.bg_normal                                 = "#111111"
-theme.bg_focus                                  = "#111111"
-theme.fg_urgent                                 = "#000000"
-theme.bg_urgent                                 = "#FFFFFF"
+theme.fg_focus                                  = "#5294e2"
+theme.bg_normal                                 = "#404552"
+theme.bg_focus                                  = "#414a59"
+theme.fg_urgent                                 = "#FFFFFF"
+theme.bg_urgent                                 = "#CC575D"
 theme.border_width                              = dpi(2)
-theme.border_normal                             = "#141414"
-theme.border_focus                              = "#93B6FF"
+theme.border_normal                             = "#414A59"
+theme.border_focus                              = theme.fg_focus
 theme.taglist_fg_focus                          = "#FFFFFF"
-theme.taglist_bg_focus                          = "#111111"
-theme.taglist_bg_normal                         = "#111111"
-theme.titlebar_bg_normal                        = "#191919"
-theme.titlebar_bg_focus                         = "#262626"
+theme.taglist_bg_focus                          = theme.bg_normal
+theme.taglist_bg_normal                         = theme.bg_normal
+theme.titlebar_bg_normal                        = theme.bg_normal
+theme.titlebar_bg_focus                         = theme.bg_focus
 theme.menu_height                               = dpi(16)
 theme.menu_width                                = dpi(130)
 theme.tasklist_disable_icon                     = true
@@ -95,14 +95,14 @@ local green  = "#8FEB8F"
 
 -- Textclock
 --os.setlocale(os.getenv("LANG")) -- to localize the clock
-local mytextclock = wibox.widget.textclock("<span font='Terminus 5'> </span>%H:%M ")
+local mytextclock = wibox.widget.textclock("%a %b %d %R ")
 mytextclock.font = theme.font
 
 -- Calendar
 theme.cal = lain.widget.cal({
     attach_to = { mytextclock },
     notification_preset = {
-        font = "Terminus 11",
+        font = "JetBrainsMono Nerd Font 11",
         fg   = theme.fg_normal,
         bg   = theme.bg_normal
     }
@@ -166,40 +166,40 @@ local batbar = wibox.widget {
     ticks_size       = dpi(6),
     widget           = wibox.widget.progressbar,
 }
-local batupd = lain.widget.bat({
-    settings = function()
-        if (not bat_now.status) or bat_now.status == "N/A" or type(bat_now.perc) ~= "number" then return end
+-- local batupd = lain.widget.bat({
+--     settings = function()
+--         if (not bat_now.status) or bat_now.status == "N/A" or type(bat_now.perc) ~= "number" then return end
 
-        if bat_now.status == "Charging" then
-            baticon:set_image(theme.ac)
-            if bat_now.perc >= 98 then
-                batbar:set_color(green)
-            elseif bat_now.perc > 50 then
-                batbar:set_color(theme.fg_normal)
-            elseif bat_now.perc > 15 then
-                batbar:set_color(theme.fg_normal)
-            else
-                batbar:set_color(red)
-            end
-        else
-            if bat_now.perc >= 98 then
-                batbar:set_color(green)
-            elseif bat_now.perc > 50 then
-                batbar:set_color(theme.fg_normal)
-                baticon:set_image(theme.bat)
-            elseif bat_now.perc > 15 then
-                batbar:set_color(theme.fg_normal)
-                baticon:set_image(theme.bat_low)
-            else
-                batbar:set_color(red)
-                baticon:set_image(theme.bat_no)
-            end
-        end
-        batbar:set_value(bat_now.perc / 100)
-    end
-})
-local batbg = wibox.container.background(batbar, "#474747", gears.shape.rectangle)
-local batwidget = wibox.container.margin(batbg, dpi(2), dpi(7), dpi(4), dpi(4))
+--         if bat_now.status == "Charging" then
+--             baticon:set_image(theme.ac)
+--             if bat_now.perc >= 98 then
+--                 batbar:set_color(green)
+--             elseif bat_now.perc > 50 then
+--                 batbar:set_color(theme.fg_normal)
+--             elseif bat_now.perc > 15 then
+--                 batbar:set_color(theme.fg_normal)
+--             else
+--                 batbar:set_color(red)
+--             end
+--         else
+--             if bat_now.perc >= 98 then
+--                 batbar:set_color(green)
+--             elseif bat_now.perc > 50 then
+--                 batbar:set_color(theme.fg_normal)
+--                 baticon:set_image(theme.bat)
+--             elseif bat_now.perc > 15 then
+--                 batbar:set_color(theme.fg_normal)
+--                 baticon:set_image(theme.bat_low)
+--             else
+--                 batbar:set_color(red)
+--                 baticon:set_image(theme.bat_no)
+--             end
+--         end
+--         batbar:set_value(bat_now.perc / 100)
+--     end
+-- })
+-- local batbg = wibox.container.background(batbar, "#474747", gears.shape.rectangle)
+-- local batwidget = wibox.container.margin(batbg, dpi(2), dpi(7), dpi(4), dpi(4))
 
 -- /home fs
 --[[ commented because it needs Gio/Glib >= 2.54
@@ -263,9 +263,9 @@ local volumebg = wibox.container.background(theme.volume.bar, "#474747", gears.s
 local volumewidget = wibox.container.margin(volumebg, dpi(2), dpi(7), dpi(4), dpi(4))
 
 -- Weather
-theme.weather = lain.widget.weather({
-    city_id = 2643743, -- placeholder (London)
-})
+-- theme.weather = lain.widget.weather({
+--     city_id = 5231851,
+-- })
 
 -- Separators
 local first     = wibox.widget.textbox(markup.font("Terminus 3", " "))
@@ -298,7 +298,7 @@ function theme.at_screen_connect(s)
     awful.tag(awful.util.tagnames, s, awful.layout.layouts)
 
     -- Create a promptbox for each screen
-    -- s.mypromptbox = awful.widget.prompt()
+    s.mypromptbox = awful.widget.prompt()
     -- Create an imagebox widget which will contains an icon indicating which layout we're using.
     -- We need one layoutbox per screen.
     s.mylayoutbox = awful.widget.layoutbox(s)
@@ -315,6 +315,11 @@ function theme.at_screen_connect(s)
     -- Create a tasklist widget
     s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons)
 
+    -- Systray
+    s.systray = wibox.widget.systray()
+    s.systray.visible = false
+    s.systray.force_height = 12
+
     -- Create the wibox
     s.mywibox = awful.wibar({ position = "top", screen = s, height = dpi(24), bg = theme.bg_normal, fg = theme.fg_normal })
 
@@ -329,7 +334,7 @@ function theme.at_screen_connect(s)
             bar_spr,
             s.mytaglist,
             -- first,
-            -- s.mypromptbox,
+            s.mypromptbox,
         },
         s.mytasklist, -- Middle widget
         { -- Right widgets
@@ -348,7 +353,7 @@ function theme.at_screen_connect(s)
             bar_spr,
             mytextclock,
             small_spr,
-            wibox.widget.systray(),
+            s.systray,
             small_spr
         },
     }

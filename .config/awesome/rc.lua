@@ -272,7 +272,7 @@ globalkeys = my_table.join(
               {description = "take a screenshot", group = "hotkeys"}),
 
     -- X screen locker
-    awful.key({ altkey, "Control" }, "l", function () os.execute(scrlocker) end,
+    awful.key({ modkey }, "Escape", function () os.execute(scrlocker) end,
               {description = "lock screen", group = "hotkeys"}),
 
     -- Hotkeys
@@ -283,7 +283,7 @@ globalkeys = my_table.join(
               {description = "view previous", group = "tag"}),
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext,
               {description = "view next", group = "tag"}),
-    awful.key({ modkey,           }, "Escape", awful.tag.history.restore,
+    awful.key({ modkey,           }, "'", awful.tag.history.restore,
               {description = "go back", group = "tag"}),
 
     -- Non-empty tag browsing
@@ -523,6 +523,9 @@ globalkeys = my_table.join(
     -- Dmenu Greenclip
     awful.key({ modkey, "Shift" }, "v", function() awful.spawn("dmenu-greenclip") end,
               {description = "clipboard manager", group = "launcher"}),
+    awful.key({ modkey }, "=", function()
+        awful.screen.focused().systray.visible = not awful.screen.focused().systray.visible
+    end, {description = "Toggle Systray", group = "custom"}),
     -- Default
     --[[ Menubar
     awful.key({ modkey }, "p", function() menubar.show() end,

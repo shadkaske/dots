@@ -14,20 +14,32 @@ local dpi   = require("beautiful.xresources").apply_dpi
 local awesome, client, os = awesome, client, os
 local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 
+local background                                = "#404552"
+local foreground                                = "#E6E4E4"
+local foreground_inactive                       = "#808191"
+local highlight                                 = "#6197D8"
+local urgent                                    = "#CC575D"
+local background_dark                           = "#2F343F"
+local background_med                            = "#383C4A"
+local background_transparent                    = "#404552CC"
+local foreground_transparent                    = "#E6E4E4CC"
+local highlight_transparent                     = "#6197D8CC"
+local urgent_transparent                        = "#CC575D"
+local foreground_inactive_transparent           = "#808191"
+
 local theme                                     = {}
 theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/themes/copland"
--- theme.wallpaper                                 = theme.dir .. "/wall.png"
-theme.font                                      = "JetBrainsMono Nerd Font 12"
-theme.fg_normal                                 = "#BBBBBB"
-theme.fg_focus                                  = "#5294e2"
-theme.bg_normal                                 = "#404552"
-theme.bg_focus                                  = "#414a59"
-theme.fg_urgent                                 = "#FFFFFF"
-theme.bg_urgent                                 = "#CC575D"
+theme.font                                      = "Cantarell 10"
+theme.fg_normal                                 = foreground_inactive
+theme.fg_focus                                  = highlight
+theme.bg_normal                                 = background
+theme.bg_focus                                  = background
+theme.fg_urgent                                 = foreground
+theme.bg_urgent                                 = urgent
 theme.border_width                              = dpi(2)
 theme.border_normal                             = "#414A59"
-theme.border_focus                              = theme.fg_focus
-theme.taglist_fg_focus                          = "#FFFFFF"
+theme.border_focus                              = highlight
+theme.taglist_fg_focus                          = foreground
 theme.taglist_bg_focus                          = theme.bg_normal
 theme.taglist_bg_normal                         = theme.bg_normal
 theme.titlebar_bg_normal                        = theme.bg_normal
@@ -95,7 +107,7 @@ local green  = "#8FEB8F"
 
 -- Textclock
 --os.setlocale(os.getenv("LANG")) -- to localize the clock
-local mytextclock = wibox.widget.textclock("%a %b %d %R ")
+local mytextclock = wibox.widget.textclock(markup(foreground, " %a %b %d %R "))
 mytextclock.font = theme.font
 
 -- Calendar
@@ -103,31 +115,10 @@ theme.cal = lain.widget.cal({
     attach_to = { mytextclock },
     notification_preset = {
         font = "JetBrainsMono Nerd Font 11",
-        fg   = theme.fg_normal,
+        fg   = foreground,
         bg   = theme.bg_normal
     }
 })
-
--- Mail IMAP check
---[[ commented because it needs to be set before use
-theme.mail = lain.widget.imap({
-    timeout  = 180,
-    server   = "server",
-    mail     = "mail",
-    password = "keyring get mail",
-    settings = function()
-        mail  = ""
-        count = ""
-
-        if mailcount > 0 then
-            mail = "<span font='Terminus 5'> </span>Mail "
-            count = mailcount .. " "
-        end
-
-        widget:set_markup(markup(blue, mail) .. count)
-    end
-})
---]]
 
 -- MPD
 local mpdicon = wibox.widget.imagebox()
@@ -233,16 +224,12 @@ local fswidget = wibox.container.margin(fsbg, dpi(2), dpi(7), dpi(4), dpi(4))
 -- ALSA volume bar
 local volicon = wibox.widget.imagebox(theme.vol)
 theme.volume = lain.widget.pulsebar {
-    width = dpi(59), border_width = 0, ticks = true, ticks_size = dpi(6),
+    width = dpi(59), border_width = 0, ticks = true, ticks_size = dpi(4),
     notification_preset = { font = theme.font },
     --togglechannel = "IEC958,3",
     settings = function()
-        if volume_now.status == "off" then
+        if volume_now.muted == "yes" then
             volicon:set_image(theme.vol_mute)
-        elseif volume_now.level == 0 then
-            volicon:set_image(theme.vol_no)
-        elseif volume_now.level <= 50 then
-            volicon:set_image(theme.vol_low)
         else
             volicon:set_image(theme.vol)
         end
@@ -285,17 +272,18 @@ end
 
 function theme.at_screen_connect(s)
     -- Quake application
-    s.quake = lain.util.quake({ app = awful.util.terminal })
+    s.quake = lain.util.quake({ app = "kitty",argname = "--title %s",extra = "--class=QuakeDD tmux new-session -A -s DropDown",
+            visible = true, height = 0.4, width = 0.4, vert = "top", horiz = "center"})
 
     -- If wallpaper is a function, call it with the screen
-    local wallpaper = theme.wallpaper
-    if type(wallpaper) == "function" then
-        wallpaper = wallpaper(s)
-    end
-    gears.wallpaper.maximized(wallpaper, s, true)
+    -- local wallpaper = theme.wallpaper
+    -- if type(wallpaper) == "function" then
+    --     wallpaper = wallpaper(s)
+    -- end
+    -- gears.wallpaper.maximized(wallpaper, s, true)
 
     -- Tags
-    awful.tag(awful.util.tagnames, s, awful.layout.layouts)
+    awful.tag(awful.util.tagnames, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()

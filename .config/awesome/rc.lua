@@ -111,7 +111,7 @@ local scrlocker    = "xfce4-screensaver-command --lock"
 local clpmngr      = "dmenu-greenclip"
 
 awful.util.terminal = terminal
-awful.util.tagnames = { "1", "2", "3", "4", "5" }
+awful.util.tagnames = { "1", "2", "3", "4", "5", "6", "7", "8", "9" }
 awful.layout.layouts = {
     awful.layout.suit.tile,
     awful.layout.suit.floating,
@@ -434,8 +434,8 @@ globalkeys = my_table.join(
               {description = "restore minimized", group = "client"}),
 
     -- Dropdown application
-    awful.key({ modkey, }, "z", function () awful.screen.focused().quake:toggle() end,
-              {description = "dropdown application", group = "launcher"}),
+    awful.key({ modkey }, "`", function() awful.screen.focused().quake:toggle() end,
+              {description = "Dropdown Terminal", group = "applications"}),
 
     -- Widgets popups
     awful.key({ altkey, }, "c", function () if beautiful.cal then beautiful.cal.show(7) end end,
@@ -520,12 +520,52 @@ globalkeys = my_table.join(
 
     awful.key({ modkey }, "p", function() awful.spawn("rofi -show drun") end,
               {description = "show the rofi", group = "launcher"}),
+
     -- Dmenu Greenclip
     awful.key({ modkey, "Shift" }, "v", function() awful.spawn("dmenu-greenclip") end,
               {description = "clipboard manager", group = "launcher"}),
+
+    -- Toggle Systray
     awful.key({ modkey }, "=", function()
         awful.screen.focused().systray.visible = not awful.screen.focused().systray.visible
     end, {description = "Toggle Systray", group = "custom"}),
+
+    -- virsh list
+    awful.key({ modkey, "Shift" }, "i", function() awful.spawn("dmenu-virtmanager") end,
+              {description = "virt-manager vms", group = "launcher"}),
+
+    -- Dmenu Network Manager
+    awful.key({ modkey, "Shift" }, "i", function() awful.spawn("dmenu-networkmanager") end,
+              {description = "dmenu network manager", group = "launcher"}),
+
+    -- Firefox
+    awful.key({ modkey }, "F2", function() awful.spawn("firefox") end,
+              {description = "Firefox", group = "applications"}),
+
+    -- Chrome
+    awful.key({ modkey }, "F3", function() awful.spawn("google-chrome") end,
+              {description = "Chrome", group = "applications"}),
+
+    -- Evolution
+    awful.key({ modkey }, "F4", function() awful.spawn("emacs") end,
+              {description = "Emacs", group = "applications"}),
+
+    -- File Manager
+    awful.key({ modkey }, "F6", function() awful.spawn(filemanager) end,
+              {description = "File Manager", group = "applications"}),
+
+    -- Database Manager
+    awful.key({ modkey }, "F7", function() awful.spawn("dbeaver") end,
+              {description = "Database Manager", group = "applications"}),
+
+    -- Virt Manager
+    awful.key({ modkey }, "F8", function() awful.spawn("virt-manager") end,
+              {description = "Virt-Manager", group = "applications"}),
+
+    -- Lazy Git Dots
+    awful.key({ modkey, "Control" }, "d", function() awful.spawn("lazygit-dots") end,
+              {description = "Dot Files Manager", group = "applications"}),
+
     -- Default
     --[[ Menubar
     awful.key({ modkey }, "p", function() menubar.show() end,
@@ -696,11 +736,46 @@ awful.rules.rules = {
       properties = { titlebars_enabled = false } },
 
     -- Set Firefox to always map on the first tag on screen 1.
-    { rule = { class = "Firefox" },
-      properties = { screen = 1, tag = awful.util.tagnames[1] } },
+    -- { rule = { class = "Firefox" },
+    --   properties = { screen = 1, tag = awful.util.tagnames[1] } },
 
     { rule = { class = "Gimp", role = "gimp-image-window" },
           properties = { maximized = true } },
+
+    -- iForms Wine Window likes to open as Maximized
+    { rule = { class = "iforms designer64.exe" },
+          properties = { maximized = false } },
+
+    -- Floating Clients
+    { rule_any = {
+        instance = {
+          "DTA",  -- Firefox addon DownThemAll.
+        },
+        class = {
+          "Arandr",
+          "Blueman-manager",
+          "Gpick",
+          "MessageWin",  -- kalarm.
+          "Sxiv",
+          "Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
+          "Wpa_gui",
+          "veromix",
+          "xtightvncviewer"},
+
+        -- Note that the name property shown in xprop might be set slightly after creation of the client
+        -- and the name shown there might not match defined rules here.
+        name = { -- Title
+          "Event Tester",  -- xev.
+          "scratchpad",
+          "Virtual Machine Manager",
+          "Remmina Remote Desktop Client"
+        },
+        role = {
+          "AlarmWindow",  -- Thunderbird's calendar.
+          "ConfigManager",  -- Thunderbird's about:config.
+          "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
+        }
+      }, properties = { floating = true }},
 }
 -- }}}
 

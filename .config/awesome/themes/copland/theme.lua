@@ -26,6 +26,8 @@ local foreground_transparent                    = "#E6E4E4CC"
 local highlight_transparent                     = "#6197D8CC"
 local urgent_transparent                        = "#CC575D"
 local foreground_inactive_transparent           = "#808191"
+local background_med_transparent                = "#383C4A"
+local background_dark_transparent               = "#2F343F"
 
 local theme                                     = {}
 theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/themes/copland"
@@ -102,7 +104,7 @@ theme.layout_centerwork                         = theme.dir .. "/icons/centerwor
 
 local markup = lain.util.markup
 local blue   = theme.fg_focus
-local red    = "#EB8F8F"
+local red    = urgent
 local green  = "#8FEB8F"
 
 -- Textclock
@@ -125,12 +127,12 @@ local mpdicon = wibox.widget.imagebox()
 theme.mpd = lain.widget.mpd({
     settings = function()
         if mpd_now.state == "play" then
-            title = mpd_now.title
-            artist  = " " .. mpd_now.artist  .. markup("#777777", " <span font='Terminus 2'> </span>|<span font='Terminus 5'> </span>")
+            title = mpd_now.title .. " "
+            artist  = " " .. markup(foreground, mpd_now.artist)  .. markup(foreground_inactive, " <span font='Terminus 2'> </span>|<span font='Terminus 5'> </span>")
             mpdicon:set_image(theme.play)
         elseif mpd_now.state == "pause" then
             title = "mpd "
-            artist  = "paused" .. markup("#777777", " |<span font='Terminus 5'> </span>")
+            artist  = "paused " .. markup(foreground_inactive, " |<span font='Terminus 5'> </span>")
             mpdicon:set_image(theme.pause)
         else
             title  = ""
@@ -235,9 +237,9 @@ theme.volume = lain.widget.pulsebar {
         end
     end,
     colors = {
-        background   = theme.bg_normal,
-        mute         = red,
-        unmute       = theme.fg_normal
+        background   = background_dark_transparent,
+        mute         = urgent,
+        unmute       = foreground
     }
 }
 theme.volume.tooltip.wibox.fg = theme.fg_focus
@@ -246,7 +248,7 @@ theme.volume.bar:buttons(my_table.join (
             awful.spawn(string.format("pavucontrol", awful.util.terminal))
           end)
 ))
-local volumebg = wibox.container.background(theme.volume.bar, "#474747", gears.shape.rectangle)
+local volumebg = wibox.container.background(theme.volume.bar, background, gears.shape.rectangle)
 local volumewidget = wibox.container.margin(volumebg, dpi(2), dpi(7), dpi(4), dpi(4))
 
 -- Weather
@@ -258,7 +260,7 @@ local volumewidget = wibox.container.margin(volumebg, dpi(2), dpi(7), dpi(4), dp
 local first     = wibox.widget.textbox(markup.font("Terminus 3", " "))
 local spr       = wibox.widget.textbox(' ')
 local small_spr = wibox.widget.textbox(markup.font("Terminus 4", " "))
-local bar_spr   = wibox.widget.textbox(markup.font("Terminus 3", " ") .. markup.fontfg(theme.font, "#777777", "|") .. markup.font("Terminus 5", " "))
+local bar_spr   = wibox.widget.textbox(markup.font("Terminus 3", " ") .. markup.fontfg(theme.font, foreground_inactive, "|") .. markup.font("Terminus 5", " "))
 
 -- Eminent-like task filtering
 local orig_filter = awful.widget.taglist.filter.all

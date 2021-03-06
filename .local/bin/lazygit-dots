@@ -1,0 +1,5 @@
+#!/bin/bash
+
+kitty -e lazygit -w $HOME -g $HOME/.dots
+
+#vim: ft=sh

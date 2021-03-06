@@ -1,0 +1,85 @@
+#!/bin/bash
+#  ____ _____
+# |  _ \_   _|  Derek Taylor (DistroTube)
+# | | | || |    http://www.youtube.com/c/DistroTube
+# | |_| || |    http://www.gitlab.com/dwt1/
+# |____/ |_|
+#
+# Dmenu script for editing some of my more frequently edited config files.
+declare -a options=(
+"awesome"
+"DoomConfig"
+"DoomInit"
+"dunst"
+"kitty"
+"neovim"
+"picom"
+"polybar"
+"quickmarks"
+"qutebrowser"
+"vim"
+"xresources"
+"zsh"
+"quit"
+)
+# The combination of echo and printf is done to add line breaks to the end of each
+# item in the array before it is piped into dmenu.  Otherwise, all the items are listed
+# as one long line (one item).
+choice=$(echo "$(printf '%s\n' "${options[@]}")" | dmenu -p 'Edit config file: ')
+case "$choice" in
+    quit)
+        echo "Program terminated." && exit 1
+        ;;
+    awesome)
+        choice="$HOME/.config/awesome/rc.lua"
+        ;;
+    DoomConfig)
+        choice="$HOME/.config/doom/config.el"
+        emacs=1
+        ;;
+    DoomInit)
+        choice="$HOME/.config/doom/init.el"
+        emacs=1
+        ;;
+    dunst)
+        choice="$HOME/.config/dunst/dunstrc"
+        ;;
+    kitty)
+        choice="$HOME/.config/kitty/kitty.conf"
+        ;;
+    neovim)
+        choice="$HOME/.config/nvim/init.vim"
+        ;;
+    picom)
+        choice="$HOME/.config/picom/picom.conf"
+        ;;
+    polybar)
+        choice="$HOME/.config/polybar/config"
+        ;;
+    quickmarks)
+        choice="$HOME/.config/qutebrowser/quickmarks"
+        ;;
+    qutebrowser)
+        choice="$HOME/.config/qutebrowser/autoconfig.yml"
+        ;;
+    vim)
+        choice="$HOME/.vimrc"
+        ;;
+    xresources)
+        choice="$HOME/.Xresources"
+        ;;
+    zsh)
+        choice="$HOME/.zshrc"
+        ;;
+    *)
+        exit 1
+        ;;
+esac
+# Ultimately, what do want to do with our choice?  Open in our editor!
+if [[ -z $emacs ]]; then
+    kitty -e nvim "$choice"
+else
+    emacsclient -c -a emacs "$choice"
+fi
+
+# vim: set filetype=sh

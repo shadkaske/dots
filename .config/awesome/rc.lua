@@ -65,10 +65,11 @@ run_once({
     "greenclip daemon",
     "unclutter -root",
     "xfce4-screensaver",
-    "onedrive monitor",
-    "/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1",
+    "xfce4-power-manager --sm-client-disable",
+    --"onedrive monitor",
+    "lxpolkit",
     "udevadm monitor",
-    "nextcloud --background"
+    --"nextcloud --background"
 }) -- entries must be separated by commas
 
 -- This function implements the XDG autostart specification
@@ -102,13 +103,14 @@ local chosen_theme = themes[2]
 local modkey       = "Mod4"
 local altkey       = "Mod1"
 local terminal     = "kitty"
-local vi_focus     = true -- vi-like client focus - https://github.com/lcpz/awesome-copycats/issues/275
+local vi_focus     = false -- vi-like client focus - https://github.com/lcpz/awesome-copycats/issues/275
 local cycle_prev   = true -- cycle trough all previous client or just the first -- https://github.com/lcpz/awesome-copycats/issues/274
 local editor       = os.getenv("EDITOR") or "vim"
 local gui_editor   = os.getenv("GUI_EDITOR") or "gvim"
 local browser      = os.getenv("BROWSER") or "firefox"
 local scrlocker    = "xfce4-screensaver-command --lock"
 local clpmngr      = "dmenu-greenclip"
+local filemanager  = "thunar"
 
 awful.util.terminal = terminal
 awful.util.tagnames = { "1", "2", "3", "4", "5", "6", "7", "8", "9" }
@@ -478,8 +480,8 @@ globalkeys = my_table.join(
               {description = "Firefox", group = "applications"}),
 
     -- Chrome
-    awful.key({ modkey }, "F3", function() awful.spawn("google-chrome") end,
-              {description = "Chrome", group = "applications"}),
+    awful.key({ modkey }, "F3", function() awful.spawn("qutebrowser") end,
+              {description = "QuteBrowser", group = "applications"}),
 
     -- Evolution
     awful.key({ modkey }, "F4", function() awful.spawn("emacs") end,
@@ -500,6 +502,14 @@ globalkeys = my_table.join(
     -- Lazy Git Dots
     awful.key({ modkey, "Control" }, "d", function() awful.spawn("lazygit-dots") end,
               {description = "Dot Files Manager", group = "applications"}),
+
+    -- Run Prompt
+    awful.key({ modkey }, "r", function() awful.spawn("rofi -show run") end,
+              {description = "show the menubar", group = "launcher"}),
+
+    -- BitWarden
+    awful.key({ modkey, "Shift" }, "p", function() awful.spawn("bwmenu") end,
+             {description = "Rofi BitWarden", group = "launcher"})
 
     -- Default
     --[[ Menubar
@@ -523,19 +533,19 @@ globalkeys = my_table.join(
         {description = "show rofi", group = "launcher"}),
     --]]
     -- Prompt
-    awful.key({ modkey }, "r", function () awful.screen.focused().mypromptbox:run() end,
-              {description = "run prompt", group = "launcher"}),
+    -- awful.key({ modkey }, "r", function () awful.screen.focused().mypromptbox:run() end,
+    --           {description = "run prompt", group = "launcher"}),
 
-    awful.key({ modkey }, "x",
-              function ()
-                  awful.prompt.run {
-                    prompt       = "Run Lua code: ",
-                    textbox      = awful.screen.focused().mypromptbox.widget,
-                    exe_callback = awful.util.eval,
-                    history_path = awful.util.get_cache_dir() .. "/history_eval"
-                  }
-              end,
-              {description = "lua execute prompt", group = "awesome"})
+    -- awful.key({ modkey }, "x",
+    --           function ()
+    --               awful.prompt.run {
+    --                 prompt       = "Run Lua code: ",
+    --                 textbox      = awful.screen.focused().mypromptbox.widget,
+    --                 exe_callback = awful.util.eval,
+    --                 history_path = awful.util.get_cache_dir() .. "/history_eval"
+    --               }
+    --           end,
+    --           {description = "lua execute prompt", group = "awesome"})
     --]]
 )
 
@@ -778,9 +788,9 @@ client.connect_signal("request::titlebars", function(c)
 end)
 
 -- Enable sloppy focus, so that focus follows mouse.
-client.connect_signal("mouse::enter", function(c)
-    c:emit_signal("request::activate", "mouse_enter", {raise = vi_focus})
-end)
+-- client.connect_signal("mouse::enter", function(c)
+--     c:emit_signal("request::activate", "mouse_enter", {raise = vi_focus})
+-- end)
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)

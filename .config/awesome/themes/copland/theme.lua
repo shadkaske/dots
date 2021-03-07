@@ -21,13 +21,6 @@ local highlight                                 = "#6197D8"
 local urgent                                    = "#CC575D"
 local background_dark                           = "#2F343F"
 local background_med                            = "#383C4A"
-local background_transparent                    = "#404552CC"
-local foreground_transparent                    = "#E6E4E4CC"
-local highlight_transparent                     = "#6197D8CC"
-local urgent_transparent                        = "#CC575D"
-local foreground_inactive_transparent           = "#808191"
-local background_med_transparent                = "#383C4A"
-local background_dark_transparent               = "#2F343F"
 
 local theme                                     = {}
 theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/themes/copland"
@@ -237,7 +230,7 @@ theme.volume = lain.widget.pulsebar {
         end
     end,
     colors = {
-        background   = background_dark_transparent,
+        background   = background_dark,
         mute         = urgent,
         unmute       = foreground
     }

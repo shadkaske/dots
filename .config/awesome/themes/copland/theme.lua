@@ -128,11 +128,11 @@ theme.mpd = lain.widget.mpd({
     settings = function()
         if mpd_now.state == "play" then
             title = mpd_now.title .. " "
-            artist  = " " .. markup(foreground, mpd_now.artist)  .. markup(foreground_inactive, " <span font='Terminus 2'> </span>|<span font='Terminus 5'> </span>")
+            artist  = " " .. markup(foreground, mpd_now.artist)  .. markup(foreground_inactive, " <span font='Terminus 2'> </span><span font='Terminus 5'> </span>")
             mpdicon:set_image(theme.play)
         elseif mpd_now.state == "pause" then
             title = "mpd "
-            artist  = "paused " .. markup(foreground_inactive, " |<span font='Terminus 5'> </span>")
+            artist  = "paused " .. markup(foreground_inactive, " <span font='Terminus 5'> </span>")
             mpdicon:set_image(theme.pause)
         else
             title  = ""
@@ -252,9 +252,9 @@ local volumebg = wibox.container.background(theme.volume.bar, background, gears.
 local volumewidget = wibox.container.margin(volumebg, dpi(2), dpi(7), dpi(4), dpi(4))
 
 -- Weather
--- theme.weather = lain.widget.weather({
---     city_id = 5231851,
--- })
+theme.weather = lain.widget.weather({
+    city_id = 5231851,
+})
 
 -- Separators
 local first     = wibox.widget.textbox(markup.font("Terminus 3", " "))
@@ -277,18 +277,9 @@ function theme.at_screen_connect(s)
     s.quake = lain.util.quake({ app = "kitty",argname = "--title %s",extra = "--class=QuakeDD tmux new-session -A -s DropDown",
             visible = true, height = 0.4, width = 0.4, vert = "top", horiz = "center"})
 
-    -- If wallpaper is a function, call it with the screen
-    -- local wallpaper = theme.wallpaper
-    -- if type(wallpaper) == "function" then
-    --     wallpaper = wallpaper(s)
-    -- end
-    -- gears.wallpaper.maximized(wallpaper, s, true)
-
     -- Tags
     awful.tag(awful.util.tagnames, s, awful.layout.layouts[1])
 
-    -- Create a promptbox for each screen
-    -- s.mypromptbox = awful.widget.prompt()
     -- Create an imagebox widget which will contains an icon indicating which layout we're using.
     -- We need one layoutbox per screen.
     s.mylayoutbox = awful.widget.layoutbox(s)
@@ -311,7 +302,14 @@ function theme.at_screen_connect(s)
     s.systray.force_height = 12
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s, height = dpi(24), bg = theme.bg_normal, fg = theme.fg_normal })
+    s.mywibox = awful.wibar({
+        position = "top",
+        screen = s,
+        height = dpi(24),
+        bg = theme.bg_normal,
+        fg = theme.fg_normal,
+        opacity = 0.8
+    })
 
     -- Add widgets to the wibox
     s.mywibox:setup {
@@ -321,7 +319,7 @@ function theme.at_screen_connect(s)
             small_spr,
             s.mylayoutbox,
             first,
-            bar_spr,
+            small_spr,
             s.mytaglist,
             -- first,
             -- s.mypromptbox,
@@ -338,9 +336,10 @@ function theme.at_screen_connect(s)
             --fsicon,
             --fswidget,
             -- bar_spr,
+            small_spr,
             volicon,
             volumewidget,
-            bar_spr,
+            small_spr,
             mytextclock,
             small_spr,
             s.systray,

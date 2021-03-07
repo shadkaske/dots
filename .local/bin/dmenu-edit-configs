@@ -77,9 +77,9 @@ case "$choice" in
 esac
 # Ultimately, what do want to do with our choice?  Open in our editor!
 if [[ -z $emacs ]]; then
-    kitty -e nvim "$choice"
+    kitty -e nvim "$choice" &
 else
-    emacsclient -c -a emacs "$choice"
+    emacsclient -c -a emacs "$choice" &
 fi
 
 # vim: set filetype=sh

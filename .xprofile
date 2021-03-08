@@ -3,3 +3,6 @@ export PATH=$HOME/.local/bin:$PATH
 setxkbmap -option ctrl:nocaps
 
 export QT_STYLE_OVERRIDE=kvantum
+
+/usr/lib/policykit-gnome/polkit-gnome-authentication-agent-1
+export BW_SESSION="+/MQcpGOXHcX7tysJjCdqiFOvCi62fL7AizIzmgYM/+O+okRSH6/SQe4UuuuS8avY4pMDTvw+DlT8JAqOPiMyQ=="

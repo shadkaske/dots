@@ -4,20 +4,9 @@ configuration {
     terminal: "kitty";
     matching: "fuzzy";
     show-icons: true;
-    /* sidebar-mode: true; */
-    fake-transparency: true;
+    opacity: 80;
 }
 
+@import "Arc-Dark.rasi"
 
-/*window {
-  height: 85%;
-  width: 25em;
-  border: 0;
-  padding: 0;
-  location: west;
-  anchor: west;
-}*/
-
-/* vim: ft=css
- */
-@import "/usr/share/rofi/themes/Arc-Dark.rasi"
+/* vim: ft=css */

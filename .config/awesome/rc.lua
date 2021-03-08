@@ -349,7 +349,7 @@ globalkeys = my_table.join(
     awful.key({ modkey }, "a", function () awful.spawn(gui_editor) end,
               {description = "run gui editor", group = "launcher"}),
 
-    awful.key({ modkey }, "p", function() awful.spawn("rofi -show drun") end,
+    awful.key({ modkey }, "p", function() awful.spawn("rofi -show run") end,
               {description = "show the rofi", group = "launcher"}),
 
     -- Dmenu Greenclip

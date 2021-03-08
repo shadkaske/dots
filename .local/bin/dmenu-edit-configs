@@ -17,6 +17,7 @@ declare -a options=(
 "polybar"
 "quickmarks"
 "qutebrowser"
+"rofi"
 "vim"
 "xresources"
 "zsh"
@@ -60,7 +61,10 @@ case "$choice" in
         choice="$HOME/.config/qutebrowser/quickmarks"
         ;;
     qutebrowser)
-        choice="$HOME/.config/qutebrowser/autoconfig.yml"
+        choice="/home/shad/.config/qutebrowser/config.py"
+        ;;
+    rofi)
+        choice="$HOME/.config/rofi/config.rasi"
         ;;
     vim)
         choice="$HOME/.vimrc"

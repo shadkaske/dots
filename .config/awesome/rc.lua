@@ -555,6 +555,10 @@ awful.rules.rules = {
     { rule = { class = "iforms designer64.exe" },
           properties = { maximized = false } },
 
+    -- Games full screen
+    { rule = { class = "valheim.x86_64" },
+          properties = { fullscreen = true } },
+
     -- Floating Clients
     { rule_any = {
         instance = {

@@ -369,13 +369,17 @@ globalkeys = my_table.join(
     awful.key({ modkey, "Shift" }, "=", function() awful.spawn("=") end,
             {description = "Toggle Systray", group = "custom"}),
 
-    -- virsh list
+    -- Dmenu virsh list
     awful.key({ modkey, "Shift" }, "i", function() awful.spawn("dmenu-virtmanager") end,
               {description = "virt-manager vms", group = "launcher"}),
 
     -- Dmenu Network Manager
     awful.key({ modkey, "Shift" }, "n", function() awful.spawn("dmenu-networkmanager") end,
               {description = "dmenu network manager", group = "launcher"}),
+
+    -- Dmenu Remote Desktop
+    awful.key({ modkey, "Shift" }, "r", function() awful.spawn("dmenu-remmina") end,
+              {description = "dmenu remmina connections", group = "launcher"}),
 
     -- Firefox
     awful.key({ modkey }, "F2", function() awful.spawn("firefox") end,

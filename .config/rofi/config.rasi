@@ -4,7 +4,7 @@ configuration {
     terminal: "kitty";
     matching: "fuzzy";
     show-icons: true;
-    opacity: 80;
+    fake-transparency: true;
 }
 
 @import "Arc-Dark.rasi"

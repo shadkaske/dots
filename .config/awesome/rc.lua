@@ -374,7 +374,7 @@ globalkeys = my_table.join(
               {description = "virt-manager vms", group = "launcher"}),
 
     -- Dmenu Network Manager
-    awful.key({ modkey, "Shift" }, "n", function() awful.spawn("dmenu-networkmanager") end,
+    awful.key({ modkey, altkey }, "n", function() awful.spawn("dmenu-networkmanager") end,
               {description = "dmenu network manager", group = "launcher"}),
 
     -- Firefox
@@ -402,19 +402,23 @@ globalkeys = my_table.join(
               {description = "Virt-Manager", group = "applications"}),
 
     -- Lazy Git Dots
-    awful.key({ modkey, "Control" }, "d", function() awful.spawn("lazygit-dots") end,
+    awful.key({ modkey, altkey }, "d", function() awful.spawn("lazygit-dots") end,
               {description = "Dot Files Manager", group = "applications"}),
 
-    -- Run Prompt
-    awful.key({ modkey }, "r", function() awful.spawn("rofi -show run") end,
-              {description = "show the menubar", group = "launcher"}),
+    -- -- Run Prompt
+    -- awful.key({ modkey }, "r", function() awful.spawn("rofi -show run") end,
+    --           {description = "show the menubar", group = "launcher"}),
 
-    -- Run Prompt
+    -- Edit Configs
     awful.key({ modkey, altkey }, "e", function() awful.spawn("dmenu-edit-configs") end,
               {description = "edit configs", group = "launcher"}),
 
+    -- Pulse Audio Source Selection
+    awful.key({ modkey, altkey }, "s", function() awful.spawn("dmenu-audio-select") end,
+              {description = "audio source", group = "launcher"}),
+
     -- BitWarden
-    awful.key({ modkey, "Shift" }, "p", function() awful.spawn("bwmenu") end,
+    awful.key({ modkey, altkey }, "p", function() awful.spawn("bwmenu") end,
              {description = "Rofi BitWarden", group = "launcher"})
 
 )
@@ -574,7 +578,7 @@ awful.rules.rules = {
           "Gpick",
           "MessageWin",  -- kalarm.
           "Sxiv",
-          "Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
+          -- "Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
           "Wpa_gui",
           "veromix",
           "xtightvncviewer"},

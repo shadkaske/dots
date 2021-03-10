@@ -189,16 +189,19 @@
   ;;;; Org Tag Settings
   (setq org-tags-column -80)
 
-  (setq org-tag-alist '((:startgroup . nil)
+  (setq org-tag-alist '((:startgroup . "Context")
                         ("@work" . ?w)
                         ("@home" . ?h)
                         ("@errands" . ?e)
                         ("@email" . ?@)
                         ("@dev" . ?d)
-                        (:endgroup . nil)
+                        (:endgroup . "Context")
+                        (:startgroup . "People")
                         ("chad" . ?c)
                         ("andy" . ?a)
-                        ("travis" . ?t)))
+                        ("travis" . ?t)
+                        (:endgroup . "People")
+                        ("followup" . ?f)))
 
   ;;;; Org Refiler Targets
   (setq org-refile-targets '((org-agenda-files :maxlevel . 3)

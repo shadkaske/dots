@@ -378,7 +378,7 @@ globalkeys = my_table.join(
               {description = "dmenu network manager", group = "launcher"}),
 
     -- Dmenu Remote Desktop
-    awful.key({ modkey, "Shift" }, "r", function() awful.spawn("dmenu-remmina") end,
+    awful.key({ modkey, altkey }, "r", function() awful.spawn("dmenu-remmina") end,
               {description = "dmenu remmina connections", group = "launcher"}),
 
     -- Firefox

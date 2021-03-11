@@ -367,7 +367,7 @@ function theme.at_screen_connect(s)
         height = dpi(24),
         bg = theme.bg_normal,
         fg = theme.fg_normal,
-        opacity = 0.8
+        opacity = 0.65
     })
 
     -- Add widgets to the wibox

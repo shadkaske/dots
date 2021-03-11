@@ -14,13 +14,37 @@ local dpi   = require("beautiful.xresources").apply_dpi
 local awesome, client, os = awesome, client, os
 local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 
-local background                                = "#404552"
-local foreground                                = "#E6E4E4"
-local foreground_inactive                       = "#808191"
-local highlight                                 = "#6197D8"
-local urgent                                    = "#CC575D"
-local background_dark                           = "#2F343F"
-local background_med                            = "#383C4A"
+local color00                                   = "#1d2021"          -- Base 00 - Black
+local color01                                   = "#d72638"          -- Base 08 - Red
+local color02                                   = "#88b92d"          -- Base 0B - Green
+local color03                                   = "#f19d1a"          -- Base 0A - Yellow
+local color04                                   = "#1e8bac"          -- Base 0D - Blue
+local color05                                   = "#be4264"          -- Base 0E - Magenta
+local color06                                   = "#1ba595"          -- Base 0C - Cyan
+local color07                                   = "#d5d5d5"          -- Base 05 - White
+local color08                                   = "#6f7579"          -- Base 03 - Bright Black
+local color09                                   = color01            -- Base 08 - Bright Red
+local color10                                   = color02            -- Base 0B - Bright Green
+local color11                                   = color03            -- Base 0A - Bright Yellow
+local color12                                   = color04            -- Base 0D - Bright Blue
+local color13                                   = color05            -- Base 0E - Bright Magenta
+local color14                                   = color06            -- Base 0C - Bright Cyan
+local color15                                   = "#e5e5e5"          -- Base 07 - Bright White
+local color16                                   = "#eb8413"          -- Base 09
+local color17                                   = "#c85e0d"          -- Base 0F
+local color18                                   = "#383c3e"          -- Base 01
+local color19                                   = "#53585b"          -- Base 02
+local color20                                   = "#cdcdcd"          -- Base 04
+local color21                                   = "#dddddd"          -- Base 06
+local color_foreground                          = color07
+local color_background                          = color00            -- Base 00
+
+local background                                = color_background
+local foreground                                = color_foreground
+local foreground_inactive                       = color15
+local highlight                                 = color04
+local urgent                                    = color01
+local background_dark                           = color08
 
 local theme                                     = {}
 theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/themes/copland"
@@ -70,7 +94,7 @@ theme.layout_max                                = theme.dir .. "/icons/max.png"
 theme.layout_fullscreen                         = theme.dir .. "/icons/fullscreen.png"
 theme.layout_magnifier                          = theme.dir .. "/icons/magnifier.png"
 theme.layout_floating                           = theme.dir .. "/icons/floating.png"
-theme.useless_gap                               = 8
+theme.useless_gap                               = 6
 theme.titlebar_close_button_focus               = theme.dir .. "/icons/titlebar/close_focus.png"
 theme.titlebar_close_button_normal              = theme.dir .. "/icons/titlebar/close_normal.png"
 theme.titlebar_ontop_button_focus_active        = theme.dir .. "/icons/titlebar/ontop_focus_active.png"
@@ -89,6 +113,9 @@ theme.titlebar_maximized_button_focus_active    = theme.dir .. "/icons/titlebar/
 theme.titlebar_maximized_button_normal_active   = theme.dir .. "/icons/titlebar/maximized_normal_active.png"
 theme.titlebar_maximized_button_focus_inactive  = theme.dir .. "/icons/titlebar/maximized_focus_inactive.png"
 theme.titlebar_maximized_button_normal_inactive = theme.dir .. "/icons/titlebar/maximized_normal_inactive.png"
+
+-- My Icon Addtions
+theme.eth_icon                                       = theme.dir .. "/icons/net_up.png"
 
 -- lain related
 theme.layout_centerfair                         = theme.dir .. "/icons/centerfair.png"
@@ -216,7 +243,7 @@ local fsbg = wibox.container.background(fsbar, "#474747", gears.shape.rectangle)
 local fswidget = wibox.container.margin(fsbg, dpi(2), dpi(7), dpi(4), dpi(4))
 --]]
 
--- ALSA volume bar
+-- Pulse volume bar
 local volicon = wibox.widget.imagebox(theme.vol)
 theme.volume = lain.widget.pulsebar {
     width = dpi(59), border_width = 0, ticks = true, ticks_size = dpi(4),
@@ -288,6 +315,45 @@ function theme.at_screen_connect(s)
 
     -- Create a tasklist widget
     s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons)
+
+    -- Network Icons
+    -- local wifi_icon = wibox.widget.imagebox()
+    -- local pia_icon = wibox.widget.imagebox()
+    -- local vpn_icon = wibox.widget.imagebox()
+    local eth_icon = wibox.widget.imagebox()
+    local net = lain.widget.net {
+        notify = "off",
+        wifi_state = "on",
+        eth_state = "on",
+        settings = function()
+            local enp6s0 = net_now.devices.enp6s0
+            if enp6s0 then
+                if enp6s0.ethernet then
+                    eth_icon:set_image(eth_icon)
+                else
+                    eth_icon:set_image()
+                end
+            end
+
+            -- local wlan0 = net_now.devices.wlan0
+            -- if wlan0 then
+            --     if wlan0.wifi then
+            --         local signal = wlan0.signal
+            --         if signal < -83 then
+            --             wifi_icon:set_image(wifi_weak_filename)
+            --         elseif signal < -70 then
+            --             wifi_icon:set_image(wifi_mid_filename)
+            --         elseif signal < -53 then
+            --             wifi_icon:set_image(wifi_good_filename)
+            --         elseif signal >= -53 then
+            --             wifi_icon:set_image(wifi_great_filename)
+            --         end
+            --     else
+            --         wifi_icon:set_image()
+            --     end
+            -- end
+        end
+    }
 
     -- Systray
     s.systray = wibox.widget.systray()

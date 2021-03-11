@@ -183,7 +183,16 @@ screen.connect_signal("property::geometry", function(s)
 end)
 
 -- On Screen Connect
+-- No borders when rearranging only 1 non-floating or maximized client
 screen.connect_signal("arrange", function (s)
+    local only_one = #s.tiled_clients == 1
+    for _, c in pairs(s.clients) do
+        if only_one and not c.floating or c.maximized then
+            c.border_width = 0
+        else
+            c.border_width = beautiful.border_width
+        end
+    end
 end)
 
 -- Create a wibox for each screen and add it
@@ -259,7 +268,7 @@ globalkeys = my_table.join(
         {description = "toggle wibox", group = "awesome"}),
 
     -- On the fly useless gaps change
-    awful.key({ modkey, "Control" }, "+", function () lain.util.useless_gaps_resize(1) end,
+    awful.key({ modkey, "Control" }, "=", function () lain.util.useless_gaps_resize(1) end,
               {description = "increment useless gaps", group = "tag"}),
     awful.key({ modkey, "Control" }, "-", function () lain.util.useless_gaps_resize(-1) end,
               {description = "decrement useless gaps", group = "tag"}),
@@ -366,11 +375,11 @@ globalkeys = my_table.join(
     end, {description = "Toggle Systray", group = "custom"}),
 
     -- Dmenu Calc
-    awful.key({ modkey, "Shift" }, "=", function() awful.spawn("=") end,
+    awful.key({ modkey, altkey }, "=", function() awful.spawn("=") end,
             {description = "Toggle Systray", group = "custom"}),
 
     -- Dmenu virsh list
-    awful.key({ modkey, "Shift" }, "i", function() awful.spawn("dmenu-virtmanager") end,
+    awful.key({ modkey, altkey }, "i", function() awful.spawn("dmenu-virtmanager") end,
               {description = "virt-manager vms", group = "launcher"}),
 
     -- Dmenu Network Manager
@@ -582,7 +591,7 @@ awful.rules.rules = {
           "Gpick",
           "MessageWin",  -- kalarm.
           "Sxiv",
-          -- "Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
+          "Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
           "Wpa_gui",
           "veromix",
           "xtightvncviewer"},

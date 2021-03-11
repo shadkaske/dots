@@ -357,7 +357,7 @@ globalkeys = my_table.join(
               {description = "show the rofi", group = "launcher"}),
 
     -- Dmenu Greenclip
-    awful.key({ modkey, "Shift" }, "v", function() awful.spawn("dmenu-greenclip") end,
+    awful.key({ modkey, altkey }, "v", function() awful.spawn("dmenu-greenclip") end,
               {description = "clipboard manager", group = "launcher"}),
 
     -- Toggle Systray

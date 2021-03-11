@@ -90,6 +90,9 @@ theme.titlebar_maximized_button_normal_active   = theme.dir .. "/icons/titlebar/
 theme.titlebar_maximized_button_focus_inactive  = theme.dir .. "/icons/titlebar/maximized_focus_inactive.png"
 theme.titlebar_maximized_button_normal_inactive = theme.dir .. "/icons/titlebar/maximized_normal_inactive.png"
 
+-- My Icon Addtions
+theme.eth_icon                                       = theme.dir .. "/icons/net_up.png"
+
 -- lain related
 theme.layout_centerfair                         = theme.dir .. "/icons/centerfair.png"
 theme.layout_termfair                           = theme.dir .. "/icons/termfair.png"
@@ -216,7 +219,7 @@ local fsbg = wibox.container.background(fsbar, "#474747", gears.shape.rectangle)
 local fswidget = wibox.container.margin(fsbg, dpi(2), dpi(7), dpi(4), dpi(4))
 --]]
 
--- ALSA volume bar
+-- Pulse volume bar
 local volicon = wibox.widget.imagebox(theme.vol)
 theme.volume = lain.widget.pulsebar {
     width = dpi(59), border_width = 0, ticks = true, ticks_size = dpi(4),
@@ -289,6 +292,45 @@ function theme.at_screen_connect(s)
     -- Create a tasklist widget
     s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons)
 
+    -- Network Icons
+    -- local wifi_icon = wibox.widget.imagebox()
+    -- local pia_icon = wibox.widget.imagebox()
+    -- local vpn_icon = wibox.widget.imagebox()
+    local eth_icon = wibox.widget.imagebox()
+    local net = lain.widget.net {
+        notify = "off",
+        wifi_state = "on",
+        eth_state = "on",
+        settings = function()
+            local enp6s0 = net_now.devices.enp6s0
+            if enp6s0 then
+                if enp6s0.ethernet then
+                    eth_icon:set_image(eth_icon)
+                else
+                    eth_icon:set_image()
+                end
+            end
+
+            -- local wlan0 = net_now.devices.wlan0
+            -- if wlan0 then
+            --     if wlan0.wifi then
+            --         local signal = wlan0.signal
+            --         if signal < -83 then
+            --             wifi_icon:set_image(wifi_weak_filename)
+            --         elseif signal < -70 then
+            --             wifi_icon:set_image(wifi_mid_filename)
+            --         elseif signal < -53 then
+            --             wifi_icon:set_image(wifi_good_filename)
+            --         elseif signal >= -53 then
+            --             wifi_icon:set_image(wifi_great_filename)
+            --         end
+            --     else
+            --         wifi_icon:set_image()
+            --     end
+            -- end
+        end
+    }
+
     -- Systray
     s.systray = wibox.widget.systray()
     s.systray.visible = false
@@ -336,7 +378,8 @@ function theme.at_screen_connect(s)
             mytextclock,
             small_spr,
             s.systray,
-            small_spr
+            small_spr,
+            net
         },
     }
 end

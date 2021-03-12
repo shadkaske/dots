@@ -17,7 +17,7 @@
     separatorcolor:              @foreground;
     border-color:                @foreground;
     selected-normal-foreground:  @lightbg;
-    selected-normal-background:  @lightfg;
+    selected-normal-background:  @blue;
     selected-active-foreground:  @background;
     selected-active-background:  @blue;
     selected-urgent-foreground:  @background;

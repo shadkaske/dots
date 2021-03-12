@@ -4,9 +4,9 @@
 [core]
     editor = nvim
 [merge]
-    tool = vscode
+	tool = vimdiff
 [diff]
-    tool = vscode
+    tool = nvim
 [mergetool]
     keepBackup = false
     prompt = false
@@ -19,7 +19,7 @@
 [difftool "nvim"]
     cmd = nvim -d
 [mergetool "nvim"]
-    cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
+    cmd = nvim -f -c \"Gdiff\" \"$MERGED\"
     ; cmd = nvim -d $LOCAL $MERGED $REMOTE -c $MERGED
 [pull]
 	rebase = false

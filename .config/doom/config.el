@@ -12,10 +12,11 @@
 (setq x-select-enable-clipboard-manager nil)
 
 ;; Theme Settings
-(setq doom-theme 'doom-material)
-(after! doom-themes
-(setq doom-themes-enable-bold t
-        doom-themes-enable-italic t))
+;; (setq doom-theme 'doom-material)
+;; (after! doom-themes
+;; (setq doom-themes-enable-bold t
+;;         doom-themes-enable-italic t))
+(load-theme 'base16-materia t)
 
 ;; Variable Pitch Font Setting Function
 (defun smk/set-buffer-variable-pitch ()

@@ -103,7 +103,7 @@ local clpmngr      = "dmenu-greenclip"
 local filemanager  = "thunar"
 
 awful.util.terminal = terminal
-awful.util.tagnames = { "1", "2", "3", "4", "5", "6", "7", "8", "9" }
+awful.util.tagnames = { " 1 ", " 2 ", " 3 ", " 4 ", " 5 ", " 6 ", " 7 ", " 8 ", " 9 " }
 awful.layout.layouts = {
     awful.layout.suit.tile,
     awful.layout.suit.floating,
@@ -444,7 +444,11 @@ globalkeys = my_table.join(
 
     -- BitWarden
     awful.key({ modkey, altkey }, "p", function() awful.spawn("bwmenu") end,
-             {description = "Rofi BitWarden", group = "launcher"})
+             {description = "Rofi BitWarden", group = "launcher"}),
+
+    -- LastPass
+    awful.key({ modkey, altkey }, "l", function() awful.spawn("dmenu-lastpass --notes copy") end,
+             {description = "LastPass", group = "launcher"})
 
 )
 
@@ -687,6 +691,8 @@ client.connect_signal("request::titlebars", function(c)
         layout = wibox.layout.align.horizontal
     }
 end)
+
+beautiful.gap_single_client = true
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)

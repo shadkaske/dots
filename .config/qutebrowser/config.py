@@ -12,7 +12,7 @@
 
 ## This is here so configs done via the GUI are still loaded.
 ## Remove it to not load settings done via the GUI.
-config.load_autoconfig(True)
+# config.load_autoconfig(True)
 
 ## Aliases for commands. The keys of the given dictionary are the
 ## aliases, while the values are the commands they map to.
@@ -31,7 +31,7 @@ config.load_autoconfig(True)
 ## session which was last loaded. This behavior can be customized via the
 ## `session.default_name` setting.
 ## Type: Bool
-# c.auto_save.session = False
+c.auto_save.session = True
 
 ## Backend to use to display websites. qutebrowser supports two different
 ## web rendering engines / backends, QtWebEngine and QtWebKit (not
@@ -383,7 +383,7 @@ config.load_autoconfig(True)
 
 ## Background color of the tab bar.
 ## Type: QssColor
-c.colors.tabs.bar.bg = '#404552'
+# c.colors.tabs.bar.bg = '#404552'
 
 ## Background color of unselected even tabs.
 ## Type: QtColor
@@ -570,7 +570,7 @@ c.colors.tabs.bar.bg = '#404552'
 
 ## Height (in pixels or as percentage of the window) of the completion.
 ## Type: PercOrInt
-# c.completion.height = '50%'
+c.completion.height = '35%'
 
 ## Minimum amount of characters needed to update completions.
 ## Type: Int
@@ -622,7 +622,7 @@ c.colors.tabs.bar.bg = '#404552'
 
 ## Execute the best-matching command on a partial match.
 ## Type: Bool
-# c.completion.use_best_match = False
+c.completion.use_best_match = True
 
 ## A list of patterns which should not be shown in the history. This only
 ## affects the completion. Matching URLs are still saved in the history
@@ -944,7 +944,7 @@ c.colors.tabs.bar.bg = '#404552'
 ## still be downloaded by clicking the download button in the pdf.js
 ## viewer.
 ## Type: Bool
-# c.content.pdfjs = False
+c.content.pdfjs = True
 
 ## Allow websites to request persistent storage quota via
 ## `navigator.webkitPersistentStorage.requestQuota`.
@@ -966,7 +966,7 @@ c.colors.tabs.bar.bg = '#404552'
 ## Open new windows in private browsing mode which does not record
 ## visited pages.
 ## Type: Bool
-# c.content.private_browsing = False
+# c.content.private_browsing = True
 
 ## Proxy to use. In addition to the listed values, you can use a
 ## `socks://...` or `http://...` URL. Note that with QtWebEngine, it will
@@ -1070,12 +1070,12 @@ c.colors.tabs.bar.bg = '#404552'
 ## Valid values:
 ##   - top
 ##   - bottom
-# c.downloads.position = 'top'
+c.downloads.position = 'bottom'
 
 ## Duration (in milliseconds) to wait before removing finished downloads.
 ## If set to -1, downloads are never removed.
 ## Type: Int
-# c.downloads.remove_finished = -1
+c.downloads.remove_finished = 30000
 
 ## Editor (and arguments) to use for the `edit-*` commands. The following
 ## placeholders are defined:  * `{file}`: Filename of the file to be
@@ -1907,11 +1907,13 @@ c.editor.encoding = 'utf-8'
 ## the search engine name to the search term, e.g. `:open google
 ## qutebrowser`.
 ## Type: Dict
-# c.url.searchengines = {'DEFAULT': 'https://duckduckgo.com/?q={}'}
+c.url.searchengines = {'DEFAULT': 'https://www.google.com/search?q={}'}
+        # 'd': 'https://duckduckgo.com/?q={}'}
 
 ## Page(s) to open at the start.
 ## Type: List of FuzzyUrl, or FuzzyUrl
 # c.url.start_pages = ['https://start.duckduckgo.com']
+c.url.start_pages = ['https://google.com']
 
 ## URL parameters to strip with `:yank url`.
 ## Type: List of String
@@ -1953,7 +1955,8 @@ c.editor.encoding = 'utf-8'
 # c.zoom.text_only = False
 
 ## Bindings for normal mode
-config.bind("p", 'spawn --userscript qute-bitwarden --totp')
+config.bind("pb", 'spawn --userscript qute-bitwarden --totp')
+config.bind("pl", 'spawn --userscript qute-lastpass')
 # config.bind("'", 'mode-enter jump_mark')
 # config.bind('+', 'zoom-in')
 # config.bind('-', 'zoom-out')
@@ -2263,25 +2266,25 @@ config.bind('J', 'tab-prev')
 # config.bind('y', 'prompt-accept yes', mode='yesno')
 
 # base16-qutebrowser (https://github.com/theova/base16-qutebrowser)
-# Base16 qutebrowser template by theova
-# Helios scheme by Alex Meyer (https://github.com/reyemxela)
+# Base16 qutebrowser template by theova and Daniel Mulford
+# Materia scheme by Defman21
 
-base00 = "#1d2021"
-base01 = "#383c3e"
-base02 = "#53585b"
-base03 = "#6f7579"
-base04 = "#cdcdcd"
-base05 = "#d5d5d5"
-base06 = "#dddddd"
-base07 = "#e5e5e5"
-base08 = "#d72638"
-base09 = "#eb8413"
-base0A = "#f19d1a"
-base0B = "#88b92d"
-base0C = "#1ba595"
-base0D = "#1e8bac"
-base0E = "#be4264"
-base0F = "#c85e0d"
+base00 = "#263238"
+base01 = "#2C393F"
+base02 = "#37474F"
+base03 = "#707880"
+base04 = "#C9CCD3"
+base05 = "#CDD3DE"
+base06 = "#D5DBE5"
+base07 = "#FFFFFF"
+base08 = "#EC5F67"
+base09 = "#EA9560"
+base0A = "#FFCC00"
+base0B = "#8BD649"
+base0C = "#80CBC4"
+base0D = "#89DDFF"
+base0E = "#82AAFF"
+base0F = "#EC5F67"
 
 # set qutebrowser colors
 
@@ -2290,13 +2293,13 @@ base0F = "#c85e0d"
 c.colors.completion.fg = base05
 
 # Background color of the completion widget for odd rows.
-c.colors.completion.odd.bg = base01
+c.colors.completion.odd.bg = base00
 
 # Background color of the completion widget for even rows.
 c.colors.completion.even.bg = base00
 
 # Foreground color of completion widget category headers.
-c.colors.completion.category.fg = base0A
+c.colors.completion.category.fg = base0D
 
 # Background color of the completion widget category headers.
 c.colors.completion.category.bg = base00
@@ -2320,10 +2323,10 @@ c.colors.completion.item.selected.border.top = base02
 c.colors.completion.item.selected.border.bottom = base02
 
 # Foreground color of the matched text in the selected completion item.
-c.colors.completion.item.selected.match.fg = base0B
+c.colors.completion.item.selected.match.fg = base05
 
 # Foreground color of the matched text in the completion.
-c.colors.completion.match.fg = base0B
+c.colors.completion.match.fg = base09
 
 # Color of the scrollbar handle in the completion view.
 c.colors.completion.scrollbar.fg = base05
@@ -2426,52 +2429,52 @@ c.colors.prompts.bg = base00
 c.colors.prompts.selected.bg = base02
 
 # Foreground color of the statusbar.
-c.colors.statusbar.normal.fg = base0B
+c.colors.statusbar.normal.fg = base05
 
 # Background color of the statusbar.
 c.colors.statusbar.normal.bg = base00
 
 # Foreground color of the statusbar in insert mode.
-c.colors.statusbar.insert.fg = base00
+c.colors.statusbar.insert.fg = base0C
 
 # Background color of the statusbar in insert mode.
-c.colors.statusbar.insert.bg = base0D
+c.colors.statusbar.insert.bg = base00
 
 # Foreground color of the statusbar in passthrough mode.
-c.colors.statusbar.passthrough.fg = base00
+c.colors.statusbar.passthrough.fg = base0A
 
 # Background color of the statusbar in passthrough mode.
-c.colors.statusbar.passthrough.bg = base0C
+c.colors.statusbar.passthrough.bg = base00
 
 # Foreground color of the statusbar in private browsing mode.
-c.colors.statusbar.private.fg = base00
+c.colors.statusbar.private.fg = base0E
 
 # Background color of the statusbar in private browsing mode.
-c.colors.statusbar.private.bg = base01
+c.colors.statusbar.private.bg = base00
 
 # Foreground color of the statusbar in command mode.
-c.colors.statusbar.command.fg = base05
+c.colors.statusbar.command.fg = base04
 
 # Background color of the statusbar in command mode.
-c.colors.statusbar.command.bg = base00
+c.colors.statusbar.command.bg = base01
 
 # Foreground color of the statusbar in private browsing + command mode.
-c.colors.statusbar.command.private.fg = base05
+c.colors.statusbar.command.private.fg = base0E
 
 # Background color of the statusbar in private browsing + command mode.
-c.colors.statusbar.command.private.bg = base00
+c.colors.statusbar.command.private.bg = base01
 
 # Foreground color of the statusbar in caret mode.
-c.colors.statusbar.caret.fg = base00
+c.colors.statusbar.caret.fg = base0D
 
 # Background color of the statusbar in caret mode.
-c.colors.statusbar.caret.bg = base0E
+c.colors.statusbar.caret.bg = base00
 
 # Foreground color of the statusbar in caret mode with a selection.
-c.colors.statusbar.caret.selection.fg = base00
+c.colors.statusbar.caret.selection.fg = base0D
 
 # Background color of the statusbar in caret mode with a selection.
-c.colors.statusbar.caret.selection.bg = base0D
+c.colors.statusbar.caret.selection.bg = base00
 
 # Background color of the progress bar.
 c.colors.statusbar.progress.bg = base0D
@@ -2483,11 +2486,11 @@ c.colors.statusbar.url.fg = base05
 c.colors.statusbar.url.error.fg = base08
 
 # Foreground color of the URL in the statusbar for hovered links.
-c.colors.statusbar.url.hover.fg = base05
+c.colors.statusbar.url.hover.fg = base09
 
 # Foreground color of the URL in the statusbar on successful load
 # (http).
-c.colors.statusbar.url.success.http.fg = base0C
+c.colors.statusbar.url.success.http.fg = base0B
 
 # Foreground color of the URL in the statusbar on successful load
 # (https).
@@ -2512,7 +2515,7 @@ c.colors.tabs.indicator.error = base08
 c.colors.tabs.odd.fg = base05
 
 # Background color of unselected odd tabs.
-c.colors.tabs.odd.bg = base01
+c.colors.tabs.odd.bg = base00
 
 # Foreground color of unselected even tabs.
 c.colors.tabs.even.fg = base05
@@ -2521,16 +2524,16 @@ c.colors.tabs.even.fg = base05
 c.colors.tabs.even.bg = base00
 
 # Background color of pinned unselected even tabs.
-c.colors.tabs.pinned.even.bg = base0C
+c.colors.tabs.pinned.even.bg = base0B
 
 # Foreground color of pinned unselected even tabs.
-c.colors.tabs.pinned.even.fg = base07
+c.colors.tabs.pinned.even.fg = base00
 
 # Background color of pinned unselected odd tabs.
 c.colors.tabs.pinned.odd.bg = base0B
 
 # Foreground color of pinned unselected odd tabs.
-c.colors.tabs.pinned.odd.fg = base07
+c.colors.tabs.pinned.odd.fg = base00
 
 # Background color of pinned selected even tabs.
 c.colors.tabs.pinned.selected.even.bg = base02
@@ -2558,4 +2561,4 @@ c.colors.tabs.selected.even.bg = base02
 
 # Background color for webpages if unset (or empty to use the theme's
 # color).
-# c.colors.webpage.bg = base00
+c.colors.webpage.bg = base00

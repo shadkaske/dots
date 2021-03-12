@@ -14,53 +14,53 @@ local dpi   = require("beautiful.xresources").apply_dpi
 local awesome, client, os = awesome, client, os
 local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 
-local color00                                   = "#1d2021"          -- Base 00 - Black
-local color01                                   = "#d72638"          -- Base 08 - Red
-local color02                                   = "#88b92d"          -- Base 0B - Green
-local color03                                   = "#f19d1a"          -- Base 0A - Yellow
-local color04                                   = "#1e8bac"          -- Base 0D - Blue
-local color05                                   = "#be4264"          -- Base 0E - Magenta
-local color06                                   = "#1ba595"          -- Base 0C - Cyan
-local color07                                   = "#d5d5d5"          -- Base 05 - White
-local color08                                   = "#6f7579"          -- Base 03 - Bright Black
-local color09                                   = color01            -- Base 08 - Bright Red
-local color10                                   = color02            -- Base 0B - Bright Green
-local color11                                   = color03            -- Base 0A - Bright Yellow
-local color12                                   = color04            -- Base 0D - Bright Blue
-local color13                                   = color05            -- Base 0E - Bright Magenta
-local color14                                   = color06            -- Base 0C - Bright Cyan
-local color15                                   = "#e5e5e5"          -- Base 07 - Bright White
-local color16                                   = "#eb8413"          -- Base 09
-local color17                                   = "#c85e0d"          -- Base 0F
-local color18                                   = "#383c3e"          -- Base 01
-local color19                                   = "#53585b"          -- Base 02
-local color20                                   = "#cdcdcd"          -- Base 04
-local color21                                   = "#dddddd"          -- Base 06
+local color00                                   = "#263238"
+local color01                                   = "#EC5F67"
+local color02                                   = "#8BD649"
+local color03                                   = "#FFCC00"
+local color04                                   = "#89DDFF"
+local color05                                   = "#82AAFF"
+local color06                                   = "#80CBC4"
+local color07                                   = "#CDD3DE"
+local color08                                   = "#707880"
+local color09                                   = color01
+local color10                                   = color02
+local color11                                   = color03
+local color12                                   = color04
+local color13                                   = color05
+local color14                                   = color06
+local color15                                   = "#FFFFFF"
+local color16                                   = "#EA9560"
+local color17                                   = "#EC5F67"
+local color18                                   = "#2C393F"
+local color19                                   = "#37474F"
+local color20                                   = "#C9CCD3"
+local color21                                   = "#D5DBE5"
 local color_foreground                          = color07
-local color_background                          = color00            -- Base 00
+local color_background                          = color00
 
 local background                                = color_background
 local foreground                                = color_foreground
-local foreground_inactive                       = color15
-local highlight                                 = color04
+local foreground_inactive                       = color08
+local highlight                                 = color05
 local urgent                                    = color01
-local background_dark                           = color08
+local background_alt                            = color08
 
 local theme                                     = {}
 theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/themes/copland"
 theme.font                                      = "Cantarell 10"
 theme.fg_normal                                 = foreground_inactive
-theme.fg_focus                                  = highlight
+theme.fg_focus                                  = foreground
 theme.bg_normal                                 = background
 theme.bg_focus                                  = background
 theme.fg_urgent                                 = foreground
 theme.bg_urgent                                 = urgent
 theme.border_width                              = dpi(2)
-theme.border_normal                             = "#414A59"
+theme.border_normal                             = background_alt
 theme.border_focus                              = highlight
-theme.taglist_fg_focus                          = foreground
-theme.taglist_bg_focus                          = theme.bg_normal
-theme.taglist_bg_normal                         = theme.bg_normal
+theme.taglist_fg_focus                          = background
+theme.taglist_bg_focus                          = highlight
+theme.taglist_bg_normal                         = background
 theme.titlebar_bg_normal                        = theme.bg_normal
 theme.titlebar_bg_focus                         = theme.bg_focus
 theme.menu_height                               = dpi(16)
@@ -94,7 +94,7 @@ theme.layout_max                                = theme.dir .. "/icons/max.png"
 theme.layout_fullscreen                         = theme.dir .. "/icons/fullscreen.png"
 theme.layout_magnifier                          = theme.dir .. "/icons/magnifier.png"
 theme.layout_floating                           = theme.dir .. "/icons/floating.png"
-theme.useless_gap                               = 6
+theme.useless_gap                               = 4
 theme.titlebar_close_button_focus               = theme.dir .. "/icons/titlebar/close_focus.png"
 theme.titlebar_close_button_normal              = theme.dir .. "/icons/titlebar/close_normal.png"
 theme.titlebar_ontop_button_focus_active        = theme.dir .. "/icons/titlebar/ontop_focus_active.png"
@@ -123,9 +123,9 @@ theme.layout_termfair                           = theme.dir .. "/icons/termfair.
 theme.layout_centerwork                         = theme.dir .. "/icons/centerwork.png"
 
 local markup = lain.util.markup
-local blue   = theme.fg_focus
+local blue   = highlight
 local red    = urgent
-local green  = "#8FEB8F"
+local green  = color02
 
 -- Textclock
 --os.setlocale(os.getenv("LANG")) -- to localize the clock
@@ -138,7 +138,7 @@ theme.cal = lain.widget.cal({
     notification_preset = {
         font = "JetBrainsMono Nerd Font 11",
         fg   = foreground,
-        bg   = theme.bg_normal
+        bg   = background
     }
 })
 
@@ -257,7 +257,7 @@ theme.volume = lain.widget.pulsebar {
         end
     end,
     colors = {
-        background   = background_dark,
+        background   = background_alt,
         mute         = urgent,
         unmute       = foreground
     }
@@ -357,7 +357,7 @@ function theme.at_screen_connect(s)
 
     -- Systray
     s.systray = wibox.widget.systray()
-    s.systray.visible = false
+    s.systray.visible = true
     s.systray.force_height = 12
 
     -- Create the wibox
@@ -367,7 +367,7 @@ function theme.at_screen_connect(s)
         height = dpi(24),
         bg = theme.bg_normal,
         fg = theme.fg_normal,
-        opacity = 0.8
+        opacity = 0.92
     })
 
     -- Add widgets to the wibox

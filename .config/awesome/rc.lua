@@ -444,7 +444,11 @@ globalkeys = my_table.join(
 
     -- BitWarden
     awful.key({ modkey, altkey }, "p", function() awful.spawn("bwmenu") end,
-             {description = "Rofi BitWarden", group = "launcher"})
+             {description = "Rofi BitWarden", group = "launcher"}),
+
+    -- LastPass
+    awful.key({ modkey, altkey }, "l", function() awful.spawn("dmenu-lastpass --notes copy") end,
+             {description = "LastPass", group = "launcher"})
 
 )
 

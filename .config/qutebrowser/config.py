@@ -31,7 +31,7 @@
 ## session which was last loaded. This behavior can be customized via the
 ## `session.default_name` setting.
 ## Type: Bool
-# c.auto_save.session = False
+c.auto_save.session = True
 
 ## Backend to use to display websites. qutebrowser supports two different
 ## web rendering engines / backends, QtWebEngine and QtWebKit (not
@@ -383,7 +383,7 @@
 
 ## Background color of the tab bar.
 ## Type: QssColor
-c.colors.tabs.bar.bg = '#404552'
+# c.colors.tabs.bar.bg = '#404552'
 
 ## Background color of unselected even tabs.
 ## Type: QtColor
@@ -622,7 +622,7 @@ c.colors.tabs.bar.bg = '#404552'
 
 ## Execute the best-matching command on a partial match.
 ## Type: Bool
-# c.completion.use_best_match = False
+c.completion.use_best_match = True
 
 ## A list of patterns which should not be shown in the history. This only
 ## affects the completion. Matching URLs are still saved in the history
@@ -944,7 +944,7 @@ c.colors.tabs.bar.bg = '#404552'
 ## still be downloaded by clicking the download button in the pdf.js
 ## viewer.
 ## Type: Bool
-# c.content.pdfjs = False
+c.content.pdfjs = True
 
 ## Allow websites to request persistent storage quota via
 ## `navigator.webkitPersistentStorage.requestQuota`.
@@ -966,7 +966,7 @@ c.colors.tabs.bar.bg = '#404552'
 ## Open new windows in private browsing mode which does not record
 ## visited pages.
 ## Type: Bool
-# c.content.private_browsing = False
+# c.content.private_browsing = True
 
 ## Proxy to use. In addition to the listed values, you can use a
 ## `socks://...` or `http://...` URL. Note that with QtWebEngine, it will
@@ -1070,12 +1070,12 @@ c.colors.tabs.bar.bg = '#404552'
 ## Valid values:
 ##   - top
 ##   - bottom
-# c.downloads.position = 'top'
+c.downloads.position = 'bottom'
 
 ## Duration (in milliseconds) to wait before removing finished downloads.
 ## If set to -1, downloads are never removed.
 ## Type: Int
-# c.downloads.remove_finished = -1
+c.downloads.remove_finished = 30000
 
 ## Editor (and arguments) to use for the `edit-*` commands. The following
 ## placeholders are defined:  * `{file}`: Filename of the file to be
@@ -1907,11 +1907,13 @@ c.editor.encoding = 'utf-8'
 ## the search engine name to the search term, e.g. `:open google
 ## qutebrowser`.
 ## Type: Dict
-# c.url.searchengines = {'DEFAULT': 'https://duckduckgo.com/?q={}'}
+c.url.searchengines = {'DEFAULT': 'https://www.google.com/search?q={}'}
+        # 'd': 'https://duckduckgo.com/?q={}'}
 
 ## Page(s) to open at the start.
 ## Type: List of FuzzyUrl, or FuzzyUrl
 # c.url.start_pages = ['https://start.duckduckgo.com']
+c.url.start_pages = ['https://google.com']
 
 ## URL parameters to strip with `:yank url`.
 ## Type: List of String
@@ -1954,6 +1956,7 @@ c.editor.encoding = 'utf-8'
 
 ## Bindings for normal mode
 config.bind("pb", 'spawn --userscript qute-bitwarden --totp')
+config.bind("pl", 'spawn --userscript qute-lastpass')
 # config.bind("'", 'mode-enter jump_mark')
 # config.bind('+', 'zoom-in')
 # config.bind('-', 'zoom-out')

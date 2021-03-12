@@ -41,7 +41,7 @@ local color_background                          = color00            -- Base 00
 
 local background                                = color_background
 local foreground                                = color_foreground
-local foreground_inactive                       = color15
+local foreground_inactive                       = color19
 local highlight                                 = color04
 local urgent                                    = color01
 local background_dark                           = color08
@@ -50,7 +50,7 @@ local theme                                     = {}
 theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/themes/copland"
 theme.font                                      = "Cantarell 10"
 theme.fg_normal                                 = foreground_inactive
-theme.fg_focus                                  = highlight
+theme.fg_focus                                  = foreground
 theme.bg_normal                                 = background
 theme.bg_focus                                  = background
 theme.fg_urgent                                 = foreground
@@ -357,7 +357,7 @@ function theme.at_screen_connect(s)
 
     -- Systray
     s.systray = wibox.widget.systray()
-    s.systray.visible = false
+    s.systray.visible = true
     s.systray.force_height = 12
 
     -- Create the wibox

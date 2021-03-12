@@ -7,6 +7,6 @@ configuration {
     fake-transparency: true;
 }
 
-@import "Arc-Dark.rasi"
+@import "base16-materia.rasi"
 
 /* vim: ft=css */

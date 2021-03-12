@@ -14,28 +14,28 @@ local dpi   = require("beautiful.xresources").apply_dpi
 local awesome, client, os = awesome, client, os
 local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 
-local color00                                   = "#1d2021"          -- Base 00 - Black
-local color01                                   = "#d72638"          -- Base 08 - Red
-local color02                                   = "#88b92d"          -- Base 0B - Green
-local color03                                   = "#f19d1a"          -- Base 0A - Yellow
-local color04                                   = "#1e8bac"          -- Base 0D - Blue
-local color05                                   = "#be4264"          -- Base 0E - Magenta
-local color06                                   = "#1ba595"          -- Base 0C - Cyan
-local color07                                   = "#d5d5d5"          -- Base 05 - White
-local color08                                   = "#6f7579"          -- Base 03 - Bright Black
+local color00                                   = "#263238"          -- Base 00 - Black
+local color01                                   = "#EC5F67"          -- Base 08 - Red
+local color02                                   = "#8BD649"          -- Base 0B - Green
+local color03                                   = "#FFCC00"          -- Base 0A - Yellow
+local color04                                   = "#89DDFF"          -- Base 0D - Blue
+local color05                                   = "#82AAFF"          -- Base 0E - Magenta
+local color06                                   = "#80CBC4"          -- Base 0C - Cyan
+local color07                                   = "#CDD3DE"          -- Base 05 - White
+local color08                                   = "#707880"          -- Base 03 - Bright Black
 local color09                                   = color01            -- Base 08 - Bright Red
 local color10                                   = color02            -- Base 0B - Bright Green
 local color11                                   = color03            -- Base 0A - Bright Yellow
 local color12                                   = color04            -- Base 0D - Bright Blue
 local color13                                   = color05            -- Base 0E - Bright Magenta
 local color14                                   = color06            -- Base 0C - Bright Cyan
-local color15                                   = "#e5e5e5"          -- Base 07 - Bright White
-local color16                                   = "#eb8413"          -- Base 09
-local color17                                   = "#c85e0d"          -- Base 0F
-local color18                                   = "#383c3e"          -- Base 01
-local color19                                   = "#53585b"          -- Base 02
-local color20                                   = "#cdcdcd"          -- Base 04
-local color21                                   = "#dddddd"          -- Base 06
+local color15                                   = "#FFFFFF"          -- Base 07 - Bright White
+local color16                                   = "#EA9560"          -- Base 09
+local color17                                   = "#EC5F67"          -- Base 0F
+local color18                                   = "#2C393F"          -- Base 01
+local color19                                   = "#37474F"          -- Base 02
+local color20                                   = "#C9CCD3"          -- Base 04
+local color21                                   = "#D5DBE5"          -- Base 06
 local color_foreground                          = color07
 local color_background                          = color00            -- Base 00
 
@@ -367,7 +367,7 @@ function theme.at_screen_connect(s)
         height = dpi(24),
         bg = theme.bg_normal,
         fg = theme.fg_normal,
-        opacity = 0.65
+        opacity = 0.92
     })
 
     -- Add widgets to the wibox

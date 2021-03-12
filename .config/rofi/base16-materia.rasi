@@ -15,7 +15,7 @@
     background:                  rgba ( 38, 50, 56, 92 % );
     background-color:            rgba ( 38, 50, 56, 0 % );
     separatorcolor:              @foreground;
-    border-color:                @foreground;
+    border-color:                @blue;
     selected-normal-foreground:  @lightbg;
     selected-normal-background:  @blue;
     selected-active-foreground:  @background;
@@ -38,8 +38,8 @@
 }
 window {
     background-color: @background;
-    border:           1;
-    padding:          5;
+    border:           0;
+    padding:          4;
 }
 mainbox {
     border:           0;

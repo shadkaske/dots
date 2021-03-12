@@ -1,6 +1,8 @@
 configuration {
     modi: "window,drun,run,ssh,combi";
-    font: "JetBrainsMono Nerd Font 14";
+    location: 2;
+    yoffset: 24;
+    font: "JetBrainsMono Nerd Font 12";
     terminal: "kitty";
     matching: "fuzzy";
     show-icons: true;

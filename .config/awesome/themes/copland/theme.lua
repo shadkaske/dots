@@ -212,7 +212,19 @@ theme.volume = lain.widget.pulsebar {
 theme.volume.tooltip.wibox.fg = theme.fg_focus
 theme.volume.bar:buttons(my_table.join (
           awful.button({}, 1, function()
-            awful.spawn(string.format("pavucontrol", awful.util.terminal))
+            os.execute("pactl set-sink-mute @DEFAULT_SINK@ toggle")
+            theme.volume.update()
+          end),
+          awful.button({}, 3, function()
+            awful.spawn(string.format("pavucontrol --tab 3", awful.util.terminal))
+          end),
+          awful.button({}, 4, function()
+            os.execute("pactl set-sink-volume @DEFAULT_SINK@ +5%")
+            theme.volume.update()
+          end),
+          awful.button({}, 5, function()
+            os.execute("pactl set-sink-volume @DEFAULT_SINK@ -5%")
+            theme.volume.update()
           end)
 ))
 local volumebg = wibox.container.background(theme.volume.bar, background, gears.shape.rectangle)
@@ -230,7 +242,7 @@ local spr       = wibox.widget.textbox(' ')
 local small_spr = wibox.widget.textbox(markup.font("Terminus 4", " "))
 local bar_spr   = wibox.widget.textbox(markup.font("Terminus 3", " ") .. markup.fontfg(theme.font, foreground_inactive, "|") .. markup.font("Terminus 5", " "))
 
--- Eminent-like task filtering
+-- {{{ Filter Taglist to show only used tags
 -- local orig_filter = awful.widget.taglist.filter.all
 
 -- -- Taglist label functions
@@ -239,6 +251,7 @@ local bar_spr   = wibox.widget.textbox(markup.font("Terminus 3", " ") .. markup.
 --         return orig_filter(t, args)
 --     end
 -- end
+-- }}}
 
 function theme.at_screen_connect(s)
     -- Quake application
@@ -346,8 +359,6 @@ function theme.at_screen_connect(s)
             small_spr,
             volicon,
             volumewidget,
-            small_rpr,
-            myweather,
             small_rpr,
             mytextclock,
             small_spr,

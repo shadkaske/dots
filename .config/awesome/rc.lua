@@ -69,7 +69,7 @@ run_once({
     --"onedrive monitor",
     "lxpolkit",
     "udevadm monitor",
-    --"nextcloud --background"
+    "nextcloud --background"
 }) -- entries must be separated by commas
 
 -- }}}

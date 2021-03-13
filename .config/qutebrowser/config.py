@@ -12,7 +12,7 @@
 
 ## This is here so configs done via the GUI are still loaded.
 ## Remove it to not load settings done via the GUI.
-# config.load_autoconfig(True)
+config.load_autoconfig(False)
 
 ## Aliases for commands. The keys of the given dictionary are the
 ## aliases, while the values are the commands they map to.
@@ -648,7 +648,7 @@ c.completion.use_best_match = True
 
 ## Automatically start playing `<video>` elements.
 ## Type: Bool
-# c.content.autoplay = True
+c.content.autoplay = False
 
 ## List of URLs to ABP-style adblocking rulesets.  Only used when Brave's
 ## ABP-style adblocker is used (see `content.blocking.method`).  You can

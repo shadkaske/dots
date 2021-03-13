@@ -61,6 +61,8 @@ theme.border_focus                              = highlight
 theme.taglist_fg_focus                          = background
 theme.taglist_bg_focus                          = highlight
 theme.taglist_bg_normal                         = background
+theme.taglist_bg_occupied                       = background
+theme.taglist_fg_occupied                       = foreground
 theme.titlebar_bg_normal                        = theme.bg_normal
 theme.titlebar_bg_focus                         = theme.bg_focus
 theme.menu_height                               = dpi(16)
@@ -95,6 +97,7 @@ theme.layout_fullscreen                         = theme.dir .. "/icons/fullscree
 theme.layout_magnifier                          = theme.dir .. "/icons/magnifier.png"
 theme.layout_floating                           = theme.dir .. "/icons/floating.png"
 theme.useless_gap                               = 4
+theme.master_width_factor                       = .55
 theme.titlebar_close_button_focus               = theme.dir .. "/icons/titlebar/close_focus.png"
 theme.titlebar_close_button_normal              = theme.dir .. "/icons/titlebar/close_normal.png"
 theme.titlebar_ontop_button_focus_active        = theme.dir .. "/icons/titlebar/ontop_focus_active.png"
@@ -186,62 +189,6 @@ local batbar = wibox.widget {
 --         if bat_now.status == "Charging" then
 --             baticon:set_image(theme.ac)
 --             if bat_now.perc >= 98 then
---                 batbar:set_color(green)
---             elseif bat_now.perc > 50 then
---                 batbar:set_color(theme.fg_normal)
---             elseif bat_now.perc > 15 then
---                 batbar:set_color(theme.fg_normal)
---             else
---                 batbar:set_color(red)
---             end
---         else
---             if bat_now.perc >= 98 then
---                 batbar:set_color(green)
---             elseif bat_now.perc > 50 then
---                 batbar:set_color(theme.fg_normal)
---                 baticon:set_image(theme.bat)
---             elseif bat_now.perc > 15 then
---                 batbar:set_color(theme.fg_normal)
---                 baticon:set_image(theme.bat_low)
---             else
---                 batbar:set_color(red)
---                 baticon:set_image(theme.bat_no)
---             end
---         end
---         batbar:set_value(bat_now.perc / 100)
---     end
--- })
--- local batbg = wibox.container.background(batbar, "#474747", gears.shape.rectangle)
--- local batwidget = wibox.container.margin(batbg, dpi(2), dpi(7), dpi(4), dpi(4))
-
--- /home fs
---[[ commented because it needs Gio/Glib >= 2.54
-local fsicon = wibox.widget.imagebox(theme.disk)
-local fsbar = wibox.widget {
-    forced_height    = dpi(1),
-    forced_width     = dpi(59),
-    color            = theme.fg_normal,
-    background_color = theme.bg_normal,
-    margins          = 1,
-    paddings         = 1,
-    ticks            = true,
-    ticks_size       = dpi(6),
-    widget           = wibox.widget.progressbar,
-}
-theme.fs = lain.widget.fs {
-    notification_preset = { fg = theme.fg_normal, bg = theme.bg_normal, font = "Terminus 10.5" },
-    settings  = function()
-        if fs_now["/home"].percentage < 90 then
-            fsbar:set_color(theme.fg_normal)
-        else
-            fsbar:set_color("#EB8F8F")
-        end
-        fsbar:set_value(fs_now["/home"].percentage / 100)
-    end
-}
-local fsbg = wibox.container.background(fsbar, "#474747", gears.shape.rectangle)
-local fswidget = wibox.container.margin(fsbg, dpi(2), dpi(7), dpi(4), dpi(4))
---]]
 
 -- Pulse volume bar
 local volicon = wibox.widget.imagebox(theme.vol)
@@ -272,8 +219,9 @@ local volumebg = wibox.container.background(theme.volume.bar, background, gears.
 local volumewidget = wibox.container.margin(volumebg, dpi(2), dpi(7), dpi(4), dpi(4))
 
 -- Weather
-theme.weather = lain.widget.weather({
+local myweather = lain.widget.weather({
     city_id = 5231851,
+    units = "imperial"
 })
 
 -- Separators
@@ -283,14 +231,14 @@ local small_spr = wibox.widget.textbox(markup.font("Terminus 4", " "))
 local bar_spr   = wibox.widget.textbox(markup.font("Terminus 3", " ") .. markup.fontfg(theme.font, foreground_inactive, "|") .. markup.font("Terminus 5", " "))
 
 -- Eminent-like task filtering
-local orig_filter = awful.widget.taglist.filter.all
+-- local orig_filter = awful.widget.taglist.filter.all
 
--- Taglist label functions
-awful.widget.taglist.filter.all = function (t, args)
-    if t.selected or #t:clients() > 0 then
-        return orig_filter(t, args)
-    end
-end
+-- -- Taglist label functions
+-- awful.widget.taglist.filter.all = function (t, args)
+--     if t.selected or #t:clients() > 0 then
+--         return orig_filter(t, args)
+--     end
+-- end
 
 function theme.at_screen_connect(s)
     -- Quake application
@@ -398,7 +346,9 @@ function theme.at_screen_connect(s)
             small_spr,
             volicon,
             volumewidget,
-            small_spr,
+            small_rpr,
+            myweather,
+            small_rpr,
             mytextclock,
             small_spr,
             s.systray,

@@ -87,6 +87,7 @@ local themes = {
     "rainbow",         -- 8
     "steamburn",       -- 9
     "vertex",          -- 10
+    "gtk",
 }
 
 local chosen_theme = themes[2]
@@ -103,7 +104,8 @@ local clpmngr      = "dmenu-greenclip"
 local filemanager  = "thunar"
 
 awful.util.terminal = terminal
-awful.util.tagnames = { " 1 ", " 2 ", " 3 ", " 4 ", " 5 ", " 6 ", " 7 ", " 8 ", " 9 " }
+-- awful.util.tagnames = { " 1 ", " 2 ", " 3 ", " 4 ", " 5 ", " 6 ", " 7 ", " 8 ", " 9 " }
+awful.util.tagnames = { "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  " }
 awful.layout.layouts = {
     awful.layout.suit.tile,
     awful.layout.suit.floating,

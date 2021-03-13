@@ -49,7 +49,7 @@ local background_alt                            = color08
 local theme                                     = {}
 theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/themes/copland"
 theme.font                                      = "Cantarell 10"
-theme.fg_normal                                 = foreground_inactive
+theme.fg_normal                                 = foreground
 theme.fg_focus                                  = foreground
 theme.bg_normal                                 = background
 theme.bg_focus                                  = background
@@ -60,7 +60,8 @@ theme.border_normal                             = background_alt
 theme.border_focus                              = highlight
 theme.taglist_fg_focus                          = background
 theme.taglist_bg_focus                          = highlight
-theme.taglist_bg_normal                         = background
+theme.taglist_bg_empty                          = background
+theme.taglist_fg_empty                          = foreground_inactive
 theme.taglist_bg_occupied                       = background
 theme.taglist_fg_occupied                       = foreground
 theme.titlebar_bg_normal                        = theme.bg_normal
@@ -350,6 +351,7 @@ function theme.at_screen_connect(s)
             --theme.mail.widget,
             mpdicon,
             theme.mpd.widget,
+            spr,
             -- baticon,
             -- batwidget,
             -- bar_spr,
@@ -360,6 +362,8 @@ function theme.at_screen_connect(s)
             volicon,
             volumewidget,
             small_rpr,
+            spr,
+            spr,
             mytextclock,
             small_spr,
             s.systray,

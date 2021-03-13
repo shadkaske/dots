@@ -1,9 +1,11 @@
 " Remove file names from Ag searches
 command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
 
+let g:fzf_preview_window = []
+
 " Popup Layout
 " Reverse the layout to make the FZF list top-down
-let $FZF_DEFAULT_OPTS='--layout=reverse'
+let $FZF_DEFAULT_OPTS='--layout=reverse --no-preview'
 let $FZF_DEFAULT_OPTS.=' --border --margin=0,2'
 
 " Using the custom window creation function
@@ -16,9 +18,9 @@ function! FloatingFZF()
     let buf = nvim_create_buf(v:false, v:true)
 
     " 30% of the height
-    let height = float2nr(&lines * 0.3)
+    let height = float2nr(&lines * 0.25)
     " 60% of the height
-    let width = float2nr(&columns * 0.4)
+    let width = float2nr(&columns * 0.7)
     " horizontal position (centralized)
     let horizontal = float2nr((&columns - width) / 2)
     " vertical position (one line down of the top)

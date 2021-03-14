@@ -337,8 +337,6 @@ function theme.at_screen_connect(s)
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
-            small_spr,
-            s.mylayoutbox,
             first,
             small_spr,
             s.mytaglist,
@@ -367,6 +365,8 @@ function theme.at_screen_connect(s)
             mytextclock,
             small_spr,
             s.systray,
+            small_spr,
+            s.mylayoutbox,
             small_spr
         },
     }
